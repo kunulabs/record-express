@@ -127,7 +127,6 @@ button {
 .btn-icon svg {
   width: 16px;
   height: 16px;
-  transform: rotate(-45deg);
 }
 
 .icon-16 {
@@ -311,6 +310,7 @@ h1, h2, h3, h4, .font-display {
 
 .eyebrow-pill {
   display: inline-flex;
+  align-self: flex-start;
   align-items: center;
   padding: 8px 16px;
   border-radius: 65px;
@@ -406,15 +406,26 @@ h1, h2, h3, h4, .font-display {
   height: 573px;
 }
 
-.hero-media-bg {
+.hero-media-bg-frame {
   position: absolute;
   left: 5%;
   right: 5%;
   top: 87px;
   width: 90%;
   height: 486px;
-  object-fit: cover;
   border-radius: 24px;
+  overflow: hidden;
+}
+
+.hero-media-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 130%;
+  height: 130%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  object-position: 65% 35%;
 }
 
 .hero-media-card {
@@ -743,6 +754,27 @@ h1, h2, h3, h4, .font-display {
   opacity: 0.85;
 }
 
+.service-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px -12px rgba(18, 33, 20, 0.2);
+}
+
+.service-card:hover .service-card-img img {
+  transform: scale(1.05);
+}
+
+.service-card-img {
+  overflow: hidden;
+}
+
+.service-card-img img {
+  transition: transform 0.4s ease;
+}
+
 .service-card-action {
   align-self: flex-end;
   width: 48px;
@@ -753,12 +785,18 @@ h1, h2, h3, h4, .font-display {
   align-items: center;
   justify-content: center;
   color: var(--color-text-action);
+  transition: background 0.25s ease, color 0.25s ease;
   margin-top: auto;
 }
 
 .service-card-action svg {
   width: 16px;
   height: 16px;
+}
+
+.service-card:hover .service-card-action {
+  background: var(--color-text-action);
+  color: var(--color-white);
 }
 
 .carousel-controls {
@@ -1617,6 +1655,7 @@ h1, h2, h3, h4, .font-display {
   width: auto;
   height: auto;
   object-fit: contain;
+  mix-blend-mode: multiply;
 }
 
 .partners-strip li:last-child {
@@ -2133,12 +2172,32 @@ h1, h2, h3, h4, .font-display {
 
 /* Industry card expand */
 .industry-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .industry-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 30px rgba(18, 33, 20, 0.1);
+  box-shadow: 0 24px 50px -12px rgba(18, 33, 20, 0.25);
+}
+
+.industry-card-media img {
+  transition: transform 0.4s ease;
+}
+
+.industry-card:hover .industry-card-media img {
+  transform: scale(1.1);
+}
+
+.industry-card .service-card-action {
+  transition: width 0.25s ease, height 0.25s ease, background 0.25s ease, color 0.25s ease, border-radius 0.25s ease;
+}
+
+.industry-card:hover .service-card-action {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--color-text-action);
+  color: var(--color-white);
 }
 
 .industry-card-detail {
@@ -2188,19 +2247,26 @@ h1, h2, h3, h4, .font-display {
   transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
-.step.is-active .step-badge {
+.step.is-visited .step-badge {
   background: var(--color-text-action);
   color: var(--color-white);
-  transform: scale(1.08);
 }
 
-.step.is-active .step-badge svg {
+.step.is-visited .step-badge svg {
   stroke: white;
 }
 
-.step.is-active p {
+.step.is-active .step-badge {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(213, 84, 69, 0.35);
+}
+
+.step.is-visited p {
   opacity: 1;
-  font-weight: 600;
+}
+
+.step.is-active p {
+  font-weight: 700;
 }
 
 .steps::after {
@@ -2295,15 +2361,21 @@ h1, h2, h3, h4, .font-display {
 }
 
 .blog-card {
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.blog-card.is-hidden {
-  display: none;
+.blog-card.is-dim {
+  opacity: 0.55;
+}
+
+.blog-card.is-match {
+  border-color: var(--color-text-action);
+  box-shadow: 0 24px 50px -12px rgba(213, 84, 69, 0.35);
 }
 
 /* Partners marquee */
 .partners-marquee {
+  display: flex;
   overflow: hidden;
   width: 100%;
   -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);

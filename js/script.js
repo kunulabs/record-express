@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   initMobileMenu();
+  initNavLinks();
   initTopbar();
   initLangDropdown();
   initHeroTilt();
@@ -28,6 +29,27 @@ function initMobileMenu() {
   toggle.addEventListener('click', function () {
     var isOpen = header.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+}
+
+function initNavLinks() {
+  // This is a single-page LP with no other pages/sections to route to yet,
+  // so nav items are inert placeholders rather than in-page anchor jumps.
+  var header = document.querySelector('.site-header');
+  var menuToggle = document.querySelector('.menu-toggle');
+
+  document.querySelectorAll('.main-nav a').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+    });
+  });
+
+  document.querySelectorAll('.mobile-nav a').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (header) header.classList.remove('is-open');
+      if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+    });
   });
 }
 
@@ -215,6 +237,7 @@ function initHowItWorksStepper() {
     current = index;
     steps.forEach(function (step, i) {
       step.classList.toggle('is-active', i === index);
+      step.classList.toggle('is-visited', i <= index);
     });
     var progress = steps.length > 1 ? (index / (steps.length - 1)) * 100 : 0;
     container.style.setProperty('--steps-progress', progress + '%');
@@ -223,9 +246,14 @@ function initHowItWorksStepper() {
   function startAuto() {
     stopAuto();
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (current >= steps.length - 1) return;
     timer = setInterval(function () {
-      setActive((current + 1) % steps.length);
-    }, 4000);
+      if (current >= steps.length - 1) {
+        stopAuto();
+        return;
+      }
+      setActive(current + 1);
+    }, 1200);
   }
 
   function stopAuto() {
@@ -352,7 +380,8 @@ function initBlogFilters() {
       var filter = btn.getAttribute('data-filter');
       cards.forEach(function (card) {
         var match = filter === 'all' || card.getAttribute('data-tag') === filter;
-        card.classList.toggle('is-hidden', !match);
+        card.classList.toggle('is-match', filter !== 'all' && match);
+        card.classList.toggle('is-dim', filter !== 'all' && !match);
       });
     });
   });
