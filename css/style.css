@@ -826,13 +826,14 @@ h1, h2, h3, h4, .font-display {
 
 .industry-card-media {
   position: absolute;
-  right: -8%;
-  bottom: -6%;
-  width: 76%;
-  height: 76%;
+  right: -10%;
+  bottom: -42%;
+  width: 72%;
+  aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
   background: var(--color-bg-dark);
+  z-index: 0;
 }
 
 .industry-card-media img {
@@ -863,13 +864,22 @@ h1, h2, h3, h4, .font-display {
 .industry-card-desc {
   font-size: 14px;
   line-height: 22px;
-  max-width: 60%;
+  max-width: 52%;
   margin: 0;
   opacity: 0.85;
+  position: relative;
+  z-index: 1;
+}
+
+.industry-card-badge,
+.industry-card-title {
+  position: relative;
+  z-index: 1;
 }
 
 .industry-card .service-card-action {
   position: relative;
+  z-index: 1;
   margin-top: auto;
   align-self: flex-start;
   background: var(--color-bg-default);
@@ -990,11 +1000,6 @@ h1, h2, h3, h4, .font-display {
   z-index: 1;
 }
 
-.step-badge-active {
-  background: var(--color-text-action);
-  color: var(--color-white);
-}
-
 .step h3 {
   font-family: "Outfit", var(--font-family);
   font-weight: 700;
@@ -1012,7 +1017,7 @@ h1, h2, h3, h4, .font-display {
 
 @media (max-width: 900px) {
   .steps { flex-direction: column; gap: 32px; }
-  .steps::before { display: none; }
+  .steps::before, .steps::after { display: none; }
 }
 
 /* ===== Checklist (shared) ===== */
@@ -1962,4 +1967,419 @@ h1, h2, h3, h4, .font-display {
   .footer-columns { flex-direction: column; gap: 32px; }
   .footer-nav { gap: 32px; }
   .newsletter-form { flex-direction: column; align-items: stretch; }
+}
+
+/* ===== Interactive additions ===== */
+
+/* Topbar dismiss */
+.topbar {
+  max-height: 60px;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.topbar.is-dismissed {
+  max-height: 0;
+  opacity: 0;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.topbar-dismiss {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  color: var(--color-text-primary);
+  opacity: 0.6;
+}
+
+.topbar-dismiss:hover {
+  opacity: 1;
+}
+
+/* Language dropdown */
+.lang-dropdown {
+  position: relative;
+}
+
+.lang-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: 0 12px 24px rgba(18, 33, 20, 0.15);
+  padding: 6px;
+  min-width: 160px;
+  list-style: none;
+  margin: 0;
+  display: none;
+  z-index: 50;
+}
+
+.lang-dropdown.is-open .lang-menu {
+  display: block;
+}
+
+.lang-menu li {
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.lang-menu li:hover {
+  background: var(--color-bg-accent);
+}
+
+.lang-menu li.is-selected {
+  font-weight: 700;
+  color: var(--color-coral-700);
+}
+
+/* Hero media tilt */
+.hero-media {
+  perspective: 1000px;
+}
+
+.hero-media-card {
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  will-change: transform;
+}
+
+/* Copy-to-clipboard triggers */
+.copy-trigger {
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+}
+
+.copy-trigger:hover {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+.copy-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--color-bg-dark);
+  color: var(--color-white);
+  padding: 12px 20px;
+  border-radius: 55px;
+  font-size: 14px;
+  font-weight: 700;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 300;
+}
+
+.copy-toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Services carousel dots */
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(18, 33, 20, 0.2);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.carousel-dot.is-active {
+  background: var(--color-coral-500);
+  width: 24px;
+  border-radius: 4px;
+}
+
+.carousel-arrows {
+  display: flex;
+  gap: 12px;
+}
+
+/* Industry card expand */
+.industry-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.industry-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 30px rgba(18, 33, 20, 0.1);
+}
+
+.industry-card-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, margin-top 0.3s ease;
+  max-width: 52%;
+  position: relative;
+  z-index: 1;
+}
+
+.industry-card-detail p {
+  font-size: 13px;
+  line-height: 20px;
+  opacity: 0.75;
+  margin: 0 0 12px;
+  font-style: italic;
+}
+
+.industry-card.is-expanded .industry-card-detail {
+  max-height: 120px;
+  margin-top: 4px;
+}
+
+.industry-toggle {
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.industry-card.is-expanded .industry-toggle {
+  transform: rotate(90deg);
+  background: var(--color-text-action);
+  color: var(--color-white);
+}
+
+/* How it works — interactive steps */
+.step {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.step:hover {
+  transform: translateY(-3px);
+}
+
+.step-badge {
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.step.is-active .step-badge {
+  background: var(--color-text-action);
+  color: var(--color-white);
+  transform: scale(1.08);
+}
+
+.step.is-active .step-badge svg {
+  stroke: white;
+}
+
+.step.is-active p {
+  opacity: 1;
+  font-weight: 600;
+}
+
+.steps::after {
+  content: "";
+  position: absolute;
+  left: 55px;
+  top: 55px;
+  height: 0;
+  border-top: 2px solid var(--color-text-action);
+  width: var(--steps-progress, 0%);
+  z-index: 0;
+  transition: width 0.4s ease;
+}
+
+/* Testimonials — click to feature */
+.testimonial-card[role="button"] {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.testimonial-card[role="button"]:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 30px rgba(18, 33, 20, 0.12);
+}
+
+.testimonial-card-dark {
+  transition: opacity 0.15s ease;
+}
+
+.testimonial-card-dark.is-updating {
+  opacity: 0.5;
+}
+
+/* About timeline accordion */
+.timeline li {
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.timeline li:not(.is-active) p {
+  display: none;
+}
+
+.timeline li:not(.is-active) h3 {
+  opacity: 0.7;
+}
+
+.timeline li.is-active h3 {
+  color: var(--color-text-action);
+}
+
+.timeline-dot {
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.timeline li.is-active .timeline-dot {
+  transform: scale(1.3);
+}
+
+/* Blog filters */
+.blog-cards-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.blog-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.blog-filter {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.blog-filter.is-active,
+.blog-filter:hover {
+  background: var(--color-bg-dark);
+  color: var(--color-white);
+  border-color: var(--color-bg-dark);
+}
+
+.blog-card {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.blog-card.is-hidden {
+  display: none;
+}
+
+/* Partners marquee */
+.partners-marquee {
+  overflow: hidden;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+
+.partners-marquee .partners-strip {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.partners-marquee:hover .partners-strip {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partners-marquee .partners-strip {
+    animation: none;
+  }
+}
+
+/* Back to top */
+.back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-coral-500);
+  color: var(--color-white);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 20px rgba(18, 33, 20, 0.2);
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease;
+  z-index: 200;
+}
+
+.back-to-top svg {
+  width: 20px;
+  height: 20px;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.back-to-top:hover {
+  background: var(--color-coral-700);
+}
+
+/* Scroll reveal — :not(.is-revealed) so the hidden-state transform stops
+   applying entirely once revealed, instead of fighting hover transforms
+   at equal specificity. */
+[data-reveal] {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+[data-reveal]:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal]:not(.is-revealed) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
