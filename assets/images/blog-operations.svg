@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" width="600" height="480" role="img" aria-label="Operations">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#122114"/>
+      <stop offset="1" stop-color="#013529"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="480" fill="url(#g)"/>
+  <g transform="translate(168.0,78.0) scale(0.55)" opacity="0.85">
+    <path d="M100 400c60-140 140 140 200 0s140-140 200 0" fill="none" stroke="white" stroke-width="10" stroke-linecap="round"/><circle cx="100" cy="400" r="16" fill="white"/><circle cx="500" cy="400" r="16" fill="white"/>
+  </g>
+  <text x="300.0" y="444" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="white" text-anchor="middle" opacity="0.9">Operations</text>
+</svg>

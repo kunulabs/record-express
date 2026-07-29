@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 404" width="800" height="404" role="img" aria-label="Our Drivers">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d55445"/>
+      <stop offset="1" stop-color="#ec6655"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="404" fill="url(#g)"/>
+  <g transform="translate(288.9,60.9) scale(0.463)" opacity="0.85">
+    <path d="M240 90l160 70v220l-160 70-160-70V160z" fill="none" stroke="white" stroke-width="10" stroke-linejoin="round"/><path d="M80 160l160 70 160-70M240 160v280" stroke="white" stroke-width="10" stroke-linejoin="round"/>
+  </g>
+  <text x="400.0" y="368" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="white" text-anchor="middle" opacity="0.9">Our Drivers</text>
+</svg>
