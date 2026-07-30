@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initLangDropdown();
   initHeroTilt();
   initHeroTypewriter();
+  initContactTypewriter();
   initQuoteBar();
   initStatsCountUp();
   initCarousels();
@@ -97,11 +98,7 @@ function initLangDropdown() {
   });
 }
 
-function initHeroTypewriter() {
-  var el = document.querySelector('.hero-title');
-  if (!el) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
+function typeElement(el) {
   var segments = [];
   Array.prototype.forEach.call(el.childNodes, function (node) {
     if (node.nodeType === Node.TEXT_NODE) {
@@ -113,8 +110,8 @@ function initHeroTypewriter() {
   if (!segments.length) return;
 
   var finalHeight = el.getBoundingClientRect().height;
-  var lineHeight = parseFloat(getComputedStyle(el).lineHeight) || 0;
-  el.style.minHeight = (finalHeight + lineHeight) + 'px';
+  el.style.height = finalHeight + 'px';
+  el.style.overflow = 'hidden';
   el.textContent = '';
   el.classList.add('is-typing');
 
@@ -125,7 +122,8 @@ function initHeroTypewriter() {
   function typeNext() {
     if (segIndex >= segments.length) {
       el.classList.remove('is-typing');
-      el.style.minHeight = finalHeight + 'px';
+      el.style.height = '';
+      el.style.overflow = '';
       return;
     }
     var seg = segments[segIndex];
@@ -149,6 +147,30 @@ function initHeroTypewriter() {
   }
 
   typeNext();
+}
+
+function initHeroTypewriter() {
+  var el = document.querySelector('.hero-title');
+  if (!el) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  typeElement(el);
+}
+
+function initContactTypewriter() {
+  var el = document.querySelector('.contact-title');
+  if (!el) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        typeElement(el);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  observer.observe(el);
 }
 
 function initHeroTilt() {

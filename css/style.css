@@ -386,7 +386,7 @@ h1, h2, h3, h4, .font-display {
   margin-top: 24px;
 }
 
-.hero-title.is-typing::after {
+.is-typing::after {
   content: "";
   display: inline-block;
   width: 4px;
@@ -1101,6 +1101,7 @@ h1, h2, h3, h4, .font-display {
   line-height: 22px;
   opacity: 0.6;
   margin: 0;
+  transition: opacity 0.45s ease-in-out;
 }
 
 @media (max-width: 900px) {
@@ -1734,8 +1735,8 @@ h1, h2, h3, h4, .font-display {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 18px;
-  height: 72px;
+  padding: 8px 20px;
+  height: 80px;
   opacity: 0.7;
   border-right: 1px solid rgba(18, 33, 20, 0.15);
   flex-shrink: 0;
@@ -1743,8 +1744,8 @@ h1, h2, h3, h4, .font-display {
 }
 
 .partners-strip li img {
-  max-width: 100px;
-  max-height: 32px;
+  max-width: 130px;
+  max-height: 40px;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -1759,6 +1760,11 @@ h1, h2, h3, h4, .font-display {
 
 .partners-strip li:last-child {
   border-right: none;
+}
+
+@media (max-width: 1400px) {
+  .partners-strip li { padding: 8px 12px; }
+  .partners-strip li img { max-width: 100px; max-height: 32px; }
 }
 
 @media (max-width: 900px) {
@@ -2346,7 +2352,7 @@ h1, h2, h3, h4, .font-display {
 /* How it works — interactive steps */
 .step {
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.35s ease;
 }
 
 .step:hover {
@@ -2354,7 +2360,7 @@ h1, h2, h3, h4, .font-display {
 }
 
 .step-badge {
-  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  transition: background 0.45s ease-in-out, color 0.45s ease-in-out, transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .step:hover .step-badge {
@@ -2365,6 +2371,10 @@ h1, h2, h3, h4, .font-display {
 .step.is-visited .step-badge {
   background: var(--color-text-action);
   color: var(--color-white);
+}
+
+.step-badge svg {
+  transition: stroke 0.45s ease-in-out;
 }
 
 .step.is-visited .step-badge svg {
@@ -2394,7 +2404,7 @@ h1, h2, h3, h4, .font-display {
   width: calc((100% - (100% - 192px) / 5) * var(--steps-progress, 0));
   max-width: calc(100% - (100% - 192px) / 5);
   z-index: 0;
-  transition: width 0.4s ease;
+  transition: width 0.6s ease-in-out;
 }
 
 /* Testimonials — click to feature */
