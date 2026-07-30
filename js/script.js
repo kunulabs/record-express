@@ -112,7 +112,9 @@ function initHeroTypewriter() {
   });
   if (!segments.length) return;
 
-  el.style.minHeight = el.getBoundingClientRect().height + 'px';
+  var finalHeight = el.getBoundingClientRect().height;
+  var lineHeight = parseFloat(getComputedStyle(el).lineHeight) || 0;
+  el.style.minHeight = (finalHeight + lineHeight) + 'px';
   el.textContent = '';
   el.classList.add('is-typing');
 
@@ -123,6 +125,7 @@ function initHeroTypewriter() {
   function typeNext() {
     if (segIndex >= segments.length) {
       el.classList.remove('is-typing');
+      el.style.minHeight = finalHeight + 'px';
       return;
     }
     var seg = segments[segIndex];
@@ -300,9 +303,12 @@ function initHowItWorksStepper() {
   var steps = Array.prototype.slice.call(container.querySelectorAll('.step'));
   if (!steps.length) return;
 
+  var scrollIndex = null;
+  var hoverIndex = null;
   var current = null;
 
-  function setActive(index) {
+  function render() {
+    var index = hoverIndex !== null ? hoverIndex : scrollIndex;
     if (index === current) return;
     current = index;
     steps.forEach(function (step, i) {
@@ -313,15 +319,27 @@ function initHowItWorksStepper() {
     container.style.setProperty('--steps-progress', progress);
   }
 
+  function setActive(index) {
+    scrollIndex = index;
+    render();
+  }
+
   steps.forEach(function (step, i) {
-    step.addEventListener('click', function () {
-      setActive(i);
+    step.addEventListener('mouseenter', function () {
+      hoverIndex = i;
+      render();
     });
-    step.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        setActive(i);
-      }
+    step.addEventListener('mouseleave', function () {
+      hoverIndex = null;
+      render();
+    });
+    step.addEventListener('focus', function () {
+      hoverIndex = i;
+      render();
+    });
+    step.addEventListener('blur', function () {
+      hoverIndex = null;
+      render();
     });
   });
 

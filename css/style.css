@@ -19,6 +19,12 @@
   --radius-pill: 55px;
 }
 
+@media (max-width: 1400px) {
+  :root {
+    --container-padding: 56px;
+  }
+}
+
 @media (max-width: 900px) {
   :root {
     --container-padding: 24px;
@@ -108,8 +114,8 @@ button {
 
 .btn-primary:hover {
   background: var(--color-coral-700);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 24px -6px rgba(213, 84, 69, 0.45);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 16px 32px -8px rgba(213, 84, 69, 0.55);
 }
 
 .btn-primary:hover .btn-icon {
@@ -302,7 +308,7 @@ button {
   border-bottom: 1px solid rgba(18, 33, 20, 0.08);
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1400px) {
   .main-nav { display: none; }
   .lang-select { display: none; }
   .menu-toggle { display: flex; }
@@ -473,10 +479,14 @@ h1, h2, h3, h4, .font-display {
   box-shadow: 0 20px 40px rgba(18, 33, 20, 0.35);
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1400px) {
   .hero-inner { flex-direction: column; }
-  .hero-title { font-size: 48px; line-height: 52px; }
+  .hero-title { font-size: 52px; line-height: 56px; }
   .hero-media { width: 100%; height: 420px; margin: 0 auto; }
+}
+
+@media (max-width: 1100px) {
+  .hero-title { font-size: 48px; line-height: 52px; }
 }
 
 @media (max-width: 560px) {
@@ -1186,7 +1196,7 @@ h1, h2, h3, h4, .font-display {
   margin: 0;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1400px) {
   .benefits-inner { flex-direction: column; }
   .benefits-media { width: 100%; height: 380px; }
 }
@@ -1619,6 +1629,12 @@ h1, h2, h3, h4, .font-display {
   flex-direction: column;
   gap: 24px;
   color: var(--color-white);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px -12px rgba(18, 33, 20, 0.3);
 }
 
 .blog-card-img {
@@ -1631,6 +1647,11 @@ h1, h2, h3, h4, .font-display {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.blog-card:hover .blog-card-img img {
+  transform: scale(1.08);
 }
 
 .blog-card h3 {
@@ -2269,12 +2290,12 @@ h1, h2, h3, h4, .font-display {
 }
 
 .industry-card-media img {
-  transform: scale(1);
+  transform: scale(1.18);
   transition: transform 0.4s ease;
 }
 
 .industry-card:hover .industry-card-media img {
-  transform: scale(1.05);
+  transform: scale(1.26);
 }
 
 .industry-card .service-card-action {
