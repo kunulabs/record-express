@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
   initIndustryToggles();
   initHowItWorksStepper();
   initTestimonialFeature();
-  initTimelineAccordion();
   initCopyTriggers();
   initServicePlaceholder();
   initContactForm();
@@ -450,30 +449,6 @@ function initTestimonialFeature() {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         promote();
-      }
-    });
-  });
-}
-
-function initTimelineAccordion() {
-  var timeline = document.getElementById('about-timeline');
-  if (!timeline) return;
-  var items = Array.prototype.slice.call(timeline.querySelectorAll('[data-timeline-item]'));
-
-  function activate(item) {
-    items.forEach(function (i) {
-      var isActive = i === item;
-      i.classList.toggle('is-active', isActive);
-      i.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-    });
-  }
-
-  items.forEach(function (item) {
-    item.addEventListener('click', function () { activate(item); });
-    item.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        activate(item);
       }
     });
   });
