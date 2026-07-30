@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
   initHowItWorksStepper();
   initTestimonialFeature();
   initTimelineAccordion();
-  initBlogFilters();
   initCopyTriggers();
   initServicePlaceholder();
   initContactForm();
@@ -113,6 +112,7 @@ function initHeroTypewriter() {
   });
   if (!segments.length) return;
 
+  el.style.minHeight = el.getBoundingClientRect().height + 'px';
   el.textContent = '';
   el.classList.add('is-typing');
 
@@ -435,30 +435,6 @@ function initTimelineAccordion() {
         e.preventDefault();
         activate(item);
       }
-    });
-  });
-}
-
-function initBlogFilters() {
-  var filters = document.querySelectorAll('.blog-filter');
-  var cards = document.querySelectorAll('.blog-card');
-  if (!filters.length) return;
-
-  filters.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      filters.forEach(function (b) {
-        b.classList.remove('is-active');
-        b.setAttribute('aria-selected', 'false');
-      });
-      btn.classList.add('is-active');
-      btn.setAttribute('aria-selected', 'true');
-
-      var filter = btn.getAttribute('data-filter');
-      cards.forEach(function (card) {
-        var match = filter === 'all' || card.getAttribute('data-tag') === filter;
-        card.classList.toggle('is-match', filter !== 'all' && match);
-        card.classList.toggle('is-dim', filter !== 'all' && !match);
-      });
     });
   });
 }
