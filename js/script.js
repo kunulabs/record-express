@@ -178,11 +178,13 @@ function initHeroTilt() {
   if (!media || !card) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+  var maxAngle = 10;
+
   media.addEventListener('mousemove', function (e) {
     var rect = media.getBoundingClientRect();
     var x = (e.clientX - rect.left) / rect.width - 0.5;
-    var y = (e.clientY - rect.top) / rect.height - 0.5;
-    card.style.transform = 'rotateY(' + (x * 10) + 'deg) rotateX(' + (y * -10) + 'deg) translateZ(10px)';
+    var angle = Math.max(-1, Math.min(1, x * 2)) * maxAngle;
+    card.style.transform = 'rotate(' + angle + 'deg)';
   });
 
   media.addEventListener('mouseleave', function () {
