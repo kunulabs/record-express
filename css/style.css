@@ -37,6 +37,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -45,6 +46,7 @@ body {
   color: var(--color-text-primary);
   background: var(--color-bg-default);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 img {
@@ -520,6 +522,7 @@ h1, h2, h3, h4, .font-display {
   display: flex;
   align-items: center;
   gap: 16px;
+  min-width: 0;
 }
 
 .quote-bar-icon {
@@ -537,8 +540,9 @@ h1, h2, h3, h4, .font-display {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  width: 288px;
-  max-width: 60vw;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 288px;
 }
 
 .quote-bar-eyebrow {
