@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
   initServicePlaceholder();
   initContactForm();
   initNewsletterForm();
-  initBackToTop();
   initScrollReveal();
 });
 
@@ -577,19 +576,6 @@ function initNewsletterForm() {
     setTimeout(function () {
       button.innerHTML = originalLabel;
     }, 4000);
-  });
-}
-
-function initBackToTop() {
-  var button = document.getElementById('back-to-top');
-  if (!button) return;
-
-  window.addEventListener('scroll', function () {
-    button.classList.toggle('is-visible', window.scrollY > 800);
-  }, { passive: true });
-
-  button.addEventListener('click', function () {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
 
