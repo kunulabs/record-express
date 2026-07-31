@@ -310,9 +310,18 @@ button {
   border-bottom: 1px solid rgba(18, 33, 20, 0.08);
 }
 
-/* The full nav measures ~1127px and first wraps at a 1230px viewport, so it
-   stays up to 1260px rather than collapsing early on ordinary laptops. */
-@media (max-width: 1260px) {
+/* Below the 1440 Figma reference the nav tightens its spacing rather than
+   collapsing, so ordinary 1250-1400px laptops keep the real nav. */
+@media (max-width: 1440px) {
+  .header-inner { gap: 16px; }
+  .header-left { gap: 24px; }
+  .main-nav ul { gap: 20px; }
+  .header-right { gap: 12px; }
+}
+
+/* Collapse only once even the tightened nav stops fitting: it measures
+   1043px and first wraps at a 1140px viewport, so 1180px leaves real margin. */
+@media (max-width: 1180px) {
   .main-nav { display: none; }
   .lang-select { display: none; }
   .menu-toggle { display: flex; }
