@@ -1166,10 +1166,10 @@ h1, h2, h3, h4, .font-display {
 
 .benefits-media {
   position: relative;
-  width: 672px;
-  max-width: 100%;
-  height: 486px;
-  flex-shrink: 0;
+  flex: 672 1 0;
+  min-width: 0;
+  max-width: 672px;
+  aspect-ratio: 672 / 486;
 }
 
 .benefits-media-frame {
@@ -1193,19 +1193,22 @@ h1, h2, h3, h4, .font-display {
   transform: scale(1.08);
 }
 
+/* Proportional to the media box (was 176px at top 92px of a 672x486 frame),
+   with aspect-ratio keeping it a circle as it scales. */
 .benefits-media-badge {
   position: absolute;
   right: 0;
-  top: 92px;
-  width: 176px;
-  height: 176px;
+  top: 18.93%;
+  width: 26.19%;
+  height: auto;
+  aspect-ratio: 1;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 10px 24px rgba(18, 33, 20, 0.15);
 }
 
 .benefits-copy {
-  flex: 1 1 0;
+  flex: 520 1 0;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -1218,9 +1221,9 @@ h1, h2, h3, h4, .font-display {
   margin: 0;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1000px) {
   .benefits-inner { flex-direction: column; }
-  .benefits-media { width: 100%; height: 380px; }
+  .benefits-media { flex: 0 1 auto; width: 100%; }
 }
 
 /* ===== Benefits 2 ===== */
@@ -1283,7 +1286,7 @@ h1, h2, h3, h4, .font-display {
   transform: scale(1.08);
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1000px) {
   .benefits2-card { flex-direction: column; }
   .benefits2-media { height: 300px; }
   .benefits2-copy h2 { font-size: 34px; line-height: 40px; }
@@ -1460,7 +1463,7 @@ h1, h2, h3, h4, .font-display {
   opacity: 0.7;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1000px) {
   .testimonials-inner { flex-direction: column; }
   .testimonial-cards { grid-template-columns: 1fr; }
   .testimonial-card-dark, .testimonial-card:nth-of-type(2), .testimonial-card:nth-of-type(3) {
@@ -1615,7 +1618,7 @@ h1, h2, h3, h4, .font-display {
   margin: 0;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1000px) {
   .about-inner { flex-direction: column; }
   .about-media { width: 100%; }
 }
@@ -1636,7 +1639,7 @@ h1, h2, h3, h4, .font-display {
 .blog-cards {
   display: flex;
   gap: 28px;
-  flex: 1 1 0;
+  flex: 832 1 0;
   min-width: 0;
 }
 
@@ -1718,17 +1721,18 @@ h1, h2, h3, h4, .font-display {
 }
 
 .blog-header {
-  width: 360px;
-  flex-shrink: 0;
+  flex: 360 1 0;
+  min-width: 0;
+  max-width: 360px;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1000px) {
   .blog-inner { flex-direction: column; }
   .blog-cards { flex-direction: column; }
-  .blog-header { width: 100%; }
+  .blog-header { flex: 0 1 auto; max-width: 100%; width: 100%; }
 }
 
 /* ===== Partners ===== */
@@ -1786,9 +1790,12 @@ h1, h2, h3, h4, .font-display {
   overflow: hidden;
 }
 
+/* +25% on the Figma sizes (160x52 -> 200x65), scaling fluidly instead of
+   dropping to a fixed smaller cap below 1400px. The strip is width:max-content
+   inside an overflow:hidden marquee, so a wider strip only scrolls. */
 .partners-strip li img {
-  max-width: 160px;
-  max-height: 52px;
+  max-width: clamp(125px, 13.9vw, 200px);
+  max-height: clamp(40px, 4.5vw, 65px);
   width: auto;
   height: auto;
   object-fit: contain;
@@ -1807,7 +1814,6 @@ h1, h2, h3, h4, .font-display {
 
 @media (max-width: 1400px) {
   .partners-strip li { padding: 8px 12px; }
-  .partners-strip li img { max-width: 100px; max-height: 32px; }
 }
 
 .icon-18 { width: 18px; height: 18px; flex-shrink: 0; }
@@ -1824,10 +1830,11 @@ h1, h2, h3, h4, .font-display {
   gap: 80px;
 }
 
+/* Figma splits the 1240 content box as 520 + 80 gap + 640; percentage bases
+   reproduce that exactly and hold the ratio as the section scales. */
 .contact-copy {
-  width: 520px;
-  max-width: 100%;
-  flex-shrink: 0;
+  flex: 0 1 41.935%;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -1875,7 +1882,7 @@ h1, h2, h3, h4, .font-display {
 }
 
 .contact-form {
-  flex: 1 1 0;
+  flex: 0 1 51.613%;
   min-width: 0;
   background: #fffdf9;
   border: 1px solid #e8ddd0;
@@ -1962,8 +1969,9 @@ h1, h2, h3, h4, .font-display {
   margin: 0;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1000px) {
   .contact-inner { flex-direction: column; gap: 48px; }
+  .contact-copy { flex: 0 1 auto; max-width: 100%; width: 100%; }
   .contact-form { padding: 32px; }
 }
 
@@ -1996,15 +2004,16 @@ h1, h2, h3, h4, .font-display {
   gap: 48px;
 }
 
+/* Figma's columns start at x=100/596/991 of a 1240 content width; expressing
+   them as proportional flex keeps those positions at any width. */
 .footer-col-brand {
-  width: 400px;
-  max-width: 100%;
-  flex-shrink: 0;
+  flex: 432 1 0;
+  min-width: 0;
 }
 
 .footer-col-services,
 .footer-col-company {
-  flex: 1 1 0;
+  flex: 340 1 0;
   min-width: 0;
 }
 
@@ -2028,6 +2037,7 @@ h1, h2, h3, h4, .font-display {
 .footer-contact {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 8px;
   color: var(--color-white) !important;
 }
@@ -2259,6 +2269,9 @@ h1, h2, h3, h4, .font-display {
   padding: 0;
   cursor: pointer;
   position: relative;
+  /* Buttons centre their text by UA default, which pulled the footer phone
+     and email off the column's left edge. */
+  text-align: left;
 }
 
 .copy-trigger:hover {
