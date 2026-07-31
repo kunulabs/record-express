@@ -310,7 +310,9 @@ button {
   border-bottom: 1px solid rgba(18, 33, 20, 0.08);
 }
 
-@media (max-width: 1400px) {
+/* The full nav measures ~1127px and first wraps at a 1230px viewport, so it
+   stays up to 1260px rather than collapsing early on ordinary laptops. */
+@media (max-width: 1260px) {
   .main-nav { display: none; }
   .lang-select { display: none; }
   .menu-toggle { display: flex; }
@@ -372,8 +374,10 @@ h1, h2, h3, h4, .font-display {
   padding-bottom: 72px;
 }
 
+/* Copy and media share space in the same 540:650 ratio as the 1440 Figma
+   frame, so the hero keeps its designed proportions at every width. */
 .hero-copy {
-  flex: 1 1 0;
+  flex: 540 1 0;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -382,9 +386,9 @@ h1, h2, h3, h4, .font-display {
 
 .hero-title {
   font-weight: 800;
-  font-size: 72px;
-  line-height: 76px;
-  letter-spacing: -1.4px;
+  font-size: clamp(36px, 5vw, 72px);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
   margin-top: 24px;
 }
 
@@ -407,8 +411,8 @@ h1, h2, h3, h4, .font-display {
 .hero-desc {
   font-family: "Outfit", var(--font-family);
   font-weight: 400;
-  font-size: 22px;
-  line-height: 28px;
+  font-size: clamp(18px, 1.53vw, 22px);
+  line-height: 1.27;
   opacity: 0.8;
   margin-top: 32px;
 }
@@ -442,63 +446,60 @@ h1, h2, h3, h4, .font-display {
 
 .hero-media {
   position: relative;
-  flex-shrink: 0;
-  width: 676px;
-  max-width: 100%;
-  height: 573px;
+  flex: 650 1 0;
+  min-width: 0;
+  max-width: 676px;
+  aspect-ratio: 676 / 573;
 }
 
+/* Inner geometry is expressed as a share of the media box (was 87px/486px of
+   a fixed 573px-tall box) so the composition scales instead of letterboxing. */
 .hero-media-bg-frame {
   position: absolute;
   left: 5%;
-  right: 5%;
-  top: 87px;
+  top: 15.18%;
   width: 90%;
-  height: 486px;
+  height: 84.82%;
   border-radius: 24px;
   overflow: hidden;
   transform: skewX(-9deg);
 }
 
+/* Counter-skewing inside the -9deg frame needs height*tan(9deg) of extra
+   width (~112%) to keep the parallelogram covered; anything beyond that is
+   just unwanted zoom, so height stays at 100%. */
 .hero-media-bg {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 140%;
-  height: 140%;
+  width: 116%;
+  height: 100%;
   transform: translate(-50%, -50%) skewX(9deg);
   object-fit: cover;
-  object-position: 65% 35%;
+  object-position: 58% 50%;
 }
 
 .hero-media-card {
   position: absolute;
-  left: 10px;
+  left: 1.48%;
   top: 0;
-  width: 258px;
-  height: 322px;
+  width: 38.17%;
+  height: 56.2%;
   object-fit: cover;
   border-radius: 16px;
   box-shadow: 0 20px 40px rgba(18, 33, 20, 0.35);
-  transform-origin: 50% -680px;
+  /* Pivot sits far above the card so hover sweeps it along a wide arc; kept
+     proportional to the card so the sweep feels identical at any size. */
+  transform-origin: 50% -211%;
   will-change: transform;
 }
 
-@media (max-width: 1400px) {
+/* Stack only once the two columns genuinely stop working. Above this the hero
+   stays side by side and scales, matching the Figma composition. */
+@media (max-width: 1000px) {
   .hero-inner { flex-direction: column; }
-  .hero-title { font-size: 52px; line-height: 56px; }
-  .hero-media { width: 100%; height: 420px; margin: 0 auto; }
-  .hero-media-bg-frame { top: 64px; height: 356px; }
-  .hero-media-card { width: 210px; height: 262px; }
-}
-
-@media (max-width: 1100px) {
-  .hero-title { font-size: 48px; line-height: 52px; }
-}
-
-@media (max-width: 560px) {
-  .hero-title { font-size: 36px; line-height: 42px; }
-  .hero-desc { font-size: 18px; line-height: 26px; }
+  .hero-copy { flex: 0 1 auto; width: 100%; }
+  .hero-media { flex: 0 1 auto; width: 100%; margin: 0 auto; }
 }
 
 /* ===== Quote bar ===== */
