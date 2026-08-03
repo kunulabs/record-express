@@ -353,9 +353,12 @@ h1, h2, h3, h4, .font-display {
   border-radius: 65px;
   background: #e3e2c9;
   font-family: "Outfit", var(--font-family);
-  font-size: 18px;
-  line-height: 24px;
-  text-transform: uppercase;
+  /* Copy runs ~56 chars; uppercase at 18px needs 581px against a 541px column,
+     so the pill keeps the sentence casing it's written in and scales slightly
+     to stay on one line down to ~1000px. */
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.34;
+  max-width: 100%;
   opacity: 0.8;
 }
 
