@@ -2363,13 +2363,17 @@ h1, h2, h3, h4, .font-display {
   box-shadow: 0 24px 50px -12px rgba(18, 33, 20, 0.25);
 }
 
+/* The card clips the circle's lower ~48%, and these landscape photos cover a
+   square box by height, so only their top half would show - the subjects sit
+   below it. translateY lifts them into the visible band; hover keeps the same
+   offset so the framing doesn't jump. */
 .industry-card-media img {
-  transform: scale(1.18);
+  transform: scale(1.18) translateY(-10%);
   transition: transform 0.4s ease;
 }
 
 .industry-card:hover .industry-card-media img {
-  transform: scale(1.26);
+  transform: scale(1.26) translateY(-10%);
 }
 
 .industry-card .service-card-action {
