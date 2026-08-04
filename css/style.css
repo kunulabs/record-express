@@ -936,11 +936,12 @@ h1, h2, h3, h4, .font-display {
   flex-direction: column;
 }
 
+/* Figma: 460x460 circle at (194,243) inside the 606x486 card. */
 .industry-card-media {
   position: absolute;
-  right: -10%;
-  bottom: -42%;
-  width: 72%;
+  left: 32.01%;
+  top: 50%;
+  width: 75.91%;
   aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
@@ -948,8 +949,21 @@ h1, h2, h3, h4, .font-display {
   z-index: 0;
 }
 
+/* Figma places a 690x460 image at x=0 of that 460 circle - the photo keeps
+   its 3:2 ratio at the circle's height and is anchored left, so the visible
+   crop is its left two thirds. Fitting it to a square instead is what forced
+   the tight, over-zoomed framing. */
 .industry-card-media img {
-  width: 100%;
+  position: absolute;
+  top: 0;
+  /* Figma anchors the 690x460 fill at left:0, but its frames hold photos the
+     designer had already cropped. These are the uncropped originals, so the
+     window is centred by default (-25% = (100% - 150%) / 2) and nudged per
+     card below. */
+  left: var(--media-x, -25%);
+  /* the global img{max-width:100%} would clamp this back to the circle width */
+  max-width: none;
+  width: 150%;
   height: 100%;
   object-fit: cover;
 }
@@ -2367,20 +2381,22 @@ h1, h2, h3, h4, .font-display {
    square box by height, so only their top half would show - the subjects sit
    below it. translateY lifts them into the visible band; hover keeps the same
    offset so the framing doesn't jump. */
+/* Geometry matches the design, so 1 is now the widest possible framing - the
+   image exactly covers the circle. Only zoom in from here; below 1 would
+   uncover the card background. */
+/* The card clips the circle's lower ~47%, so only the top half of each photo
+   shows and the subjects sit below it. --media-y lifts them into that band;
+   the resulting gap falls in the clipped part, so nothing is uncovered. */
 .industry-card-media img {
-  transform: scale(var(--media-zoom, 1.18)) translateY(-10%);
+  transform: scale(var(--media-zoom, 1)) translateY(var(--media-y, -10%));
   transition: transform 0.4s ease;
 }
 
 .industry-card:hover .industry-card-media img {
-  transform: scale(calc(var(--media-zoom, 1.18) + 0.08)) translateY(-10%);
+  transform: scale(calc(var(--media-zoom, 1) + 0.06)) translateY(var(--media-y, -10%));
 }
 
-/* Per-card framing: these photos are shot at different distances, so one
-   shared zoom crops some too tight and leaves others too wide. */
-.industry-card:nth-of-type(2) { --media-zoom: 1.30; }  /* Industry - closer */
-.industry-card:nth-of-type(3) { --media-zoom: 1.05; }  /* Medical - wider */
-.industry-card:nth-of-type(4) { --media-zoom: 1.05; }  /* Service - wider */
+.industry-card:nth-of-type(2) { --media-zoom: 1.15; --media-y: -14%; }  /* Industry - closer */
 
 .industry-card .service-card-action {
   transition: width 0.25s ease, height 0.25s ease, background 0.25s ease, color 0.25s ease, border-radius 0.25s ease;
