@@ -2368,13 +2368,19 @@ h1, h2, h3, h4, .font-display {
    below it. translateY lifts them into the visible band; hover keeps the same
    offset so the framing doesn't jump. */
 .industry-card-media img {
-  transform: scale(1.18) translateY(-10%);
+  transform: scale(var(--media-zoom, 1.18)) translateY(-10%);
   transition: transform 0.4s ease;
 }
 
 .industry-card:hover .industry-card-media img {
-  transform: scale(1.26) translateY(-10%);
+  transform: scale(calc(var(--media-zoom, 1.18) + 0.08)) translateY(-10%);
 }
+
+/* Per-card framing: these photos are shot at different distances, so one
+   shared zoom crops some too tight and leaves others too wide. */
+.industry-card:nth-of-type(2) { --media-zoom: 1.30; }  /* Industry - closer */
+.industry-card:nth-of-type(3) { --media-zoom: 1.05; }  /* Medical - wider */
+.industry-card:nth-of-type(4) { --media-zoom: 1.05; }  /* Service - wider */
 
 .industry-card .service-card-action {
   transition: width 0.25s ease, height 0.25s ease, background 0.25s ease, color 0.25s ease, border-radius 0.25s ease;
