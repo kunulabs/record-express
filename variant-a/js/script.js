@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
   initHeroTypewriter();
   initContactTypewriter();
   initQuoteBar();
+  initBookingWidget();
+  initStickyHandoff();
   initStatsCountUp();
   initDispatchBoard();
   initServiceRail();
@@ -492,8 +494,9 @@ function initQuoteBar() {
     }
   });
 
-  var form = document.getElementById('quote-bar');
-  if (form) {
+  // there are two of these on the page now - the in-page bar and the sticky
+  // copy - so bind them all rather than the single original id
+  document.querySelectorAll('form.quote-bar').forEach(function (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var pickup = form.querySelector('[data-role="pickup"] input').value;
@@ -501,7 +504,80 @@ function initQuoteBar() {
       window.location.hash = 'contact';
       console.log('Quote requested', { pickup: pickup, delivery: delivery });
     });
+  });
+}
+
+// The capsule only takes over once the in-page quote bar has scrolled away, so
+// the two are never on screen at the same time.
+function initBookingWidget() {
+  var widget = document.getElementById('booking-widget');
+  if (!widget) return;
+  var button = widget.querySelector('.booking-book');
+  if (!button) return;
+
+  button.addEventListener('click', function () {
+    var open = widget.classList.toggle('is-open');
+    button.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!widget.contains(e.target) && widget.classList.contains('is-open')) {
+      widget.classList.remove('is-open');
+      button.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  function dismiss() {
+    widget.classList.remove('is-open');
+    widget.classList.add('is-dismissed');
+    button.setAttribute('aria-expanded', 'false');
   }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (!widget.matches(':hover, :focus-within') && !widget.classList.contains('is-open')) return;
+    dismiss();
+    button.focus();
+  });
+
+  widget.addEventListener('mouseleave', function () { widget.classList.remove('is-dismissed'); });
+  widget.addEventListener('focusout', function () {
+    setTimeout(function () {
+      if (!widget.contains(document.activeElement)) widget.classList.remove('is-dismissed');
+    }, 0);
+  });
+}
+
+function initStickyHandoff() {
+  var widget = document.getElementById('booking-widget');
+  var bar = document.querySelector('.quote-bar-section');
+  if (!widget) return;
+  if (!bar) { widget.removeAttribute('hidden'); return; }
+
+  widget.removeAttribute('hidden');
+  widget.classList.add('is-stowed');
+
+  // Show the capsule only once the bar has scrolled up out of view. An
+  // IntersectionObserver is the wrong tool here: it only fires on intersection
+  // transitions, so an instant jump from below the bar back up to the top of
+  // the page never fires a callback and leaves the capsule stuck on screen.
+  // Reading the position each frame always agrees with what is on screen.
+  var ticking = false;
+
+  function sync() {
+    ticking = false;
+    widget.classList.toggle('is-stowed', bar.getBoundingClientRect().bottom > 0);
+  }
+
+  function request() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(sync);
+  }
+
+  window.addEventListener('scroll', request, { passive: true });
+  window.addEventListener('resize', request);
+  sync();
 }
 
 function initContactForm() {

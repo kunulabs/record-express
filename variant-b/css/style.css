@@ -3076,6 +3076,12 @@ h1, h2, h3, h4, .font-display {
   .booking-panel .quote-bar-divider { display: none; }
 }
 
+/* At 320px the capsule's natural 309px width no longer clears the 12px insets,
+   so tighten the two options rather than let it hang off the screen edge. */
+@media (max-width: 380px) {
+  .booking-opt { padding: 0 12px; font-size: 13px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .booking-panel, .booking-arrow { transition: none; }
 }

@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <!-- ?v= busts the 10-minute GitHub Pages asset cache; bump on every deploy -->
-  <link rel="stylesheet" href="css/style.css?v=20260811e-a" />
+  <link rel="stylesheet" href="css/style.css?v=20260811f-a" />
 </head>
 <body>
 
@@ -736,6 +736,55 @@
 
   </main>
 
+  <!-- Sticky booking widget: appears once the quote bar has scrolled away -->
+  <div class="booking-widget" id="booking-widget" hidden>
+    <div class="booking-panel" id="booking-panel">
+      <form class="quote-bar" id="quote-bar-sticky">
+            <div class="quote-bar-title">
+              <span class="quote-bar-icon">
+                <svg viewBox="0 0 24 24" fill="none" class="icon-32"><path d="M7 4h8l4 4v12H7z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M10 12h6M10 16h6M10 8h2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              </span>
+              <span class="quote-bar-title-text">
+                <span class="quote-bar-eyebrow">Get a Quick</span>
+                <span class="quote-bar-heading">Delivery Price</span>
+              </span>
+            </div>
+            <div class="quote-bar-divider" aria-hidden="true"></div>
+            <div class="quote-bar-options">
+              <label class="quote-option is-active" data-role="pickup">
+                <svg viewBox="0 0 24 24" fill="none" class="icon-32"><path d="M12 21s7-6.1 7-11.5A7 7 0 105 9.5C5 14.9 12 21 12 21z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.3" stroke="currentColor" stroke-width="1.4"/></svg>
+                <span class="quote-option-text">
+                  <span class="quote-option-label">Pick-up</span>
+                  <input type="text" value="Rue Joseph Bens 33, 1180 Uccle" aria-label="Pick-up address (quick booking)" />
+                </span>
+              </label>
+              <label class="quote-option" data-role="delivery">
+                <svg viewBox="0 0 24 24" fill="none" class="icon-32"><path d="M12 21s7-6.1 7-11.5A7 7 0 105 9.5C5 14.9 12 21 12 21z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.3" stroke="currentColor" stroke-width="1.4"/></svg>
+                <span class="quote-option-text">
+                  <span class="quote-option-label">Delivery</span>
+                  <input type="text" value="Rue Neuve 25, 6238 Point-o-Celles" aria-label="Delivery address (quick booking)" />
+                </span>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary quote-bar-submit">
+                Book Now
+              <span class="btn-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+          </form>
+    </div>
+    <div class="booking-capsule">
+      <button type="button" class="booking-opt booking-whatsapp">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3a9 9 0 00-7.7 13.6L3 21l4.6-1.2A9 9 0 1012 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        WhatsApp
+      </button>
+      <button type="button" class="booking-opt booking-book" aria-expanded="false" aria-controls="booking-panel">
+        Book Now
+        <span class="booking-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </button>
+    </div>
+  </div>
+
+
   <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -806,6 +855,6 @@
 
   <div class="copy-toast" id="copy-toast" role="status" aria-live="polite"></div>
 
-  <script src="js/script.js?v=20260811e-a"></script>
+  <script src="js/script.js?v=20260811f-a"></script>
 </body>
 </html>
