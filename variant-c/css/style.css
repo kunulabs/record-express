@@ -20,13 +20,13 @@
   --font-family: "Open Sans", system-ui, -apple-system, sans-serif;
 
   --container-max: 1440px;
-  --container-padding: 100px;
+  --container-padding: 120px;
   --radius-pill: 55px;
 }
 
 @media (max-width: 1400px) {
   :root {
-    --container-padding: 56px;
+    --container-padding: 64px;
   }
 }
 
@@ -412,9 +412,9 @@ h1, h2, h3, h4, .font-display {
 .hero-inner {
   display: flex;
   align-items: center;
-  gap: 48px;
-  padding-top: 72px;
-  padding-bottom: 72px;
+  gap: 64px;
+  padding-top: 88px;
+  padding-bottom: 96px;
 }
 
 /* Copy and media share space in the same 540:650 ratio as the 1440 Figma
@@ -826,9 +826,9 @@ h1, h2, h3, h4, .font-display {
 .section-header {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   width: 100%;
-  margin-bottom: 48px;
+  margin-bottom: 64px;
 }
 
 .section-header-row {
@@ -856,7 +856,7 @@ h1, h2, h3, h4, .font-display {
 /* ===== Stats ===== */
 .stats-section {
   background: var(--color-surface);
-  padding: 72px 0;
+  padding: 112px 0;
 }
 
 .stats-bar {
@@ -925,7 +925,7 @@ h1, h2, h3, h4, .font-display {
    Figma node 33240:2819 splits the content box 800 / 40 gap / 440. */
 .services-section {
   background: var(--color-bg-default);
-  padding: 72px 0;
+  padding: 112px 0;
 }
 
 .services-showcase {
@@ -1223,7 +1223,7 @@ h1, h2, h3, h4, .font-display {
    Figma node 33240:2882: 360 / 56 / 480 / 56 / 288 across the 1240 box. */
 .industries-section {
   background: var(--color-bg-default);
-  padding: 72px 0;
+  padding: 112px 0;
 }
 
 .industries-inner {
@@ -1369,7 +1369,7 @@ h1, h2, h3, h4, .font-display {
 /* ===== Urgent CTA ===== */
 .urgent-cta-section {
   background: var(--color-bg-accent);
-  padding: 72px 0;
+  padding: 112px 0;
 }
 
 .urgent-cta {
@@ -1437,7 +1437,7 @@ h1, h2, h3, h4, .font-display {
 /* ===== How it works ===== */
 .how-it-works-section {
   background: var(--color-bg-default);
-  padding: 72px 0;
+  padding: 112px 0;
 }
 
 .steps {
@@ -1528,7 +1528,7 @@ h1, h2, h3, h4, .font-display {
 /* ===== Benefits 1 ===== */
 .benefits-section {
   background: var(--color-bg-default);
-  padding: 72px 0;
+  padding: 112px 0;
 }
 
 .benefits-inner {
@@ -1602,7 +1602,7 @@ h1, h2, h3, h4, .font-display {
 /* ===== Benefits 2 ===== */
 .benefits2-section {
   background: var(--color-bg-accent);
-  padding: 72px 0;
+  padding: 112px 0;
 }
 
 .benefits2-card {
@@ -1668,7 +1668,7 @@ h1, h2, h3, h4, .font-display {
 /* ===== Testimonials ===== */
 .testimonials-section {
   background: var(--color-bg-default);
-  padding: 72px 0;
+  padding: 112px 0;
 }
 
 .testimonials-inner {
@@ -1847,7 +1847,7 @@ h1, h2, h3, h4, .font-display {
 /* ===== About / Story ===== */
 .about-section {
   background: var(--color-surface);
-  padding: 96px 0;
+  padding: 136px 0;
 }
 
 .about-inner {
@@ -1999,7 +1999,7 @@ h1, h2, h3, h4, .font-display {
 /* ===== Blog ===== */
 .blog-section {
   background: var(--color-bg-default);
-  padding: 72px 0;
+  padding: 112px 0;
 }
 
 .blog-inner {
@@ -2111,7 +2111,7 @@ h1, h2, h3, h4, .font-display {
 /* ===== Partners ===== */
 .partners-section {
   background: var(--color-bg-accent);
-  padding: 72px 0;
+  padding: 112px 0;
 }
 
 .partners-section .section-eyebrow {
@@ -2194,7 +2194,7 @@ h1, h2, h3, h4, .font-display {
 /* ===== Contact ===== */
 .contact-section {
   background: var(--color-surface);
-  padding: 72px 0;
+  padding: 112px 0;
 }
 
 .contact-inner {
@@ -2357,7 +2357,7 @@ h1, h2, h3, h4, .font-display {
   background: var(--color-bg-dark);
   color: var(--color-white);
   /* bottom trimmed from 72px on request; Figma leaves 74px under the legal row */
-  padding: 72px 0 28px;
+  padding: 104px 0 36px;
 }
 
 .footer-top {
