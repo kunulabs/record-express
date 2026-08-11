@@ -8,28 +8,32 @@ any static host.
 
 ## Structure
 
-```
-index.html         Page markup
-css/style.css      Styles (design tokens, layout, components)
-js/script.js       Mobile nav, quote-bar toggle, section selectors, form handling
-assets/images/     Image assets
+The site lives in three self-contained variants; the repository root holds only
+a small preview index that links to them.
 
-variant-a/         Standalone copy for colour-scheme exploration
-variant-b/         Standalone copy for colour-scheme exploration
-variant-c/         Standalone copy for colour-scheme exploration
+```
+index.html         Preview index (links to the three variants)
+
+variant-a/         Current design
+variant-b/         Colour-scheme variant
+variant-c/         Colour-scheme variant
+
+  index.html       Page markup
+  css/style.css    Styles (design tokens, layout, components)
+  js/script.js     Mobile nav, quote-bar toggle, section selectors, forms
+  assets/images/   Image assets
 ```
 
 ## Colour-scheme variants
 
-`variant-a/`, `variant-b/` and `variant-c/` are complete, self-contained copies of the site,
-each with its own `index.html`, `css/`, `js/` and `assets/`. Editing one cannot
-affect the others.
+Each variant is a complete, independent copy — its own `index.html`, `css/`,
+`js/` and `assets/`. Editing one cannot affect the others.
 
 Live previews:
 
 | | URL |
 |---|---|
-| Main | https://kunulabs.github.io/record-express/ |
+| Index | https://kunulabs.github.io/record-express/ |
 | Variant A | https://kunulabs.github.io/record-express/variant-a/ |
 | Variant B | https://kunulabs.github.io/record-express/variant-b/ |
 | Variant C | https://kunulabs.github.io/record-express/variant-c/ |
@@ -48,8 +52,8 @@ the whole palette flows from that one block:
 }
 ```
 
-Note the assets are duplicated per variant, so an image fix must be applied to
-all four copies (root plus the three variants).
+Note the assets are duplicated per variant, so an image or markup fix must be
+applied to all three copies.
 
 ## Running locally
 
@@ -61,9 +65,8 @@ Then open http://localhost:8000/.
 
 ## Note on images
 
-The photographic images in this repo are placeholder SVG graphics (branded
-gradients + icons), not the final photography from the Figma file — this
-environment's network policy blocks direct downloads from figma.com. Replace
-the files in `assets/images/` with the real exported photos/logos from Figma
-(same filenames) to finish the visual polish. The partner logos in the
-"Our Partners" strip are text placeholders for the same reason.
+The images are the real exported photography and partner logos, supplied via
+Google Drive and direct upload. They cannot be pulled from Figma in this
+environment: the egress policy blocks `figma.com`, so `download_assets` URLs
+fail even though the design itself can be read through the Figma MCP server.
+New or updated artwork therefore has to be uploaded rather than fetched.
