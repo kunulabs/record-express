@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <!-- ?v= busts the 10-minute GitHub Pages asset cache; bump on every deploy -->
-  <link rel="stylesheet" href="css/style.css?v=20260804c" />
+  <link rel="stylesheet" href="css/style.css?v=20260811a" />
 </head>
 <body>
 
@@ -187,94 +187,169 @@
             <p class="section-desc">We manage complex transport chains with high precision, modern fleets, and intelligent tour planning.</p>
           </div>
         </div>
-        <div class="carousel" id="services-carousel">
-          <div class="carousel-track">
-            <a class="service-card" href="#contact" aria-label="Learn more about Express &amp; SameDay">
-              <div class="service-card-img"><img src="assets/images/service-express.png" alt="Express and same-day courier loading a van" /></div>
-              <p class="service-card-number">01</p>
-              <h3 class="service-card-title">Express &amp; SameDay</h3>
-              <p class="service-card-desc">Immediate handling. Pick-up within 2h, direct delivery with no intermediary, hand-to-hand drop-off. Order all day long, proactive tracking by our team. Across Belgium and all of Europe.</p>
-              <span class="service-card-action" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M11.333 11.333V4.667H4.667M11.333 4.667L4.667 11.333" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-            </a>
-            <a class="service-card" href="#contact" aria-label="Learn more about Organization of Tours">
-              <div class="service-card-img"><img src="assets/images/service-tours.jpg" alt="Courier handing a parcel to a customer" /></div>
-              <p class="service-card-number">02</p>
-              <h3 class="service-card-title">Organization of Tours</h3>
-              <p class="service-card-desc">Planned or dedicated rounds, frequencies tailored to your needs, seamless integration into your operational flows across Belgium.</p>
-              <span class="service-card-action" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M11.333 11.333V4.667H4.667M11.333 4.667L4.667 11.333" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-            </a>
-            <a class="service-card" href="#contact" aria-label="Learn more about Next Day Europe">
-              <div class="service-card-img"><img src="assets/images/service-nextday.png" alt="Team planning delivery routes on a map" /></div>
-              <p class="service-card-number">03</p>
-              <h3 class="service-card-title">Next Day Europe</h3>
-              <p class="service-card-desc">Delivery on the next business day. A reliable and controlled solution for non-urgent shipments. Order before 2 PM. Belgium &amp; international.</p>
-              <span class="service-card-action" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M11.333 11.333V4.667H4.667M11.333 4.667L4.667 11.333" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-            </a>
-            <a class="service-card" href="#contact" aria-label="Learn more about Logistics Missions">
-              <div class="service-card-img"><img src="assets/images/service-logistics.png" alt="Dispatcher coordinating logistics on the phone" /></div>
-              <p class="service-card-number">04</p>
-              <h3 class="service-card-title">Logistics Missions</h3>
-              <p class="service-card-desc">High-constraint operational projects tailored to demanding sectors such as pharma, banking, automotive and e-commerce. Multi-point coordination, continuous communication, fully customised solutions.</p>
-              <span class="service-card-action" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M11.333 11.333V4.667H4.667M11.333 4.667L4.667 11.333" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-            </a>
+        <div class="services-showcase">
+          <div class="services-featured">
+            <article class="service-panel is-active" id="service-panel-01" role="tabpanel" aria-labelledby="service-tab-01">
+              <div class="service-panel-media"><img src="assets/images/service-express.png" alt="Express and same-day courier loading a van" /></div>
+              <div class="service-panel-body">
+                <div class="service-panel-top">
+                  <p class="service-panel-number">01</p>
+                  <span class="service-panel-badge">Active capability</span>
+                </div>
+                <h3 class="service-panel-title">Express &amp; SameDay</h3>
+                <p class="service-panel-desc">Immediate handling. Pick-up within 2h, direct delivery with no intermediary, hand-to-hand drop-off. Order all day long, proactive tracking by our team. Across Belgium and all of Europe.</p>
+              </div>
+              <div class="service-panel-footer">
+                <a class="service-panel-cta" href="#contact">Explore service details <span class="service-panel-cta-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                <span class="service-panel-compliance">COP &amp; TAPA compliant</span>
+              </div>
+            </article>
+            <article class="service-panel" id="service-panel-02" role="tabpanel" aria-labelledby="service-tab-02" hidden>
+              <div class="service-panel-media"><img src="assets/images/service-tours.jpg" alt="Courier handing a parcel to a customer" /></div>
+              <div class="service-panel-body">
+                <div class="service-panel-top">
+                  <p class="service-panel-number">02</p>
+                  <span class="service-panel-badge">Active capability</span>
+                </div>
+                <h3 class="service-panel-title">Organization of Tours</h3>
+                <p class="service-panel-desc">Planned or dedicated rounds, frequencies tailored to your needs, seamless integration into your operational flows across Belgium.</p>
+              </div>
+              <div class="service-panel-footer">
+                <a class="service-panel-cta" href="#contact">Explore service details <span class="service-panel-cta-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                <span class="service-panel-compliance">COP &amp; TAPA compliant</span>
+              </div>
+            </article>
+            <article class="service-panel" id="service-panel-03" role="tabpanel" aria-labelledby="service-tab-03" hidden>
+              <div class="service-panel-media"><img src="assets/images/service-nextday.png" alt="Team planning delivery routes on a map" /></div>
+              <div class="service-panel-body">
+                <div class="service-panel-top">
+                  <p class="service-panel-number">03</p>
+                  <span class="service-panel-badge">Active capability</span>
+                </div>
+                <h3 class="service-panel-title">Next Day Europe</h3>
+                <p class="service-panel-desc">Delivery on the next business day. A reliable and controlled solution for non-urgent shipments. Order before 2 PM. Belgium &amp; international.</p>
+              </div>
+              <div class="service-panel-footer">
+                <a class="service-panel-cta" href="#contact">Explore service details <span class="service-panel-cta-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                <span class="service-panel-compliance">COP &amp; TAPA compliant</span>
+              </div>
+            </article>
+            <article class="service-panel" id="service-panel-04" role="tabpanel" aria-labelledby="service-tab-04" hidden>
+              <div class="service-panel-media"><img src="assets/images/service-logistics.png" alt="Dispatcher coordinating logistics on the phone" /></div>
+              <div class="service-panel-body">
+                <div class="service-panel-top">
+                  <p class="service-panel-number">04</p>
+                  <span class="service-panel-badge">Active capability</span>
+                </div>
+                <h3 class="service-panel-title">Logistics Missions</h3>
+                <p class="service-panel-desc">High-constraint operational projects tailored to demanding sectors such as pharma, banking, automotive and e-commerce. Multi-point coordination, continuous communication, fully customised solutions.</p>
+              </div>
+              <div class="service-panel-footer">
+                <a class="service-panel-cta" href="#contact">Explore service details <span class="service-panel-cta-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                <span class="service-panel-compliance">COP &amp; TAPA compliant</span>
+              </div>
+            </article>
           </div>
-          <div class="carousel-controls">
-            <div class="carousel-dots" data-carousel-dots></div>
-            <div class="carousel-arrows">
-              <button type="button" class="carousel-btn" data-dir="-1" aria-label="Previous services"><svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-              <button type="button" class="carousel-btn" data-dir="1" aria-label="Next services"><svg viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="services-rail">
+            <p class="services-rail-title">Select category to preview</p>
+            <div class="services-rail-list" role="tablist" aria-label="Services">
+            <button type="button" class="service-row is-active" id="service-tab-01" role="tab" aria-selected="true" aria-controls="service-panel-01" data-service-tab="01">
+              <span class="service-row-number">01</span>
+              <span class="service-row-title">Express &amp; SameDay</span>
+              <span class="service-row-icon"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4 2.5 8 6l-4 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+            <button type="button" class="service-row" id="service-tab-02" role="tab" aria-selected="false" aria-controls="service-panel-02" data-service-tab="02">
+              <span class="service-row-number">02</span>
+              <span class="service-row-title">Organization of Tours</span>
+              <span class="service-row-icon"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4 2.5 8 6l-4 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+            <button type="button" class="service-row" id="service-tab-03" role="tab" aria-selected="false" aria-controls="service-panel-03" data-service-tab="03">
+              <span class="service-row-number">03</span>
+              <span class="service-row-title">Next Day Europe</span>
+              <span class="service-row-icon"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4 2.5 8 6l-4 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+            <button type="button" class="service-row" id="service-tab-04" role="tab" aria-selected="false" aria-controls="service-panel-04" data-service-tab="04">
+              <span class="service-row-number">04</span>
+              <span class="service-row-title">Logistics Missions</span>
+              <span class="service-row-icon"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4 2.5 8 6l-4 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+            </div>
+            <div class="services-rail-cta">
+              <h3>Need custom arrangements?</h3>
+              <p>Speak directly with our Brussels dispatch office for dedicated logistics missions.</p>
+              <p class="services-rail-contact">
+                <button type="button" class="copy-trigger" data-copy="+3223310505" data-copy-label="+32 2 331 05 05">+32 2 331 05 05</button>
+                <span class="services-rail-dot">·</span>
+                <span class="services-rail-avail">Available 24/7/365</span>
+              </p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Industries -->
     <section class="industries-section" id="industries">
-      <div class="container">
-        <div class="section-header">
+      <div class="container industries-inner">
+        <div class="section-header industries-header">
           <span class="section-eyebrow">Industry Sectors</span>
           <h2 class="section-title">Delivery for demanding sectors.</h2>
-          <p class="section-desc" style="max-width:640px;">Medical, industrial, legal, service providers: Over 30 years of expertise across Belgium and internationally.</p>
+          <p class="section-desc">Medical, industrial, legal, service providers: Over 30 years of expertise across Belgium and internationally.</p>
         </div>
-        <div class="industries-grid">
-          <article class="industry-card">
-            <div class="industry-card-media"><img src="assets/images/industry-legal.jpg" alt="Courier delivering legal documents from a van" /></div>
-            <span class="industry-card-badge"><svg viewBox="0 0 32 32" fill="none" class="icon-32"><path d="M4 13.3333C4 8.30501 4 5.79086 5.56209 4.22875C7.1242 2.66666 9.63835 2.66666 14.6667 2.66666H17.3333C22.3616 2.66666 24.8759 2.66666 26.4379 4.22875C28 5.79086 28 8.30501 28 13.3333V18.6667C28 23.6949 28 26.2092 26.4379 27.7712C24.8759 29.3333 22.3616 29.3333 17.3333 29.3333H14.6667C9.63835 29.3333 7.1242 29.3333 5.56209 27.7712C4 26.2092 4 23.6949 4 18.6667V13.3333Z" stroke="currentColor" stroke-width="2"/><path d="M10.667 13.3335H21.3337" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M10.667 18.6665H17.3337" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-            <h3 class="industry-card-title">Legal &amp; Financial</h3>
-            <p class="industry-card-desc">Confidential documents, tenders, bank cards... Hand-to-hand delivery, confidentiality preserved.</p>
-            <div class="industry-card-detail"><p>Notarial deeds, tender submissions, signed contracts, and bank documents — handled hand-to-hand with a signed proof of delivery.</p></div>
-            <button type="button" class="service-card-action industry-toggle" aria-expanded="false" aria-label="Learn more about Legal & Financial"><svg viewBox="0 0 16 16" fill="none"><path d="M11.333 11.333V4.667H4.667M11.333 4.667L4.667 11.333" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
-          </article>
-          <article class="industry-card">
-            <div class="industry-card-media"><img src="assets/images/industry-industry.jpg" alt="Dispatchers reviewing delivery routes on screen" /></div>
-            <span class="industry-card-badge"><svg viewBox="0 0 32 32" fill="none" class="icon-32"><path d="M4 28H28" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M25.3337 28V20V9.33333C25.3337 6.81917 25.3337 5.56209 24.5526 4.78105C23.7715 4 22.5145 4 20.0003 4H16.0003H12.0003C9.48617 4 8.22909 4 7.44805 4.78105C6.66699 5.56209 6.66699 6.81917 6.66699 9.33333V20V28" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10.6667H13.3333" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 16H13.3333" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 21.3333H13.3333" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.667 10.6665H20.0003" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.667 16H20.0003" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.667 21.3335H20.0003" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <h3 class="industry-card-title">Industry</h3>
-            <p class="industry-card-desc">Urgent spare parts, samples, prototypes, components, equipment. Production downtime prevented 24/7 across Belgium and Europe.</p>
-            <div class="industry-card-detail"><p>Spare parts, machine tooling, and just-in-time components moved directly between production sites and depots.</p></div>
-            <button type="button" class="service-card-action industry-toggle" aria-expanded="false" aria-label="Learn more about Industry"><svg viewBox="0 0 16 16" fill="none"><path d="M11.333 11.333V4.667H4.667M11.333 4.667L4.667 11.333" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
-          </article>
-          <article class="industry-card">
-            <div class="industry-card-media"><img src="assets/images/industry-medical.jpg" alt="Warehouse worker handling medical supply boxes" /></div>
-            <span class="industry-card-badge"><svg viewBox="0 0 32 32" fill="none" class="icon-32"><path d="M11.9603 29.3332H19.9603C26.627 29.3332 29.2937 26.6665 29.2937 19.9998V11.9998C29.2937 5.33317 26.627 2.6665 19.9603 2.6665H11.9603C5.29362 2.6665 2.62695 5.33317 2.62695 11.9998V19.9998C2.62695 26.6665 5.29362 29.3332 11.9603 29.3332Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.62695 16.9336L10.627 16.907C11.627 16.907 12.747 17.667 13.1203 18.6003L14.6403 22.4403C14.987 23.307 15.5337 23.307 15.8803 22.4403L18.9337 14.6936C19.227 13.947 19.7737 13.9203 20.147 14.627L21.5337 17.2536C21.947 18.0403 23.0137 18.6803 23.8937 18.6803H29.307" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <h3 class="industry-card-title">Medical &amp; Pharma</h3>
-            <p class="industry-card-desc">Medical equipment, sensitive medications, samples. Controlled temperature and certified traceability, 24/7 emergency management.</p>
-            <div class="industry-card-detail"><p>Cold-chain aware handling for lab samples, prescriptions, and medical devices, with strict chain-of-custody tracking.</p></div>
-            <button type="button" class="service-card-action industry-toggle" aria-expanded="false" aria-label="Learn more about Medical & Pharma"><svg viewBox="0 0 16 16" fill="none"><path d="M11.333 11.333V4.667H4.667M11.333 4.667L4.667 11.333" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
-          </article>
-          <article class="industry-card">
-            <div class="industry-card-media"><img src="assets/images/industry-service.jpg" alt="Team reviewing a delivery schedule on a monitor" /></div>
-            <span class="industry-card-badge"><svg viewBox="0 0 32 32" fill="none" class="icon-32"><path d="M16.2143 14.4932C16.081 14.4798 15.921 14.4798 15.7743 14.4932C12.6011 14.3865 10.0811 11.7865 10.0811 8.5865C10.0811 5.31984 12.7211 2.6665 16.001 2.6665C19.2677 2.6665 21.921 5.31984 21.921 8.5865C21.9077 11.7865 19.3877 14.3865 16.2143 14.4932Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.54793 19.4135C6.32126 21.5735 6.32126 25.0935 9.54793 27.2402C13.2146 29.6935 19.2279 29.6935 22.8946 27.2402C26.1213 25.0802 26.1213 21.5602 22.8946 19.4135C19.2413 16.9735 13.2279 16.9735 9.54793 19.4135Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <h3 class="industry-card-title">Service Providers</h3>
-            <p class="industry-card-desc">B2B &amp; B2C deliveries for high-demand service providers. Implementation of complex projects.</p>
-            <div class="industry-card-detail"><p>Facilities, IT, and field service teams get same-day parts and equipment delivered straight to the job site.</p></div>
-            <button type="button" class="service-card-action industry-toggle" aria-expanded="false" aria-label="Learn more about Service Providers"><svg viewBox="0 0 16 16" fill="none"><path d="M11.333 11.333V4.667H4.667M11.333 4.667L4.667 11.333" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
-          </article>
+        <div class="industries-photo">
+          <img class="industry-photo is-active" src="assets/images/industry-legal.jpg" alt="Record Express team reviewing a delivery route beside a branded van" />
+          <img class="industry-photo" src="assets/images/industry-industry.jpg" alt="Warehouse team walking between racking aisles" aria-hidden="true" />
+          <img class="industry-photo" src="assets/images/industry-medical.jpg" alt="Record Express staff member in a warehouse" aria-hidden="true" />
+          <img class="industry-photo" src="assets/images/industry-service.jpg" alt="Two Record Express drivers in a van cab" aria-hidden="true" />
+        </div>
+        <div class="industries-list">
+          <div class="industry-row is-active" data-industry="01">
+            <button type="button" class="industry-row-header" aria-expanded="true" aria-controls="industry-body-01">
+              <span class="industry-row-number">01</span>
+              <span class="industry-row-title">Legal &amp; Financial</span>
+              <span class="industry-row-icon"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 14 14 6M14 6H7.5M14 6v6.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+            <div class="industry-row-body" id="industry-body-01">
+              <p>Confidential documents, tenders, bank cards... Hand-to-hand delivery, confidentiality preserved.</p>
+              <a class="industry-row-link" href="#contact">Explore industry <span aria-hidden="true">&#8594;</span></a>
+            </div>
+          </div>
+          <div class="industry-row" data-industry="02">
+            <button type="button" class="industry-row-header" aria-expanded="false" aria-controls="industry-body-02">
+              <span class="industry-row-number">02</span>
+              <span class="industry-row-title">Industry</span>
+              <span class="industry-row-icon"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 14 14 6M14 6H7.5M14 6v6.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+            <div class="industry-row-body" id="industry-body-02">
+              <p>Urgent spare parts, samples, prototypes, components, equipment. Production downtime prevented 24/7 across Belgium and Europe.</p>
+              <a class="industry-row-link" href="#contact">Explore industry <span aria-hidden="true">&#8594;</span></a>
+            </div>
+          </div>
+          <div class="industry-row" data-industry="03">
+            <button type="button" class="industry-row-header" aria-expanded="false" aria-controls="industry-body-03">
+              <span class="industry-row-number">03</span>
+              <span class="industry-row-title">Medical &amp; Pharma</span>
+              <span class="industry-row-icon"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 14 14 6M14 6H7.5M14 6v6.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+            <div class="industry-row-body" id="industry-body-03">
+              <p>Medical equipment, sensitive medications, samples. Controlled temperature and certified traceability, 24/7 emergency management.</p>
+              <a class="industry-row-link" href="#contact">Explore industry <span aria-hidden="true">&#8594;</span></a>
+            </div>
+          </div>
+          <div class="industry-row" data-industry="04">
+            <button type="button" class="industry-row-header" aria-expanded="false" aria-controls="industry-body-04">
+              <span class="industry-row-number">04</span>
+              <span class="industry-row-title">Service Providers</span>
+              <span class="industry-row-icon"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 14 14 6M14 6H7.5M14 6v6.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+            <div class="industry-row-body" id="industry-body-04">
+              <p>B2B &amp; B2C deliveries for high-demand service providers. Implementation of complex projects.</p>
+              <a class="industry-row-link" href="#contact">Explore industry <span aria-hidden="true">&#8594;</span></a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Urgent CTA banner -->
     <section class="urgent-cta-section">
       <div class="container">
         <div class="urgent-cta">
@@ -706,6 +781,6 @@
 
   <div class="copy-toast" id="copy-toast" role="status" aria-live="polite"></div>
 
-  <script src="js/script.js?v=20260804c"></script>
+  <script src="js/script.js?v=20260811a"></script>
 </body>
 </html>

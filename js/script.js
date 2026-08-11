@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
   initContactTypewriter();
   initQuoteBar();
   initStatsCountUp();
-  initCarousels();
-  initIndustryToggles();
+  initServiceRail();
+  initIndustrySelector();
   initHowItWorksStepper();
   initTestimonialFeature();
   initCopyTriggers();
@@ -237,84 +237,71 @@ function initStatsCountUp() {
   stats.forEach(function (el) { observer.observe(el); });
 }
 
-function initCarousels() {
-  document.querySelectorAll('.carousel').forEach(function (carousel) {
-    var track = carousel.querySelector('.carousel-track');
-    var buttons = carousel.querySelectorAll('.carousel-btn');
-    var dotsContainer = carousel.querySelector('[data-carousel-dots]');
-    if (!track) return;
+function initServiceRail() {
+  var rail = document.querySelector('.services-rail-list');
+  var featured = document.querySelector('.services-featured');
+  if (!rail || !featured) return;
 
-    var cards = Array.prototype.slice.call(track.children);
-    var dots = [];
+  var tabs = Array.prototype.slice.call(rail.querySelectorAll('[data-service-tab]'));
+  var panels = Array.prototype.slice.call(featured.querySelectorAll('.service-panel'));
+  if (!tabs.length || !panels.length) return;
 
-    function cardWidth() {
-      var card = track.querySelector(':scope > *');
-      return card ? card.getBoundingClientRect().width + 28 : 300;
-    }
-
-    function updateActiveDot() {
-      if (!dots.length) return;
-      var index = Math.round(track.scrollLeft / cardWidth());
-      dots.forEach(function (dot, i) {
-        dot.classList.toggle('is-active', i === index);
-      });
-      updateButtonState(index);
-    }
-
-    function updateButtonState(index) {
-      buttons.forEach(function (btn) {
-        var dir = parseInt(btn.getAttribute('data-dir'), 10);
-        var disabled = (dir < 0 && index <= 0) || (dir > 0 && index >= cards.length - 1);
-        btn.classList.toggle('is-disabled', disabled);
-        btn.disabled = disabled;
-      });
-    }
-
-    function updateOverflow() {
-      var hasOverflow = track.scrollWidth - track.clientWidth > 4;
-      carousel.classList.toggle('has-overflow', hasOverflow);
-      if (hasOverflow) updateActiveDot();
-    }
-
-    if (dotsContainer && cards.length > 1) {
-      cards.forEach(function (card, i) {
-        var dot = document.createElement('button');
-        dot.type = 'button';
-        dot.className = 'carousel-dot' + (i === 0 ? ' is-active' : '');
-        dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-        dot.addEventListener('click', function () {
-          track.scrollTo({ left: cardWidth() * i, behavior: 'smooth' });
-        });
-        dotsContainer.appendChild(dot);
-        dots.push(dot);
-      });
-      var debounced;
-      track.addEventListener('scroll', function () {
-        clearTimeout(debounced);
-        debounced = setTimeout(updateActiveDot, 100);
-      });
-    }
-
-    buttons.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var dir = parseInt(btn.getAttribute('data-dir'), 10);
-        track.scrollBy({ left: dir * cardWidth(), behavior: 'smooth' });
-      });
+  function select(index) {
+    tabs.forEach(function (tab, i) {
+      var on = i === index;
+      tab.classList.toggle('is-active', on);
+      tab.setAttribute('aria-selected', on ? 'true' : 'false');
     });
+    panels.forEach(function (panel, i) {
+      var on = i === index;
+      panel.classList.toggle('is-active', on);
+      if (on) panel.removeAttribute('hidden');
+      else panel.setAttribute('hidden', '');
+    });
+  }
 
-    updateOverflow();
-    window.addEventListener('resize', updateOverflow);
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener('click', function () { select(i); });
+    // Roving arrow-key navigation, as expected of a tablist.
+    tab.addEventListener('keydown', function (e) {
+      var next = null;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+      else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+      if (next === null) return;
+      e.preventDefault();
+      select(next);
+      tabs[next].focus();
+    });
   });
 }
 
-function initIndustryToggles() {
-  document.querySelectorAll('.industry-toggle').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var card = btn.closest('.industry-card');
-      if (!card) return;
-      var isOpen = card.classList.toggle('is-expanded');
-      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+function initIndustrySelector() {
+  var list = document.querySelector('.industries-list');
+  var photos = Array.prototype.slice.call(document.querySelectorAll('.industry-photo'));
+  if (!list) return;
+
+  var rows = Array.prototype.slice.call(list.querySelectorAll('.industry-row'));
+  if (!rows.length) return;
+
+  function select(index) {
+    rows.forEach(function (row, i) {
+      var on = i === index;
+      row.classList.toggle('is-active', on);
+      var header = row.querySelector('.industry-row-header');
+      if (header) header.setAttribute('aria-expanded', on ? 'true' : 'false');
     });
+    photos.forEach(function (photo, i) {
+      var on = i === index;
+      photo.classList.toggle('is-active', on);
+      // the inactive photos are decorative duplicates of the active one
+      if (on) photo.removeAttribute('aria-hidden');
+      else photo.setAttribute('aria-hidden', 'true');
+    });
+  }
+
+  rows.forEach(function (row, i) {
+    var header = row.querySelector('.industry-row-header');
+    if (header) header.addEventListener('click', function () { select(i); });
   });
 }
 
@@ -581,7 +568,8 @@ function initNewsletterForm() {
 
 function initScrollReveal() {
   var selectors = [
-    '.section-header', '.service-card', '.industry-card', '.blog-card',
+    '.section-header', '.services-showcase', '.industries-photo',
+    '.industries-list', '.blog-card',
     '.testimonial-card', '.step', '.stat', '.benefits-copy', '.benefits-media',
     '.about-copy', '.about-media', '.contact-form', '.contact-copy',
     '.benefits2-card', '.urgent-cta'
