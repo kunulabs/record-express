@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function () {
   initNavLinks();
   initTopbar();
   initLangDropdown();
-  initHeroTilt();
   initHeroTypewriter();
   initContactTypewriter();
   initQuoteBar();
@@ -169,26 +168,6 @@ function initContactTypewriter() {
   }, { threshold: 0.9 });
 
   observer.observe(el);
-}
-
-function initHeroTilt() {
-  var media = document.querySelector('.hero-media');
-  var card = document.querySelector('.hero-media-card');
-  if (!media || !card) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  var maxAngle = 10;
-
-  media.addEventListener('mousemove', function (e) {
-    var rect = media.getBoundingClientRect();
-    var x = (e.clientX - rect.left) / rect.width - 0.5;
-    var angle = Math.max(-1, Math.min(1, x * 2)) * maxAngle;
-    card.style.transform = 'rotate(' + angle + 'deg)';
-  });
-
-  media.addEventListener('mouseleave', function () {
-    card.style.transform = '';
-  });
 }
 
 function initStatsCountUp() {

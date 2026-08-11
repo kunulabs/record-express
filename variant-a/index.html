@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <!-- ?v= busts the 10-minute GitHub Pages asset cache; bump on every deploy -->
-  <link rel="stylesheet" href="css/style.css?v=20260811b-a" />
+  <link rel="stylesheet" href="css/style.css?v=20260811c-a" />
 </head>
 <body>
 
@@ -110,7 +110,32 @@
           <div class="hero-media-bg-frame">
             <img class="hero-media-bg" src="assets/images/hero-van.png" alt="Record Express delivery van" />
           </div>
-          <img class="hero-media-card" src="assets/images/hero-dispatch.png" alt="Live dispatch tracking panel" />
+          <div class="hero-dispatch" tabindex="0" role="img" aria-label="Live dispatch panel showing active Record Express shipments">
+            <div class="d-head">
+              <span class="d-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="d-title">Dispatch &middot; Live</span>
+              <span class="d-clock">14:12:46 &middot; 16 Active</span>
+            </div>
+            <div class="d-cols" aria-hidden="true"><span>Race</span><span>Journey</span><span>Status</span></div>
+            <ul class="d-rows">
+            <li><span class="d-code">RX-24124</span><span class="d-journey">Brussels <i aria-hidden="true">&#8594;</i> Cork</span><span class="d-status d-road">On the road</span></li>
+            <li><span class="d-code">RX-24101</span><span class="d-journey">Charleroi <i aria-hidden="true">&#8594;</i> Paris Nord</span><span class="d-status d-done">Delivered</span></li>
+            <li><span class="d-code">RX-24551</span><span class="d-journey">Brussels <i aria-hidden="true">&#8594;</i> Lille</span><span class="d-status d-road">On the road</span></li>
+            <li><span class="d-code">RX-24511</span><span class="d-journey">Brussels <i aria-hidden="true">&#8594;</i> Lille</span><span class="d-status d-move">Removal</span></li>
+            <li><span class="d-code">RX-24462</span><span class="d-journey">Antwerp <i aria-hidden="true">&#8594;</i> Cork</span><span class="d-status d-move">Removal</span></li>
+            <li><span class="d-code">RX-24564</span><span class="d-journey">Brussels <i aria-hidden="true">&#8594;</i> Lille</span><span class="d-status d-move">Removal</span></li>
+            <li><span class="d-code">RX-24482</span><span class="d-journey">Charleroi <i aria-hidden="true">&#8594;</i> Paris Nord</span><span class="d-status d-road">On the road</span></li>
+            <li class="is-extra"><span class="d-code">RX-24891</span><span class="d-journey">Liege <i aria-hidden="true">&#8594;</i> Antwerp</span><span class="d-status d-wait">In transit</span></li>
+            <li class="is-extra"><span class="d-code">RX-24983</span><span class="d-journey">Ghent <i aria-hidden="true">&#8594;</i> Brussels</span><span class="d-status d-road">On the road</span></li>
+            <li class="is-extra"><span class="d-code">RX-25812</span><span class="d-journey">Namur <i aria-hidden="true">&#8594;</i> Cork</span><span class="d-status d-done">Delivered</span></li>
+            <li class="is-extra"><span class="d-code">RX-25044</span><span class="d-journey">Antwerp <i aria-hidden="true">&#8594;</i> Paris Nord</span><span class="d-status d-move">Removal</span></li>
+            <li class="is-extra"><span class="d-code">RX-25118</span><span class="d-journey">Brussels <i aria-hidden="true">&#8594;</i> Lille</span><span class="d-status d-wait">In transit</span></li>
+            </ul>
+            <div class="d-foot">
+              <span>BXL-CTRL &middot; Hub</span>
+              <span class="d-count">699 deliveries</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -781,6 +806,6 @@
 
   <div class="copy-toast" id="copy-toast" role="status" aria-live="polite"></div>
 
-  <script src="js/script.js?v=20260811b-a"></script>
+  <script src="js/script.js?v=20260811c-a"></script>
 </body>
 </html>

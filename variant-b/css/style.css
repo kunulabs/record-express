@@ -497,19 +497,153 @@ h1, h2, h3, h4, .font-display {
   object-position: 58% 50%;
 }
 
-.hero-media-card {
+/* Live dispatch panel. Built as markup rather than the old flat export so it
+   can grow on hover to reveal more shipments, and stay crisp at any DPR.
+   Type is sized in cqw so the whole panel scales with the card. */
+.hero-dispatch {
   position: absolute;
   left: 0;
   top: 0;
   width: 35.97%;
-  height: 51.33%;
-  object-fit: cover;
+  /* Two states from the design: 7 rows at rest, 12 on hover. The card sets an
+     explicit height and clips the list, so the footer stays pinned in both. */
+  height: 46%;
+  display: flex;
+  flex-direction: column;
+  container-type: inline-size;
+  background: #0a1a0c;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   box-shadow: 0 20px 40px rgba(18, 33, 20, 0.35);
-  /* Pivot sits far above the card so hover sweeps it along a wide arc; kept
-     proportional to the card so the sweep feels identical at any size. */
-  transform-origin: 50% -211%;
-  will-change: transform;
+  overflow: hidden;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: rgba(255, 255, 255, 0.82);
+  transition: height 0.45s ease, box-shadow 0.45s ease, transform 0.45s ease;
+}
+
+.hero-dispatch:hover,
+.hero-dispatch:focus-visible {
+  outline: none;
+  height: 70.5%;
+  transform: translateY(-4px);
+  box-shadow: 0 28px 56px rgba(18, 33, 20, 0.45);
+}
+
+.d-head {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 2cqw;
+  padding: 3.4cqw 3.8cqw;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.d-dots { display: inline-flex; gap: 1cqw; }
+
+.d-dots i {
+  width: 1.5cqw;
+  height: 1.5cqw;
+  border-radius: 50%;
+  background: #e0b13c;
+}
+
+.d-dots i:first-child { background: #ec6655; }
+.d-dots i:last-child { background: #2ecc71; }
+
+.d-title {
+  flex: 1 1 auto;
+  font-size: 3.1cqw;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+
+.d-clock {
+  font-size: 2.7cqw;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+}
+
+.d-cols,
+.d-rows li {
+  display: grid;
+  grid-template-columns: 1.5fr 2.4fr 1.7fr;
+  align-items: center;
+  gap: 1.5cqw;
+  padding: 3.5cqw 3.8cqw;
+}
+
+.d-cols {
+  flex-shrink: 0;
+  font-size: 2.4cqw;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  padding-bottom: 1.4cqw;
+}
+
+.d-rows {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.d-rows li {
+  font-size: 2.7cqw;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.d-code { color: rgba(255, 255, 255, 0.45); }
+
+.d-journey {
+  color: var(--color-white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.d-journey i { color: rgba(255, 255, 255, 0.4); font-style: normal; }
+
+.d-status {
+  justify-self: end;
+  padding: 1cqw 1.8cqw;
+  border-radius: 2cqw;
+  font-size: 2.2cqw;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.d-road { background: rgba(46, 204, 113, 0.16); color: #2ecc71; }
+.d-done { background: rgba(236, 102, 85, 0.16); color: #f08d7f; }
+.d-move { background: rgba(122, 162, 247, 0.16); color: #7aa2f7; }
+.d-wait { background: rgba(224, 177, 60, 0.16); color: #e0b13c; }
+
+.d-foot {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2cqw;
+  padding: 3cqw 3.8cqw;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  font-size: 2.4cqw;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.d-count {
+  padding: 1cqw 1.8cqw;
+  border-radius: 2cqw;
+  background: rgba(46, 204, 113, 0.16);
+  color: #2ecc71;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-dispatch { transition: none; }
 }
 
 /* Stack only once the two columns genuinely stop working. Above this the hero
@@ -2457,16 +2591,6 @@ h1, h2, h3, h4, .font-display {
 .lang-menu li.is-selected {
   font-weight: 700;
   color: var(--color-coral-700);
-}
-
-/* Hero media tilt */
-.hero-media {
-  perspective: 1000px;
-}
-
-.hero-media-card {
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-  will-change: transform;
 }
 
 /* Copy-to-clipboard triggers */
