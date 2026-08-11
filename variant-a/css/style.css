@@ -205,7 +205,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px var(--container-padding);
+  padding: 16px var(--container-padding);
   gap: 24px;
 }
 
@@ -387,8 +387,8 @@ h1, h2, h3, h4, .font-display {
   display: flex;
   align-items: center;
   gap: 48px;
-  padding-top: 72px;
-  padding-bottom: 72px;
+  padding-top: 24px;
+  padding-bottom: 48px;
 }
 
 /* Copy and media share space in the same 540:650 ratio as the 1440 Figma
@@ -398,7 +398,7 @@ h1, h2, h3, h4, .font-display {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 28px;
 }
 
 .hero-title {
@@ -406,7 +406,7 @@ h1, h2, h3, h4, .font-display {
   font-size: clamp(36px, 5vw, 72px);
   line-height: 1.06;
   letter-spacing: -0.02em;
-  margin-top: 24px;
+  margin-top: 4px;
 }
 
 .is-typing::after {
@@ -431,7 +431,7 @@ h1, h2, h3, h4, .font-display {
   font-size: clamp(18px, 1.53vw, 22px);
   line-height: 1.27;
   opacity: 0.8;
-  margin-top: 32px;
+  margin-top: 20px;
 }
 
 .hero-actions {
