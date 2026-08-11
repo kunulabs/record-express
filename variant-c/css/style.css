@@ -3066,3 +3066,16 @@ h1, h2, h3, h4, .font-display {
 .about-section,
 .partners-section { background: var(--color-bg-accent); }
 
+
+/* rows stream in on first view, like a board populating */
+.d-rows li.is-loading { opacity: 0; transform: translateX(-8px); }
+
+.d-rows li.is-loaded {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .d-rows li.is-loading { opacity: 1; transform: none; }
+}

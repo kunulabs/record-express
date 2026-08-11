@@ -687,16 +687,40 @@ function initDispatchBoard() {
     renderClock();
   }
 
+  // Rows stream in the first time the board is seen, the way a real screen
+  // populates, then the live updates take over.
+  var booted = false;
+
+  function bootRows() {
+    if (booted) return;
+    booted = true;
+    rows.forEach(function (row, i) {
+      row.classList.add('is-loading');
+      timers.push(setTimeout(function () {
+        row.classList.remove('is-loading');
+        row.classList.add('is-loaded');
+      }, 120 + i * 95));
+    });
+  }
+
   function start() {
     if (running) return;
     running = true;
+    if (!booted) {
+      bootRows();
+      // hold the live updates until the rows have finished arriving
+      timers.push(setTimeout(function () {
+        timers.push(setInterval(shuffleRow, 2600));
+      }, 120 + rows.length * 95 + 600));
+    } else {
+      timers.push(setInterval(shuffleRow, 2600));
+    }
     timers.push(setInterval(tick, 1000));
-    timers.push(setInterval(shuffleRow, 2600));
   }
 
   function stop() {
     running = false;
-    timers.forEach(clearInterval);
+    timers.forEach(function (t) { clearInterval(t); clearTimeout(t); });
     timers = [];
   }
 
