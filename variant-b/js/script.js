@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initHeroTypewriter();
   initContactTypewriter();
   initQuoteBar();
+  initBookingWidget();
   initStatsCountUp();
   initServiceRail();
   initIndustrySelector();
@@ -473,6 +474,48 @@ function initServicePlaceholder() {
   }
 
   select.addEventListener('change', updatePlaceholder);
+}
+
+function initBookingWidget() {
+  var widget = document.getElementById('booking-widget');
+  if (!widget) return;
+  var button = widget.querySelector('.booking-book');
+  if (!button) return;
+
+  // Hover alone leaves no way in on touch or by keyboard, so the button also
+  // toggles a pinned state.
+  button.addEventListener('click', function () {
+    var open = widget.classList.toggle('is-open');
+    button.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!widget.contains(e.target) && widget.classList.contains('is-open')) {
+      widget.classList.remove('is-open');
+      button.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  function dismiss() {
+    widget.classList.remove('is-open');
+    widget.classList.add('is-dismissed');
+    button.setAttribute('aria-expanded', 'false');
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (!widget.matches(':hover, :focus-within') && !widget.classList.contains('is-open')) return;
+    dismiss();
+    button.focus();
+  });
+
+  // let the widget work again once the pointer and focus have both left
+  widget.addEventListener('mouseleave', function () { widget.classList.remove('is-dismissed'); });
+  widget.addEventListener('focusout', function () {
+    setTimeout(function () {
+      if (!widget.contains(document.activeElement)) widget.classList.remove('is-dismissed');
+    }, 0);
+  });
 }
 
 function initQuoteBar() {

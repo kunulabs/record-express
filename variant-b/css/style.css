@@ -11,6 +11,11 @@
   --color-coral-700: #b84437;
   --color-border: rgba(18, 33, 20, 0.2);
   --color-white: #ffffff;
+  /* --color-white doubles as text-on-dark, so raised panels use their own
+     token; that lets a theme darken surfaces without inverting the text. */
+  --color-surface: #ffffff;
+  --color-surface-alt: #fffdf9;
+  --color-pill: #e3e2c9;
 
   --font-family: "Open Sans", system-ui, -apple-system, sans-serif;
 
@@ -24,6 +29,78 @@
     --container-padding: 56px;
   }
 }
+
+/* ===== Variant B - dark scheme =====
+   Sampled from Figma node 33290:1022: #0c0e0c for the page, #121713 for the
+   alternating bands, with the services section left on the light palette. */
+:root {
+  --color-bg-default: #0c0e0c;
+  --color-bg-accent: #121713;
+  --color-bg-dark: #121713;
+  --color-surface: #121713;
+  --color-surface-alt: #151b16;
+  --color-pill: #1b2a1d;
+  --color-text-primary: #f4f1ea;
+  --color-text-secondary: rgba(244, 241, 234, 0.62);
+  --color-border: rgba(255, 255, 255, 0.14);
+}
+
+body { background: var(--color-bg-default); color: var(--color-text-primary); }
+
+.site-header,
+.topbar { background: var(--color-bg-default); }
+
+.topbar { border-bottom: 1px solid var(--color-border); }
+
+/* The services band stays light in the design. Re-declaring the tokens on the
+   section re-lightens everything inside it through the cascade. */
+.services-section {
+  --color-bg-default: #fff6eb;
+  --color-bg-accent: #ffe3c2;
+  --color-bg-dark: #122114;
+  --color-surface: #ffffff;
+  --color-surface-alt: #fffdf9;
+  --color-text-primary: #122114;
+  --color-text-secondary: rgba(18, 33, 20, 0.65);
+  --color-border: rgba(18, 33, 20, 0.2);
+  background: var(--color-bg-default);
+  color: var(--color-text-primary);
+}
+
+/* Photos carry their own light, so knock them back slightly on the dark page. */
+.industries-photo img,
+.blog-card-img img,
+.benefits-media img,
+.benefits2-media img { filter: brightness(0.94); }
+
+/* Inputs and the dark form need light-on-dark treatment. */
+.form-field input,
+.form-field select,
+.form-field textarea,
+.newsletter-input,
+.quote-option {
+  background: var(--color-surface-alt);
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder,
+.newsletter-input input::placeholder { color: rgba(244, 241, 234, 0.4); }
+
+.newsletter-input input { color: var(--color-text-primary); }
+
+.contact-form { box-shadow: 0 24px 25px rgba(0, 0, 0, 0.35); }
+
+.site-footer { border-top: 1px solid var(--color-border); }
+
+.blog-card { border-color: rgba(46, 204, 113, 0.35); }
+
+.industry-row.is-active { background: var(--color-bg-accent); }
+
+.hero-dispatch { border-color: rgba(255, 255, 255, 0.14); }
+
+
 
 @media (max-width: 900px) {
   :root {
@@ -351,7 +428,7 @@ h1, h2, h3, h4, .font-display {
   align-items: center;
   padding: 8px 16px;
   border-radius: 65px;
-  background: #e3e2c9;
+  background: var(--color-pill);
   font-family: "Outfit", var(--font-family);
   /* Copy runs ~56 chars; uppercase at 18px needs 581px against a 541px column,
      so the pill keeps the sentence casing it's written in and scales slightly
@@ -824,7 +901,7 @@ h1, h2, h3, h4, .font-display {
 
 /* ===== Stats ===== */
 .stats-section {
-  background: var(--color-white);
+  background: var(--color-surface);
   padding: 72px 0;
 }
 
@@ -1130,14 +1207,14 @@ h1, h2, h3, h4, .font-display {
 .service-row.is-active .service-row-number { color: var(--color-white); }
 
 .service-row.is-active .service-row-icon {
-  background: var(--color-white);
+  background: var(--color-surface);
   color: var(--color-coral-500);
 }
 
 .services-rail-cta {
   margin-top: 16px;
   padding: 24px;
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 20px;
 }
@@ -1815,7 +1892,7 @@ h1, h2, h3, h4, .font-display {
 
 /* ===== About / Story ===== */
 .about-section {
-  background: var(--color-white);
+  background: var(--color-surface);
   padding: 96px 0;
 }
 
@@ -1906,7 +1983,7 @@ h1, h2, h3, h4, .font-display {
   border-radius: 50%;
   object-fit: cover;
   border: 6px solid var(--color-bg-dark);
-  background: var(--color-white);
+  background: var(--color-surface);
 }
 
 .about-media-caption {
@@ -2162,7 +2239,7 @@ h1, h2, h3, h4, .font-display {
 
 /* ===== Contact ===== */
 .contact-section {
-  background: var(--color-white);
+  background: var(--color-surface);
   padding: 72px 0;
 }
 
@@ -2226,7 +2303,7 @@ h1, h2, h3, h4, .font-display {
 .contact-form {
   flex: 0 1 51.613%;
   min-width: 0;
-  background: #fffdf9;
+  background: var(--color-surface-alt);
   border: 1px solid #e8ddd0;
   border-radius: 20px;
   padding: 48px;
@@ -2263,7 +2340,7 @@ h1, h2, h3, h4, .font-display {
   padding: 12px 16px;
   border: 1px solid #b9afa2;
   border-radius: 8px;
-  background: var(--color-white);
+  background: var(--color-surface);
   color: var(--color-text-primary);
   width: 100%;
 }
@@ -2444,7 +2521,7 @@ h1, h2, h3, h4, .font-display {
   gap: 10px;
   height: 56px;
   padding: 0 16px;
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid #d4d4d4;
   border-radius: 55px;
   color: var(--color-text-primary);
@@ -2561,7 +2638,7 @@ h1, h2, h3, h4, .font-display {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 12px;
   box-shadow: 0 12px 24px rgba(18, 33, 20, 0.15);
@@ -2859,4 +2936,131 @@ h1, h2, h3, h4, .font-display {
     transform: none;
     transition: none;
   }
+}
+
+/* ===== Variant B - sticky booking widget =====
+   The quote bar is lifted out of the page flow into a fixed capsule; hovering
+   (or focusing) Book Now expands it into the same quote form as before. */
+.booking-widget {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.booking-capsule {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: #0f130f;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.booking-opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 20px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--color-white);
+  white-space: nowrap;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.booking-opt svg { width: 20px; height: 20px; }
+
+.booking-whatsapp:hover { background: rgba(255, 255, 255, 0.08); }
+
+.booking-book {
+  background: var(--color-coral-500);
+  padding-right: 14px;
+}
+
+.booking-book:hover { background: var(--color-coral-700); }
+
+.booking-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.22);
+  transition: transform 0.25s ease;
+}
+
+.booking-arrow svg { width: 14px; height: 14px; }
+
+.booking-widget:hover .booking-arrow,
+.booking-widget:focus-within .booking-arrow { transform: translateX(2px); }
+
+/* The panel is hidden until the widget is hovered or focused. visibility keeps
+   it out of the tab order while closed, and the delay stops it snapping shut
+   as the pointer travels from the button up into the panel. */
+.booking-panel {
+  width: min(720px, calc(100vw - 48px));
+  padding: 16px;
+  background: var(--color-bg-accent);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px) scale(0.98);
+  transform-origin: 100% 100%;
+  transition: opacity 0.28s ease, transform 0.28s ease, visibility 0s linear 0.28s;
+}
+
+.booking-widget:hover .booking-panel,
+.booking-widget:focus-within .booking-panel,
+.booking-widget.is-open .booking-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity 0.28s ease, transform 0.28s ease, visibility 0s;
+}
+
+/* Escape sets this; it has to outrank the hover and focus-within rules above,
+   which would otherwise reopen the panel the moment focus returns to the
+   button. Cleared on pointer/focus leave so the widget works again. */
+.booking-widget.is-dismissed .booking-panel,
+.booking-widget.is-dismissed:hover .booking-panel,
+.booking-widget.is-dismissed:focus-within .booking-panel {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px) scale(0.98);
+}
+
+/* the lifted form drops its section chrome inside the panel */
+.booking-panel .quote-bar {
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .booking-widget { right: 12px; bottom: 12px; left: 12px; align-items: stretch; }
+  .booking-capsule { align-self: flex-end; }
+  .booking-panel { width: 100%; }
+  .booking-panel .quote-bar { flex-direction: column; align-items: stretch; }
+  .booking-panel .quote-bar-divider { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .booking-panel, .booking-arrow { transition: none; }
 }

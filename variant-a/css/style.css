@@ -11,6 +11,11 @@
   --color-coral-700: #b84437;
   --color-border: rgba(18, 33, 20, 0.2);
   --color-white: #ffffff;
+  /* --color-white doubles as text-on-dark, so raised panels use their own
+     token; that lets a theme darken surfaces without inverting the text. */
+  --color-surface: #ffffff;
+  --color-surface-alt: #fffdf9;
+  --color-pill: #e3e2c9;
 
   --font-family: "Open Sans", system-ui, -apple-system, sans-serif;
 
@@ -351,7 +356,7 @@ h1, h2, h3, h4, .font-display {
   align-items: center;
   padding: 8px 16px;
   border-radius: 65px;
-  background: #e3e2c9;
+  background: var(--color-pill);
   font-family: "Outfit", var(--font-family);
   /* Copy runs ~56 chars; uppercase at 18px needs 581px against a 541px column,
      so the pill keeps the sentence casing it's written in and scales slightly
@@ -824,7 +829,7 @@ h1, h2, h3, h4, .font-display {
 
 /* ===== Stats ===== */
 .stats-section {
-  background: var(--color-white);
+  background: var(--color-surface);
   padding: 72px 0;
 }
 
@@ -1130,14 +1135,14 @@ h1, h2, h3, h4, .font-display {
 .service-row.is-active .service-row-number { color: var(--color-white); }
 
 .service-row.is-active .service-row-icon {
-  background: var(--color-white);
+  background: var(--color-surface);
   color: var(--color-coral-500);
 }
 
 .services-rail-cta {
   margin-top: 16px;
   padding: 24px;
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 20px;
 }
@@ -1815,7 +1820,7 @@ h1, h2, h3, h4, .font-display {
 
 /* ===== About / Story ===== */
 .about-section {
-  background: var(--color-white);
+  background: var(--color-surface);
   padding: 96px 0;
 }
 
@@ -1906,7 +1911,7 @@ h1, h2, h3, h4, .font-display {
   border-radius: 50%;
   object-fit: cover;
   border: 6px solid var(--color-bg-dark);
-  background: var(--color-white);
+  background: var(--color-surface);
 }
 
 .about-media-caption {
@@ -2162,7 +2167,7 @@ h1, h2, h3, h4, .font-display {
 
 /* ===== Contact ===== */
 .contact-section {
-  background: var(--color-white);
+  background: var(--color-surface);
   padding: 72px 0;
 }
 
@@ -2226,7 +2231,7 @@ h1, h2, h3, h4, .font-display {
 .contact-form {
   flex: 0 1 51.613%;
   min-width: 0;
-  background: #fffdf9;
+  background: var(--color-surface-alt);
   border: 1px solid #e8ddd0;
   border-radius: 20px;
   padding: 48px;
@@ -2263,7 +2268,7 @@ h1, h2, h3, h4, .font-display {
   padding: 12px 16px;
   border: 1px solid #b9afa2;
   border-radius: 8px;
-  background: var(--color-white);
+  background: var(--color-surface);
   color: var(--color-text-primary);
   width: 100%;
 }
@@ -2444,7 +2449,7 @@ h1, h2, h3, h4, .font-display {
   gap: 10px;
   height: 56px;
   padding: 0 16px;
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid #d4d4d4;
   border-radius: 55px;
   color: var(--color-text-primary);
@@ -2561,7 +2566,7 @@ h1, h2, h3, h4, .font-display {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  background: var(--color-white);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 12px;
   box-shadow: 0 12px 24px rgba(18, 33, 20, 0.15);
