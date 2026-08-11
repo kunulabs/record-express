@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded', function () {
   initHeroTypewriter();
   initContactTypewriter();
   initQuoteBar();
+  initBookingWidget();
   initStatsCountUp();
+  initDispatchBoard();
   initServiceRail();
   initIndustrySelector();
   initHowItWorksStepper();
@@ -475,6 +477,45 @@ function initServicePlaceholder() {
   select.addEventListener('change', updatePlaceholder);
 }
 
+function initBookingWidget() {
+  var widget = document.getElementById('booking-widget');
+  if (!widget) return;
+  var button = widget.querySelector('.booking-book');
+  if (!button) return;
+
+  button.addEventListener('click', function () {
+    var open = widget.classList.toggle('is-open');
+    button.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!widget.contains(e.target) && widget.classList.contains('is-open')) {
+      widget.classList.remove('is-open');
+      button.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  function dismiss() {
+    widget.classList.remove('is-open');
+    widget.classList.add('is-dismissed');
+    button.setAttribute('aria-expanded', 'false');
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (!widget.matches(':hover, :focus-within') && !widget.classList.contains('is-open')) return;
+    dismiss();
+    button.focus();
+  });
+
+  widget.addEventListener('mouseleave', function () { widget.classList.remove('is-dismissed'); });
+  widget.addEventListener('focusout', function () {
+    setTimeout(function () {
+      if (!widget.contains(document.activeElement)) widget.classList.remove('is-dismissed');
+    }, 0);
+  });
+}
+
 function initQuoteBar() {
   var options = document.querySelectorAll('.quote-option');
   options.forEach(function (option) {
@@ -573,4 +614,106 @@ function initScrollReveal() {
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
   elements.forEach(function (el) { observer.observe(el); });
+}
+
+// Brings the hero dispatch panel to life: the clock runs, shipments change
+// status, and the counters drift the way a real board would.
+function initDispatchBoard() {
+  var board = document.querySelector('.hero-dispatch');
+  if (!board) return;
+
+  var clock = board.querySelector('.d-clock');
+  var count = board.querySelector('.d-count');
+  var rows = Array.prototype.slice.call(board.querySelectorAll('.d-rows li'));
+  if (!rows.length) return;
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) return;
+
+  var STATES = [
+    { cls: 'd-road', label: 'On the road' },
+    { cls: 'd-wait', label: 'In transit' },
+    { cls: 'd-move', label: 'Removal' },
+    { cls: 'd-done', label: 'Delivered' }
+  ];
+
+  var seconds = 14 * 3600 + 12 * 60 + 46;
+  var active = 16;
+  var delivered = 699;
+  var timers = [];
+  var running = false;
+
+  function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+  function renderClock() {
+    var h = Math.floor(seconds / 3600) % 24;
+    var m = Math.floor(seconds / 60) % 60;
+    var s = seconds % 60;
+    if (clock) clock.textContent = pad(h) + ':' + pad(m) + ':' + pad(s) + ' · ' + active + ' Active';
+  }
+
+  function tick() {
+    seconds += 1;
+    renderClock();
+  }
+
+  function shuffleRow() {
+    var row = rows[Math.floor(Math.random() * rows.length)];
+    var badge = row.querySelector('.d-status');
+    if (!badge) return;
+
+    var current = STATES.filter(function (s) { return badge.classList.contains(s.cls); })[0];
+    var next = STATES[Math.floor(Math.random() * STATES.length)];
+    if (current && next.cls === current.cls) {
+      next = STATES[(STATES.indexOf(current) + 1) % STATES.length];
+    }
+
+    STATES.forEach(function (s) { badge.classList.remove(s.cls); });
+    badge.classList.add(next.cls);
+    badge.textContent = next.label;
+
+    // brief flash so the change reads as an event rather than a repaint
+    row.classList.remove('is-updating');
+    void row.offsetWidth;
+    row.classList.add('is-updating');
+
+    if (next.cls === 'd-done') {
+      delivered += 1;
+      if (count) count.textContent = delivered.toLocaleString('en-GB') + ' deliveries';
+      active = Math.max(8, active - 1);
+    } else if (Math.random() > 0.6) {
+      active += 1;
+    }
+    renderClock();
+  }
+
+  function start() {
+    if (running) return;
+    running = true;
+    timers.push(setInterval(tick, 1000));
+    timers.push(setInterval(shuffleRow, 2600));
+  }
+
+  function stop() {
+    running = false;
+    timers.forEach(clearInterval);
+    timers = [];
+  }
+
+  renderClock();
+
+  // only run while the panel is actually on screen
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { e.isIntersecting ? start() : stop(); });
+    }, { threshold: 0.15 });
+    io.observe(board);
+  } else {
+    start();
+  }
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stop();
+    else if (board.getBoundingClientRect().top < window.innerHeight) start();
+  });
 }

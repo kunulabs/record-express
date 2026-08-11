@@ -14,9 +14,9 @@ a small preview index that links to them.
 ```
 index.html         Preview index (links to the three variants)
 
-variant-a/         Current design
-variant-b/         Colour-scheme variant
-variant-c/         Colour-scheme variant
+variant-a/         Current design (cream), quote bar in the page
+variant-b/         Dark scheme, sticky booking widget
+variant-c/         Light scheme (white/cream), sticky booking widget
 
   index.html       Page markup
   css/style.css    Styles (design tokens, layout, components)
@@ -28,6 +28,10 @@ variant-c/         Colour-scheme variant
 
 Each variant is a complete, independent copy — its own `index.html`, `css/`,
 `js/` and `assets/`. Editing one cannot affect the others.
+
+B and C share a layout that differs from A: the quote bar is lifted out of the
+page into a fixed capsule, where hovering **Book Now** expands it full width.
+Only their palettes differ.
 
 Live previews:
 

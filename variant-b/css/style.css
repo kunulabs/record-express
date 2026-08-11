@@ -2943,6 +2943,7 @@ h1, h2, h3, h4, .font-display {
    (or focusing) Book Now expands it into the same quote form as before. */
 .booking-widget {
   position: fixed;
+  left: 24px;
   right: 24px;
   bottom: 24px;
   z-index: 200;
@@ -2950,7 +2951,13 @@ h1, h2, h3, h4, .font-display {
   flex-direction: column;
   align-items: flex-end;
   gap: 12px;
+  /* only the capsule and the open panel should be clickable; the rest of this
+     full-width strip must not swallow clicks on the page beneath it */
+  pointer-events: none;
 }
+
+.booking-capsule,
+.booking-panel { pointer-events: auto; }
 
 .booking-capsule {
   display: flex;
@@ -3003,15 +3010,14 @@ h1, h2, h3, h4, .font-display {
 
 .booking-arrow svg { width: 14px; height: 14px; }
 
-.booking-widget:hover .booking-arrow,
-.booking-widget:focus-within .booking-arrow { transform: translateX(2px); }
+.booking-book:hover .booking-arrow { transform: translateX(2px); }
 
 /* The panel is hidden until the widget is hovered or focused. visibility keeps
    it out of the tab order while closed, and the delay stops it snapping shut
    as the pointer travels from the button up into the panel. */
 .booking-panel {
-  width: min(720px, calc(100vw - 48px));
-  padding: 16px;
+  width: 100%;
+  padding: 20px 24px;
   background: var(--color-bg-accent);
   border: 1px solid var(--color-border);
   border-radius: 24px;
@@ -3023,8 +3029,10 @@ h1, h2, h3, h4, .font-display {
   transition: opacity 0.28s ease, transform 0.28s ease, visibility 0s linear 0.28s;
 }
 
-.booking-widget:hover .booking-panel,
-.booking-widget:focus-within .booking-panel,
+.booking-widget:has(.booking-book:hover) .booking-panel,
+.booking-widget:has(.booking-panel:hover) .booking-panel,
+.booking-widget:has(.booking-book:focus-visible) .booking-panel,
+.booking-widget:has(.booking-panel:focus-within) .booking-panel,
 .booking-widget.is-open .booking-panel {
   opacity: 1;
   visibility: visible;
@@ -3036,7 +3044,8 @@ h1, h2, h3, h4, .font-display {
    which would otherwise reopen the panel the moment focus returns to the
    button. Cleared on pointer/focus leave so the widget works again. */
 .booking-widget.is-dismissed .booking-panel,
-.booking-widget.is-dismissed:hover .booking-panel,
+.booking-widget.is-dismissed:has(.booking-book:hover) .booking-panel,
+.booking-widget.is-dismissed:has(.booking-panel:hover) .booking-panel,
 .booking-widget.is-dismissed:focus-within .booking-panel {
   opacity: 0;
   visibility: hidden;
@@ -3050,17 +3059,37 @@ h1, h2, h3, h4, .font-display {
   box-shadow: none;
   background: transparent;
   padding: 0;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  gap: 24px;
+}
+
+.booking-panel .quote-bar-options { gap: 16px; }
+
+@media (max-width: 1100px) {
+  .booking-panel .quote-bar { flex-wrap: wrap; }
 }
 
 @media (max-width: 900px) {
-  .booking-widget { right: 12px; bottom: 12px; left: 12px; align-items: stretch; }
+  .booking-widget { right: 12px; bottom: 12px; left: 12px; }
   .booking-capsule { align-self: flex-end; }
-  .booking-panel { width: 100%; }
   .booking-panel .quote-bar { flex-direction: column; align-items: stretch; }
   .booking-panel .quote-bar-divider { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .booking-panel, .booking-arrow { transition: none; }
+}
+
+/* status-change flash on the live dispatch board */
+.d-rows li.is-updating { animation: dispatch-flash 1.1s ease-out; }
+
+@keyframes dispatch-flash {
+  0% { background: rgba(255, 255, 255, 0.14); }
+  100% { background: transparent; }
+}
+
+.d-status { transition: background 0.3s ease, color 0.3s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .d-rows li.is-updating { animation: none; }
 }

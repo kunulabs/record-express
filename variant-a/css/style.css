@@ -2865,3 +2865,19 @@ h1, h2, h3, h4, .font-display {
     transition: none;
   }
 }
+
+/* status-change flash on the live dispatch board */
+.d-rows li.is-updating {
+  animation: dispatch-flash 1.1s ease-out;
+}
+
+@keyframes dispatch-flash {
+  0% { background: rgba(255, 255, 255, 0.14); }
+  100% { background: transparent; }
+}
+
+.d-status { transition: background 0.3s ease, color 0.3s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .d-rows li.is-updating { animation: none; }
+}
