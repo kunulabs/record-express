@@ -16,11 +16,12 @@ assets/images/     Image assets
 
 variant-a/         Standalone copy for colour-scheme exploration
 variant-b/         Standalone copy for colour-scheme exploration
+variant-c/         Standalone copy for colour-scheme exploration
 ```
 
 ## Colour-scheme variants
 
-`variant-a/` and `variant-b/` are complete, self-contained copies of the site,
+`variant-a/`, `variant-b/` and `variant-c/` are complete, self-contained copies of the site,
 each with its own `index.html`, `css/`, `js/` and `assets/`. Editing one cannot
 affect the others.
 
@@ -31,6 +32,7 @@ Live previews:
 | Main | https://kunulabs.github.io/record-express/ |
 | Variant A | https://kunulabs.github.io/record-express/variant-a/ |
 | Variant B | https://kunulabs.github.io/record-express/variant-b/ |
+| Variant C | https://kunulabs.github.io/record-express/variant-c/ |
 
 To reskin a variant, edit the design tokens at the top of its `css/style.css` —
 the whole palette flows from that one block:
@@ -47,7 +49,7 @@ the whole palette flows from that one block:
 ```
 
 Note the assets are duplicated per variant, so an image fix must be applied to
-all three copies.
+all four copies (root plus the three variants).
 
 ## Running locally
 
