@@ -388,7 +388,7 @@ h1, h2, h3, h4, .font-display {
   align-items: center;
   gap: 48px;
   padding-top: 24px;
-  padding-bottom: 48px;
+  padding-bottom: 32px;
 }
 
 /* Copy and media share space in the same 540:650 ratio as the 1440 Figma
@@ -398,12 +398,12 @@ h1, h2, h3, h4, .font-display {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 22px;
 }
 
 .hero-title {
   font-weight: 800;
-  font-size: clamp(36px, 5vw, 72px);
+  font-size: clamp(32px, 4vw, 56px);
   line-height: 1.06;
   letter-spacing: -0.02em;
   margin-top: 4px;
@@ -463,9 +463,9 @@ h1, h2, h3, h4, .font-display {
 
 .hero-media {
   position: relative;
-  flex: 650 1 0;
+  flex: 545 1 0;
   min-width: 0;
-  max-width: 676px;
+  max-width: 566px;
   aspect-ratio: 645 / 565;
 }
 
