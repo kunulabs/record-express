@@ -544,7 +544,7 @@ h1, h2, h3, h4, .font-display {
      0.1167), and the media box is a fixed 645/565, so the height that shows
      exactly N rows is width% * (0.29337 + 0.11669N) / 0.87597. Anything else
      leaves a row sliced in half above the footer. */
-  width: 56%;
+  width: 68%;
   /* Height follows the content rather than a percentage of the photo: the row
      list below is pinned to an exact multiple of the row height, so the card
      is always head + columns + N whole rows + footer. Deriving it from a
@@ -3113,8 +3113,10 @@ h1, h2, h3, h4, .font-display {
   .d-rows li.is-loading { opacity: 1; transform: none; }
 }
 
-/* Hover opens the board to 10 rows. The list grows, not the card, so the
-   footer stays pinned and the last row is never half-cut. */
+/* Hover opens the board to 10 rows - the list grows, not the card, so the
+   footer stays pinned and the last row is never half-cut. The ceiling is how
+   much room the hero has below the photo: any taller and the open card lands
+   on the section beneath it. */
 .hero-dispatch:hover .d-rows,
 .hero-dispatch:focus-visible .d-rows {
   height: calc(120.8cqw + 10px);
