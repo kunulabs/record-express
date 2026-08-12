@@ -741,12 +741,6 @@ function initDispatchBoard() {
     badge.textContent = STAGES[index].label;
   }
 
-  function flash(row) {
-    row.classList.remove('is-updating');
-    void row.offsetWidth;
-    row.classList.add('is-updating');
-  }
-
   // Active is derived from what is actually on the board rather than drifting
   // on its own, plus the runs being handled outside this window.
   function render() {
@@ -799,9 +793,7 @@ function initDispatchBoard() {
   }
 
   function buildRow() {
-    var li = fillRow(document.createElement('li'));
-    li.classList.add('is-updating');
-    return li;
+    return fillRow(document.createElement('li'));
   }
 
   // A delivered job holds on screen just long enough to read, then the slot
@@ -811,7 +803,6 @@ function initDispatchBoard() {
   function recycle(row) {
     if (!row.parentNode || stageOf(row) !== DONE) return;
     fillRow(row);
-    flash(row);
     render();
   }
 
@@ -835,7 +826,6 @@ function initDispatchBoard() {
     var row = pick(movable);
     var next = stageOf(row) + 1;
     setStage(row, next);
-    flash(row);
     if (next === DONE) {
       delivered += 1;
       later(function () { recycle(row); }, 2600 + Math.floor(Math.random() * 1600));

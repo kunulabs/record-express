@@ -2866,21 +2866,10 @@ h1, h2, h3, h4, .font-display {
   }
 }
 
-/* status-change flash on the live dispatch board */
-.d-rows li.is-updating {
-  animation: dispatch-flash 1.1s ease-out;
-}
-
-@keyframes dispatch-flash {
-  0% { background: rgba(255, 255, 255, 0.14); }
-  100% { background: transparent; }
-}
-
+/* The badge cross-fades to its new colour; the row itself stays put. A
+   background flash on the whole row was too loud for how often the board
+   updates. */
 .d-status { transition: background 0.3s ease, color 0.3s ease; }
-
-@media (prefers-reduced-motion: reduce) {
-  .d-rows li.is-updating { animation: none; }
-}
 
 /* the row being pushed off the bottom by an arrival fades as it goes */
 .d-rows li.is-ageing {
