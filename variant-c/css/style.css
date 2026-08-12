@@ -535,13 +535,22 @@ h1, h2, h3, h4, .font-display {
   position: absolute;
   left: 0;
   top: 0;
-  /* Scaled up from the 35.97%/46% of the Figma frame so the board reads at a
-     glance. Everything inside is sized in cqw against this box, so the type
-     and padding grow with it. */
-  width: 45%;
-  /* Two states from the design: 7 rows at rest, 12 on hover. The card sets an
-     explicit height and clips the list, so the footer stays pinned in both. */
-  height: 56%;
+  /* Scaled well up from the 35.97%/46% of the Figma frame so the board reads
+     at a glance. Everything inside is sized in cqw against this box, so the
+     type and padding grow with the width.
+
+     The heights are not eyeballed. Head, column strip, footer and row all
+     come to fixed fractions of the card width (0.1066, 0.0761, 0.1107 and
+     0.1167), and the media box is a fixed 645/565, so the height that shows
+     exactly N rows is width% * (0.29337 + 0.11669N) / 0.87597. Anything else
+     leaves a row sliced in half above the footer. */
+  width: 56%;
+  /* Height follows the content rather than a percentage of the photo: the row
+     list below is pinned to an exact multiple of the row height, so the card
+     is always head + columns + N whole rows + footer. Deriving it from a
+     percentage left a row sliced in half above the footer, and by a different
+     amount in each variant. */
+  height: auto;
   display: flex;
   flex-direction: column;
   container-type: inline-size;
@@ -552,13 +561,12 @@ h1, h2, h3, h4, .font-display {
   overflow: hidden;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   color: rgba(255, 255, 255, 0.82);
-  transition: height 0.45s ease, box-shadow 0.45s ease, transform 0.45s ease;
+  transition: box-shadow 0.45s ease, transform 0.45s ease;
 }
 
 .hero-dispatch:hover,
 .hero-dispatch:focus-visible {
   outline: none;
-  height: 82%;
   transform: translateY(-4px);
   box-shadow: 0 28px 56px rgba(18, 33, 20, 0.45);
 }
@@ -618,9 +626,11 @@ h1, h2, h3, h4, .font-display {
 }
 
 .d-rows {
-  flex: 1 1 auto;
-  min-height: 0;
+  /* 7 rows of 12.08cqw + 1px border each */
+  flex: none;
+  height: calc(84.56cqw + 7px);
   overflow: hidden;
+  transition: height 0.45s ease;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -628,6 +638,11 @@ h1, h2, h3, h4, .font-display {
 
 .d-rows li {
   font-size: 2.7cqw;
+  /* explicit line boxes here and on .d-status keep the row height a pure cqw
+     figure: 3.5 + 3.5 padding + the taller of the text line (2.7 * 1.5) and
+     the badge (1 + 1 padding + 2.2 * 1.4) = 7 + 5.08 = 12.08cqw, plus 1px of
+     border. Left on "normal" it depends on the font's own metrics. */
+  line-height: 1.5;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -647,6 +662,7 @@ h1, h2, h3, h4, .font-display {
   padding: 1cqw 1.8cqw;
   border-radius: 2cqw;
   font-size: 2.2cqw;
+  line-height: 1.4;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -3095,4 +3111,15 @@ h1, h2, h3, h4, .font-display {
 
 @media (prefers-reduced-motion: reduce) {
   .d-rows li.is-loading { opacity: 1; transform: none; }
+}
+
+/* Hover opens the board to 10 rows. The list grows, not the card, so the
+   footer stays pinned and the last row is never half-cut. */
+.hero-dispatch:hover .d-rows,
+.hero-dispatch:focus-visible .d-rows {
+  height: calc(120.8cqw + 10px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .d-rows { transition: none; }
 }
