@@ -535,10 +535,13 @@ h1, h2, h3, h4, .font-display {
   position: absolute;
   left: 0;
   top: 0;
-  width: 35.97%;
+  /* Scaled up from the 35.97%/46% of the Figma frame so the board reads at a
+     glance. Everything inside is sized in cqw against this box, so the type
+     and padding grow with it. */
+  width: 45%;
   /* Two states from the design: 7 rows at rest, 12 on hover. The card sets an
      explicit height and clips the list, so the footer stays pinned in both. */
-  height: 46%;
+  height: 56%;
   display: flex;
   flex-direction: column;
   container-type: inline-size;
@@ -555,7 +558,7 @@ h1, h2, h3, h4, .font-display {
 .hero-dispatch:hover,
 .hero-dispatch:focus-visible {
   outline: none;
-  height: 70.5%;
+  height: 82%;
   transform: translateY(-4px);
   box-shadow: 0 28px 56px rgba(18, 33, 20, 0.45);
 }
