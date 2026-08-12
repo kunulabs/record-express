@@ -3083,3 +3083,49 @@ h1, h2, h3, h4, .font-display {
 @media (prefers-reduced-motion: reduce) {
   .booking-widget, .booking-widget.is-stowed { transition: none; }
 }
+
+/* ===== Short desktop viewports =====
+   The quote bar has to be reachable without scrolling on the smallest desktop
+   screens. Rather than shrink the hero for everyone, compress it against the
+   height that is actually available: laptops at 1280x720 / 1366x768 get the
+   compact hero, anything taller keeps the designed proportions. Scoped above
+   the 1000px stacking breakpoint, where the hero is a single column and this
+   does not apply. */
+@media (min-width: 1001px) and (max-height: 740px) {
+  .header-inner { padding: 10px var(--container-padding); }
+  .logo img { width: 40px; height: 40px; }
+
+  .hero-inner {
+    gap: 36px;
+    padding-top: 8px;
+    padding-bottom: 14px;
+  }
+
+  .hero-copy { gap: 14px; }
+
+  .eyebrow-pill {
+    padding: 5px 13px;
+    font-size: clamp(13px, 1.05vw, 15px);
+  }
+
+  .hero-title {
+    font-size: clamp(28px, 3.05vw, 42px);
+    margin-top: 0;
+  }
+
+  .hero-desc {
+    font-size: clamp(14px, 1.1vw, 16px);
+    margin-top: 10px;
+  }
+
+  .hero-actions { gap: 22px; }
+
+  .hero-media { max-width: 415px; }
+}
+
+/* At 1024-1200 the quote bar wraps to two rows (216px rather than 128px), so
+   the hero has to give up more height again for the form to clear the fold.
+   Below 1200 the image is the taller column, so that is where it comes from. */
+@media (min-width: 1001px) and (max-width: 1200px) and (max-height: 740px) {
+  .hero-media { max-width: 360px; }
+}
