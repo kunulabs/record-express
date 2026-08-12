@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
   initHeroTypewriter();
   initContactTypewriter();
   initQuoteBar();
-  initBookingWidget();
   initStickyHandoff();
   initStatsCountUp();
   initDispatchBoard();
@@ -509,45 +508,6 @@ function initQuoteBar() {
 
 // The capsule only takes over once the in-page quote bar has scrolled away, so
 // the two are never on screen at the same time.
-function initBookingWidget() {
-  var widget = document.getElementById('booking-widget');
-  if (!widget) return;
-  var button = widget.querySelector('.booking-book');
-  if (!button) return;
-
-  button.addEventListener('click', function () {
-    var open = widget.classList.toggle('is-open');
-    button.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-
-  document.addEventListener('click', function (e) {
-    if (!widget.contains(e.target) && widget.classList.contains('is-open')) {
-      widget.classList.remove('is-open');
-      button.setAttribute('aria-expanded', 'false');
-    }
-  });
-
-  function dismiss() {
-    widget.classList.remove('is-open');
-    widget.classList.add('is-dismissed');
-    button.setAttribute('aria-expanded', 'false');
-  }
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key !== 'Escape') return;
-    if (!widget.matches(':hover, :focus-within') && !widget.classList.contains('is-open')) return;
-    dismiss();
-    button.focus();
-  });
-
-  widget.addEventListener('mouseleave', function () { widget.classList.remove('is-dismissed'); });
-  widget.addEventListener('focusout', function () {
-    setTimeout(function () {
-      if (!widget.contains(document.activeElement)) widget.classList.remove('is-dismissed');
-    }, 0);
-  });
-}
-
 function initStickyHandoff() {
   var widget = document.getElementById('booking-widget');
   var bar = document.querySelector('.quote-bar-section');
