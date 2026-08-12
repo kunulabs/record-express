@@ -386,6 +386,9 @@ h1, h2, h3, h4, .font-display {
 .hero-inner {
   display: flex;
   align-items: center;
+  /* copy left, photo right, and the slack between them becomes the channel the
+     dispatch card overhangs into */
+  justify-content: space-between;
   gap: 48px;
   padding-top: 24px;
   padding-bottom: 32px;
@@ -394,7 +397,10 @@ h1, h2, h3, h4, .font-display {
 /* Copy and media share space in the same 540:650 ratio as the 1440 Figma
    frame, so the hero keeps its designed proportions at every width. */
 .hero-copy {
-  flex: 540 1 0;
+  /* Narrowed from the 540:545 split of the Figma frame to open space on the
+     photo's left. The photo itself is unchanged, so the hero keeps its height
+     and the quote bar stays where it is. */
+  flex: 0 1 44%;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -403,7 +409,7 @@ h1, h2, h3, h4, .font-display {
 
 .hero-title {
   font-weight: 800;
-  font-size: clamp(32px, 4vw, 56px);
+  font-size: clamp(30px, 3.4vw, 47px);
   line-height: 1.06;
   letter-spacing: -0.02em;
   margin-top: 4px;
@@ -3108,4 +3114,13 @@ h1, h2, h3, h4, .font-display {
 
 @media (prefers-reduced-motion: reduce) {
   .d-rows { transition: none; }
+}
+
+/* The card overhangs the photo's left edge so it clears the van's branding,
+   but only where there is actually a channel to overhang into. Below ~1280
+   the photo has not reached its max-width yet, so it keeps growing with the
+   viewport and the only space between the columns is the 48px gap - the card
+   would sit on the headline (measured: 28px into it at 1166). */
+@media (min-width: 1300px) {
+  .hero-dispatch { left: -14%; }
 }
