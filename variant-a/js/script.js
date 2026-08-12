@@ -660,107 +660,231 @@ function initDispatchBoard() {
 
   var clock = board.querySelector('.d-clock');
   var count = board.querySelector('.d-count');
-  var rows = Array.prototype.slice.call(board.querySelectorAll('.d-rows li'));
+  var list = board.querySelector('.d-rows');
+  if (!list) return;
+
+  var rows = Array.prototype.slice.call(list.querySelectorAll('li'));
   if (!rows.length) return;
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduced) return;
 
-  var STATES = [
-    { cls: 'd-road', label: 'On the road' },
-    { cls: 'd-wait', label: 'In transit' },
+  // A job walks down this pipeline one stage at a time, and only forwards.
+  // Keeping the stages ordered is what makes the board read as work
+  // progressing rather than as cells flickering at random; the four labels and
+  // badge colours are the ones from the design.
+  var STAGES = [
     { cls: 'd-move', label: 'Removal' },
+    { cls: 'd-wait', label: 'In transit' },
+    { cls: 'd-road', label: 'On the road' },
     { cls: 'd-done', label: 'Delivered' }
   ];
+  var DONE = STAGES.length - 1;
 
+  var ROUTES = [
+    ['Brussels', 'Cork'], ['Charleroi', 'Paris Nord'], ['Brussels', 'Lille'],
+    ['Antwerp', 'Cork'], ['Liege', 'Antwerp'], ['Ghent', 'Brussels'],
+    ['Namur', 'Cork'], ['Antwerp', 'Paris Nord'], ['Brussels', 'Rotterdam'],
+    ['Bruges', 'Lille'], ['Leuven', 'Eindhoven'], ['Mons', 'Luxembourg'],
+    ['Hasselt', 'Dusseldorf'], ['Brussels', 'Amsterdam'], ['Ghent', 'Calais'],
+    ['Antwerp', 'Cologne'], ['Liege', 'Maastricht'], ['Brussels', 'Roissy CDG'],
+    ['Tournai', 'Lille'], ['Mechelen', 'Breda'], ['Kortrijk', 'Paris Nord']
+  ];
+
+  var ROW_COUNT = rows.length;
   var seconds = 14 * 3600 + 12 * 60 + 46;
-  var active = 16;
   var delivered = 699;
   var timers = [];
   var running = false;
+  var booted = false;
+
+  // New jobs get the next reference up from the highest already on the board,
+  // so arrivals always carry a higher number than the work above them.
+  var nextCode = rows.reduce(function (max, row) {
+    var el = row.querySelector('.d-code');
+    var n = el ? parseInt(String(el.textContent).replace(/\D/g, ''), 10) : 0;
+    return isNaN(n) ? max : Math.max(max, n);
+  }, 0) || 25118;
 
   function pad(n) { return n < 10 ? '0' + n : String(n); }
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
 
-  function renderClock() {
+  function later(fn, ms) {
+    var t = setTimeout(fn, ms);
+    timers.push(t);
+    return t;
+  }
+
+  function every(fn, ms) {
+    var t = setInterval(fn, ms);
+    timers.push(t);
+    return t;
+  }
+
+  function stageOf(row) {
+    var badge = row.querySelector('.d-status');
+    if (!badge) return -1;
+    for (var i = 0; i < STAGES.length; i++) {
+      if (badge.classList.contains(STAGES[i].cls)) return i;
+    }
+    return -1;
+  }
+
+  function setStage(row, index) {
+    var badge = row.querySelector('.d-status');
+    if (!badge) return;
+    STAGES.forEach(function (s) { badge.classList.remove(s.cls); });
+    badge.classList.add(STAGES[index].cls);
+    badge.textContent = STAGES[index].label;
+  }
+
+  function flash(row) {
+    row.classList.remove('is-updating');
+    void row.offsetWidth;
+    row.classList.add('is-updating');
+  }
+
+  // Active is derived from what is actually on the board rather than drifting
+  // on its own, plus the runs being handled outside this window.
+  function render() {
+    var live = 0;
+    Array.prototype.forEach.call(list.children, function (row) {
+      if (stageOf(row) < DONE) live += 1;
+    });
+    var active = live + 9;
     var h = Math.floor(seconds / 3600) % 24;
     var m = Math.floor(seconds / 60) % 60;
     var s = seconds % 60;
     if (clock) clock.textContent = pad(h) + ':' + pad(m) + ':' + pad(s) + ' · ' + active + ' Active';
+    if (count) count.textContent = delivered.toLocaleString('en-GB') + ' deliveries';
   }
 
   function tick() {
     seconds += 1;
-    renderClock();
+    render();
   }
 
-  function shuffleRow() {
-    var row = rows[Math.floor(Math.random() * rows.length)];
-    var badge = row.querySelector('.d-status');
-    if (!badge) return;
+  function buildRow() {
+    var route = pick(ROUTES);
+    nextCode += 1 + Math.floor(Math.random() * 7);
 
-    var current = STATES.filter(function (s) { return badge.classList.contains(s.cls); })[0];
-    var next = STATES[Math.floor(Math.random() * STATES.length)];
-    if (current && next.cls === current.cls) {
-      next = STATES[(STATES.indexOf(current) + 1) % STATES.length];
-    }
+    var li = document.createElement('li');
 
-    STATES.forEach(function (s) { badge.classList.remove(s.cls); });
-    badge.classList.add(next.cls);
-    badge.textContent = next.label;
+    var code = document.createElement('span');
+    code.className = 'd-code';
+    code.textContent = 'RX-' + nextCode;
 
-    // brief flash so the change reads as an event rather than a repaint
-    row.classList.remove('is-updating');
-    void row.offsetWidth;
-    row.classList.add('is-updating');
+    var journey = document.createElement('span');
+    journey.className = 'd-journey';
+    journey.appendChild(document.createTextNode(route[0] + ' '));
+    var arrow = document.createElement('i');
+    arrow.setAttribute('aria-hidden', 'true');
+    arrow.textContent = '→';
+    journey.appendChild(arrow);
+    journey.appendChild(document.createTextNode(' ' + route[1]));
 
-    if (next.cls === 'd-done') {
-      delivered += 1;
-      if (count) count.textContent = delivered.toLocaleString('en-GB') + ' deliveries';
-      active = Math.max(8, active - 1);
-    } else if (Math.random() > 0.6) {
-      active += 1;
-    }
-    renderClock();
+    var status = document.createElement('span');
+    status.className = 'd-status ' + STAGES[0].cls;
+    status.textContent = STAGES[0].label;
+
+    li.appendChild(code);
+    li.appendChild(journey);
+    li.appendChild(status);
+    li.classList.add('is-updating');
+    return li;
   }
 
-  // Rows stream in the first time the board is seen, the way a real screen
-  // populates, then the live updates take over.
-  var booted = false;
+  // Move one job on by a single stage. Jobs already delivered are left alone -
+  // they sit on the board until they age off the bottom.
+  function advance() {
+    var movable = Array.prototype.filter.call(list.children, function (row) {
+      var i = stageOf(row);
+      return i >= 0 && i < DONE;
+    });
+    if (!movable.length) return;
 
+    var row = pick(movable);
+    var next = stageOf(row) + 1;
+    setStage(row, next);
+    flash(row);
+    if (next === DONE) delivered += 1;
+    render();
+  }
+
+  // A booking lands on top and the list scrolls down one row, pushing the
+  // oldest job off the bottom, the way a real board takes new work.
+  function arrive() {
+    var first = list.firstElementChild;
+    var rowHeight = first ? first.getBoundingClientRect().height : 0;
+    var li = buildRow();
+    list.insertBefore(li, first);
+    var last = list.lastElementChild;
+
+    function trim() {
+      list.style.transition = '';
+      list.style.transform = '';
+      while (list.children.length > ROW_COUNT) {
+        list.removeChild(list.lastElementChild);
+      }
+      render();
+    }
+
+    if (reduced || !rowHeight) { trim(); return; }
+
+    list.style.transition = 'none';
+    list.style.transform = 'translateY(' + -rowHeight + 'px)';
+    void list.offsetWidth;
+    list.style.transition = 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)';
+    list.style.transform = 'translateY(0)';
+    if (last) last.classList.add('is-ageing');
+
+    later(trim, 500);
+    render();
+  }
+
+  // Rows stream in the first time the board is seen, the way a screen
+  // populates, and the live updates hold until they have all landed.
   function bootRows() {
-    if (booted) return;
     booted = true;
     rows.forEach(function (row, i) {
       row.classList.add('is-loading');
-      timers.push(setTimeout(function () {
+      later(function () {
         row.classList.remove('is-loading');
         row.classList.add('is-loaded');
-      }, 120 + i * 95));
+      }, 120 + i * 95);
     });
   }
 
+  function startLoops() {
+    every(advance, 2200);
+    every(arrive, 7600);
+  }
+
   function start() {
-    if (running) return;
+    if (running || reduced) return;
     running = true;
     if (!booted) {
       bootRows();
-      // hold the live updates until the rows have finished arriving
-      timers.push(setTimeout(function () {
-        timers.push(setInterval(shuffleRow, 2600));
-      }, 120 + rows.length * 95 + 600));
+      later(startLoops, 120 + rows.length * 95 + 600);
     } else {
-      timers.push(setInterval(shuffleRow, 2600));
+      startLoops();
     }
-    timers.push(setInterval(tick, 1000));
+    every(tick, 1000);
   }
 
   function stop() {
     running = false;
     timers.forEach(function (t) { clearInterval(t); clearTimeout(t); });
     timers = [];
+    // a stop mid-slide would otherwise leave the list parked off its origin
+    list.style.transition = '';
+    list.style.transform = '';
+    while (list.children.length > ROW_COUNT) {
+      list.removeChild(list.lastElementChild);
+    }
   }
 
-  renderClock();
+  render();
+  if (reduced) return;
 
   // only run while the panel is actually on screen
   if ('IntersectionObserver' in window) {

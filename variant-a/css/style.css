@@ -2882,6 +2882,25 @@ h1, h2, h3, h4, .font-display {
   .d-rows li.is-updating { animation: none; }
 }
 
+/* the row being pushed off the bottom by an arrival fades as it goes */
+.d-rows li.is-ageing {
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+/* the green header dot reads as a live link rather than a painted circle */
+.d-dots i:last-child { animation: dispatch-live 2.4s ease-in-out infinite; }
+
+@keyframes dispatch-live {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .d-rows li.is-ageing { opacity: 1; transition: none; }
+  .d-dots i:last-child { animation: none; }
+}
+
 /* rows stream in on first view, like a board populating */
 .d-rows li.is-loading { opacity: 0; transform: translateX(-8px); }
 
