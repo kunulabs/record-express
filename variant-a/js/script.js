@@ -709,7 +709,11 @@ function initDispatchBoard() {
   function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
 
   function later(fn, ms) {
-    var t = setTimeout(fn, ms);
+    var t = setTimeout(function () {
+      var i = timers.indexOf(t);
+      if (i !== -1) timers.splice(i, 1);
+      fn();
+    }, ms);
     timers.push(t);
     return t;
   }
@@ -763,11 +767,13 @@ function initDispatchBoard() {
     render();
   }
 
-  function buildRow() {
+  // Load a fresh booking into a row: new reference, new route, back to the
+  // head of the pipeline.
+  function fillRow(li) {
     var route = pick(ROUTES);
     nextCode += 1 + Math.floor(Math.random() * 7);
 
-    var li = document.createElement('li');
+    li.textContent = '';
 
     var code = document.createElement('span');
     code.className = 'd-code';
@@ -789,24 +795,51 @@ function initDispatchBoard() {
     li.appendChild(code);
     li.appendChild(journey);
     li.appendChild(status);
+    return li;
+  }
+
+  function buildRow() {
+    var li = fillRow(document.createElement('li'));
     li.classList.add('is-updating');
     return li;
   }
 
-  // Move one job on by a single stage. Jobs already delivered are left alone -
-  // they sit on the board until they age off the bottom.
+  // A delivered job holds on screen just long enough to read, then the slot
+  // takes new work. Without this the board silts up: completions accumulate
+  // faster than arrivals clear them, and after a minute or two almost every
+  // row is Delivered and nothing moves.
+  function recycle(row) {
+    if (!row.parentNode || stageOf(row) !== DONE) return;
+    fillRow(row);
+    flash(row);
+    render();
+  }
+
+  // Move one job on by a single stage, never backwards.
   function advance() {
     var movable = Array.prototype.filter.call(list.children, function (row) {
       var i = stageOf(row);
       return i >= 0 && i < DONE;
     });
-    if (!movable.length) return;
+
+    // everything on screen is finished - clear the oldest one out now rather
+    // than waiting on its hold timer, so the board always has something to do
+    if (!movable.length) {
+      var done = Array.prototype.filter.call(list.children, function (row) {
+        return stageOf(row) === DONE;
+      });
+      if (done.length) recycle(done[done.length - 1]);
+      return;
+    }
 
     var row = pick(movable);
     var next = stageOf(row) + 1;
     setStage(row, next);
     flash(row);
-    if (next === DONE) delivered += 1;
+    if (next === DONE) {
+      delivered += 1;
+      later(function () { recycle(row); }, 2600 + Math.floor(Math.random() * 1600));
+    }
     render();
   }
 
@@ -854,9 +887,23 @@ function initDispatchBoard() {
     });
   }
 
+  // Self-rescheduling rather than fixed intervals, so updates land on an
+  // uneven beat the way real traffic does instead of metronomically.
+  function loopAdvance() {
+    if (!running) return;
+    advance();
+    later(loopAdvance, 1100 + Math.floor(Math.random() * 800));
+  }
+
+  function loopArrive() {
+    if (!running) return;
+    arrive();
+    later(loopArrive, 7000 + Math.floor(Math.random() * 3500));
+  }
+
   function startLoops() {
-    every(advance, 2200);
-    every(arrive, 7600);
+    loopAdvance();
+    later(loopArrive, 4000);
   }
 
   function start() {
