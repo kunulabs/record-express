@@ -712,8 +712,8 @@ h1, h2, h3, h4, .font-display {
 .quote-bar-heading {
   font-family: "Outfit", var(--font-family);
   font-weight: 700;
-  font-size: 22px;
-  line-height: 28px;
+  font-size: 19px;
+  line-height: 25px;
 }
 
 .quote-bar-divider {
@@ -815,8 +815,8 @@ h1, h2, h3, h4, .font-display {
 
 .section-title {
   font-weight: 800;
-  font-size: 36px;
-  line-height: 42px;
+  font-size: 29px;
+  line-height: 35px;
   max-width: 640px;
 }
 
@@ -880,8 +880,8 @@ h1, h2, h3, h4, .font-display {
 .stat-text strong {
   font-family: "Outfit", var(--font-family);
   font-weight: 700;
-  font-size: 28px;
-  line-height: 34px;
+  font-size: 23px;
+  line-height: 29px;
 }
 
 .stat-text span {
@@ -965,8 +965,8 @@ h1, h2, h3, h4, .font-display {
 .service-panel-number {
   font-family: "Outfit", var(--font-family);
   font-weight: 800;
-  font-size: 40px;
-  line-height: 54px;
+  font-size: 32px;
+  line-height: 43px;
   color: var(--color-coral-500);
   margin: 0;
 }
@@ -989,8 +989,8 @@ h1, h2, h3, h4, .font-display {
 .service-panel-title {
   font-family: "Outfit", var(--font-family);
   font-weight: 800;
-  font-size: 40px;
-  line-height: 54px;
+  font-size: 32px;
+  line-height: 43px;
   margin: 16px 0 0;
 }
 
@@ -1092,8 +1092,8 @@ h1, h2, h3, h4, .font-display {
 .service-row-number {
   font-family: "Outfit", var(--font-family);
   font-weight: 700;
-  font-size: 20px;
-  line-height: 28px;
+  font-size: 18px;
+  line-height: 26px;
   color: var(--color-text-action);
   transition: color 0.3s ease;
 }
@@ -1102,8 +1102,8 @@ h1, h2, h3, h4, .font-display {
   flex: 1 1 auto;
   font-family: "Outfit", var(--font-family);
   font-weight: 700;
-  font-size: 24px;
-  line-height: 34px;
+  font-size: 20px;
+  line-height: 29px;
 }
 
 .service-row-icon {
@@ -1184,7 +1184,7 @@ h1, h2, h3, h4, .font-display {
 
 @media (max-width: 1000px) {
   .services-showcase { flex-direction: column; }
-  .service-panel-number, .service-panel-title { font-size: 32px; line-height: 42px; }
+  .service-panel-number, .service-panel-title { font-size: 26px; line-height: 34px; }
 }
 
 @media (max-width: 560px) {
@@ -1278,8 +1278,8 @@ h1, h2, h3, h4, .font-display {
   flex: 1 1 auto;
   font-family: "Outfit", var(--font-family);
   font-weight: 700;
-  font-size: 20px;
-  line-height: 28px;
+  font-size: 18px;
+  line-height: 26px;
 }
 
 .industry-row-icon {
@@ -1380,8 +1380,8 @@ h1, h2, h3, h4, .font-display {
 .urgent-cta-copy h3 {
   font-family: "Outfit", var(--font-family);
   font-weight: 800;
-  font-size: 36px;
-  line-height: 42px;
+  font-size: 29px;
+  line-height: 35px;
   max-width: 640px;
   margin-bottom: 16px;
 }
@@ -1599,8 +1599,8 @@ h1, h2, h3, h4, .font-display {
 
 .benefits2-copy h2 {
   font-weight: 800;
-  font-size: 48px;
-  line-height: 54px;
+  font-size: 38px;
+  line-height: 44px;
   max-width: 640px;
   margin-bottom: 16px;
 }
@@ -1636,7 +1636,7 @@ h1, h2, h3, h4, .font-display {
 @media (max-width: 1000px) {
   .benefits2-card { flex-direction: column; }
   .benefits2-media { height: 300px; }
-  .benefits2-copy h2 { font-size: 34px; line-height: 40px; }
+  .benefits2-copy h2 { font-size: 27px; line-height: 33px; }
 }
 
 /* ===== Testimonials ===== */
@@ -1682,8 +1682,8 @@ h1, h2, h3, h4, .font-display {
 .rating-score {
   font-family: "Outfit", var(--font-family);
   font-weight: 800;
-  font-size: 36px;
-  line-height: 42px;
+  font-size: 29px;
+  line-height: 35px;
   margin: 0;
 }
 
@@ -1751,14 +1751,14 @@ h1, h2, h3, h4, .font-display {
 
 .quote-mark {
   font-family: Georgia, serif;
-  font-size: 64px;
+  font-size: 50px;
   line-height: 1;
   color: var(--color-coral-500);
   font-weight: 700;
 }
 
 .quote-mark-small {
-  font-size: 40px;
+  font-size: 32px;
 }
 
 .testimonial-card p {
@@ -2028,8 +2028,8 @@ h1, h2, h3, h4, .font-display {
 
 .blog-card h3 {
   font-weight: 700;
-  font-size: 20px;
-  line-height: 26px;
+  font-size: 18px;
+  line-height: 24px;
   margin: 0 0 12px;
 }
 
@@ -2188,8 +2188,8 @@ h1, h2, h3, h4, .font-display {
 }
 
 .contact-title {
-  font-size: 48px;
-  line-height: 54px;
+  font-size: 38px;
+  line-height: 44px;
 }
 
 .contact-desc {
@@ -2426,7 +2426,7 @@ h1, h2, h3, h4, .font-display {
 .footer-newsletter h3 {
   font-family: "Outfit", var(--font-family);
   font-weight: 700;
-  font-size: 22px;
+  font-size: 19px;
 }
 
 .footer-newsletter p {
@@ -3023,4 +3023,57 @@ h1, h2, h3, h4, .font-display {
    Below 1200 the image is the taller column, so that is where it comes from. */
 @media (min-width: 1001px) and (max-width: 1200px) and (max-height: 740px) {
   .hero-media { max-width: 360px; }
+}
+
+/* The hero takes a further x0.75 on short screens (56 -> 42px). The rest of
+   the page has to come down with it, or the hero ends up smaller than the
+   headings below it and the scale reads broken. */
+@media (min-width: 1001px) and (max-height: 740px) {
+  .section-title,
+  .urgent-cta-copy h3,
+  .rating-score { font-size: 23px; line-height: 29px; }
+
+  .contact-title,
+  .benefits2-copy h2 { font-size: 29px; line-height: 35px; }
+
+  .service-panel-title,
+  .service-panel-number { font-size: 25px; line-height: 34px; }
+
+  .stat-text strong { font-size: 19px; line-height: 25px; }
+
+  .service-row-title { font-size: 17px; line-height: 25px; }
+  .quote-bar-heading { font-size: 17px; line-height: 23px; }
+
+  .service-row-number,
+  .industry-row-title,
+  .blog-card h3,
+  .footer-newsletter h3 { font-size: 16px; line-height: 22px; }
+
+  .quote-mark { font-size: 40px; }
+  .quote-mark-small { font-size: 26px; }
+
+  /* lead paragraphs and list copy follow the hero description down */
+  .contact-desc,
+  .contact-list li,
+  .checklist li,
+  .step h3,
+  .timeline h3,
+  .services-rail-cta h3 { font-size: 16px; }
+
+  .section-desc { font-size: 15px; line-height: 24px; }
+}
+
+/* A few headings carry words longer than their column at the narrow end
+   ("intermediaries." in a 208px box at 320px), which spills past the edge.
+   Pre-existing, and smaller type reduces it rather than fixes it. */
+.section-title,
+.benefits2-copy h2,
+.benefits-copy h2,
+.urgent-cta-copy h3,
+.blog-card h3,
+.contact-title,
+.service-panel-title,
+.service-row-title,
+.industry-row-title {
+  overflow-wrap: break-word;
 }
