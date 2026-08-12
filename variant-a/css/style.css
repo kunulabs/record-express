@@ -3122,5 +3122,11 @@ h1, h2, h3, h4, .font-display {
    viewport and the only space between the columns is the 48px gap - the card
    would sit on the headline (measured: 28px into it at 1166). */
 @media (min-width: 1300px) {
-  .hero-dispatch { left: -14%; }
+  /* Above 1300 the photo is capped, so narrowing the copy converts directly
+     into channel width for the card to sit in. Below it the photo is still
+     growing, the channel would not widen, and the narrower column only costs
+     headline lines - which pushed the quote bar from 417 to 527 at 1024x650. */
+  .hero-copy { flex: 0 1 38%; }
+  .hero-title { font-size: clamp(28px, 2.9vw, 40px); }
+  .hero-dispatch { left: -26%; }
 }
