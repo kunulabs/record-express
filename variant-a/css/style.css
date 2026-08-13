@@ -524,10 +524,10 @@ h1, h2, h3, h4, .font-display {
      0.1167), and the media box is a fixed 645/565, so the height that shows
      exactly N rows is width% * (0.29337 + 0.11669N) / 0.87597. Anything else
      leaves a row sliced in half above the footer. */
-  /* One physical card across the three variants regardless of their photo
-     widths. It fills the channel opened by the narrowed copy and overlaps
-     the photo's left portion, stopping short of the van's branding. */
-  width: min(85%, 480px);
+  /* Figma 33310:1641 draws the card 243.76px wide on a 1440 frame, which is
+     19.66% of the 1240 container. The cap holds that at desktop while the
+     percentage lets it scale down with the photo on smaller screens. */
+  width: min(43%, 244px);
   /* Height follows the content rather than a percentage of the photo: the row
      list below is pinned to an exact multiple of the row height, so the card
      is always head + columns + N whole rows + footer. Deriving it from a
@@ -3129,13 +3129,8 @@ h1, h2, h3, h4, .font-display {
      into channel width for the card to sit in. Below it the photo is still
      growing, the channel would not widen, and the narrower column only costs
      headline lines - which pushed the quote bar from 417 to 527 at 1024x650. */
-  .hero-copy { flex: 0 1 35%; }
-  .hero-title { font-size: clamp(26px, 2.6vw, 36px); }
-  .hero-dispatch { left: -30%; }
+  .hero-copy { flex: 0 1 41.6%; }
+  .hero-title { font-size: clamp(30px, 3.4vw, 47px); }
+  .hero-dispatch { left: -16%; }
 }
 
-/* Past 1440 the container stops growing, so the channel reaches its full
-   width and the card can sit further left still. */
-@media (min-width: 1440px) {
-  .hero-dispatch { left: -36%; }
-}
