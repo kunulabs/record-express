@@ -8,15 +8,17 @@ any static host.
 
 ## Structure
 
-The site lives in three self-contained variants; the repository root holds only
+The site lives in four self-contained variants; the repository root holds only
 a small preview index that links to them.
 
 ```
-index.html         Preview index (links to the three variants)
+index.html         Preview index (links to the four variants)
 
 variant-a/         Current design (cream), quote bar in the page
 variant-b/         Dark scheme, sticky booking widget
 variant-c/         Light scheme (white/cream), sticky booking widget
+variant-d/         Figma 33329:1919 - wider copy, smaller photo and card,
+                   driver utility bar kept, no sticky widget
 
   index.html       Page markup
   css/style.css    Styles (design tokens, layout, components)
@@ -41,6 +43,7 @@ Live previews:
 | Variant A | https://kunulabs.github.io/record-express/variant-a/ |
 | Variant B | https://kunulabs.github.io/record-express/variant-b/ |
 | Variant C | https://kunulabs.github.io/record-express/variant-c/ |
+| Variant D | https://kunulabs.github.io/record-express/variant-d/ |
 
 To reskin a variant, edit the design tokens at the top of its `css/style.css` —
 the whole palette flows from that one block:
@@ -57,7 +60,7 @@ the whole palette flows from that one block:
 ```
 
 Note the assets are duplicated per variant, so an image or markup fix must be
-applied to all three copies.
+applied to all four copies.
 
 ## Running locally
 
