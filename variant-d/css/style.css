@@ -390,7 +390,9 @@ h1, h2, h3, h4, .font-display {
      no slack to distribute and no channel for the card to overhang into. */
   gap: 48px;
   padding-top: 72px;
-  padding-bottom: 72px;
+  /* the 48px down to the quote bar is carried by that section's padding-top,
+     so the two do not stack */
+  padding-bottom: 0;
 }
 
 /* Copy and media share space in the same 540:650 ratio as the 1440 Figma
@@ -401,7 +403,8 @@ h1, h2, h3, h4, .font-display {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  /* the steps are uneven in the design, so they are set per child below */
+  gap: 0;
 }
 
 .hero-title {
@@ -409,7 +412,7 @@ h1, h2, h3, h4, .font-display {
   font-size: clamp(30px, 3.4vw, 47px);
   line-height: 1.06;
   letter-spacing: -0.02em;
-  margin-top: 4px;
+  margin-top: 24px;
 }
 
 .is-typing::after {
@@ -434,12 +437,16 @@ h1, h2, h3, h4, .font-display {
   font-size: clamp(18px, 1.53vw, 22px);
   line-height: 1.27;
   opacity: 0.8;
-  margin-top: 20px;
+  margin-top: 32px;
+  /* the UA paragraph margin (1em = 22px) was never zeroed and was landing
+     between the description and the actions */
+  margin-bottom: 0;
 }
 
 .hero-actions {
   display: flex;
   align-items: center;
+  margin-top: 48px;
   gap: 32px;
   flex-wrap: wrap;
 }
@@ -688,7 +695,8 @@ h1, h2, h3, h4, .font-display {
 
 /* ===== Quote bar ===== */
 .quote-bar-section {
-  padding: 0 0 72px;
+  /* 48 above the bar, 72 below it, per 33332:5116 */
+  padding: 48px 0 72px;
 }
 
 .quote-bar {
@@ -698,7 +706,9 @@ h1, h2, h3, h4, .font-display {
   background: var(--color-bg-accent);
   border: 1px solid #b9afa2;
   border-radius: 32px;
-  padding: 24px;
+  /* tallest child is 78px, so 12 + 12 padding plus the 2px of borders
+     lands on the 104 the design calls for (33332:5140) */
+  padding: 12px;
   box-shadow: 0 12px 14px rgba(0, 0, 0, 0.04);
   flex-wrap: wrap;
 }
