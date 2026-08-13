@@ -532,8 +532,10 @@ h1, h2, h3, h4, .font-display {
      0.1167), and the media box is a fixed 645/565, so the height that shows
      exactly N rows is width% * (0.29337 + 0.11669N) / 0.87597. Anything else
      leaves a row sliced in half above the footer. */
-  /* 216.68px on the 1440 frame in Figma 33329:1984, 36.06% of the photo. */
-  width: min(36%, 217px);
+  /* Figma 33329:1984 draws it 216.68px wide (36.06% of the photo); scaled up
+     ~12% from that for legibility, on request. Everything inside is sized in
+     cqw against this box, so the type grows with it in both states. */
+  width: min(41%, 243px);
   /* Height follows the content rather than a percentage of the photo: the row
      list below is pinned to an exact multiple of the row height, so the card
      is always head + columns + N whole rows + footer. Deriving it from a
@@ -3039,13 +3041,14 @@ h1, h2, h3, h4, .font-display {
   overflow-wrap: break-word;
 }
 
-/* Hover opens the board to 8 rows - the list grows, not the card, so the
-   footer stays pinned and the last row is never half-cut. The ceiling is how
-   much room the hero has below the photo: any taller and the open card lands
-   on the section beneath it. */
+/* Hover opens the board to all 12 rows - the list grows, not the card, so the
+   footer stays pinned and the last row is never half-cut. A and its siblings
+   stop at 8 or 10 because their open card would land on the section below;
+   D's card is only 253 of the photo's 472, so the full state fits inside the
+   photo with room to spare. */
 .hero-dispatch:hover .d-rows,
 .hero-dispatch:focus-visible .d-rows {
-  height: calc(96.64cqw + 8px);
+  height: calc(144.96cqw + 12px);
 }
 
 @media (prefers-reduced-motion: reduce) {
