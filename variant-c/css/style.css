@@ -546,10 +546,10 @@ h1, h2, h3, h4, .font-display {
      0.1167), and the media box is a fixed 645/565, so the height that shows
      exactly N rows is width% * (0.29337 + 0.11669N) / 0.87597. Anything else
      leaves a row sliced in half above the footer. */
-  /* min() so the three variants land on the same physical card despite
-     their different photo widths: 74% of A's 566 is 419, and the 420 cap
-     catches B (676) and C (621). */
-  width: min(74%, 420px);
+  /* One physical card across the three variants regardless of their photo
+     widths. It fills the channel opened by the narrowed copy and overlaps
+     the photo's left portion, stopping short of the van's branding. */
+  width: min(85%, 480px);
   /* Height follows the content rather than a percentage of the photo: the row
      list below is pinned to an exact multiple of the row height, so the card
      is always head + columns + N whole rows + footer. Deriving it from a
@@ -3136,10 +3136,15 @@ h1, h2, h3, h4, .font-display {
    between them becomes the channel the card overhangs into. Matches variant A.
    The headline steps down so the narrower column does not add lines. */
 @media (min-width: 1300px) {
-  .hero-copy { flex: 0 1 38%; }
-  .hero-title { font-size: clamp(32px, 3.6vw, 52px); }
+  .hero-copy { flex: 0 1 32%; }
+  .hero-title { font-size: clamp(28px, 2.9vw, 42px); }
   .hero-media { max-width: 600px; }
-  /* channel is 137px at 1300 and 169px at 1440+, so -18% (108px) keeps the
-     card off the copy at both ends */
-  .hero-dispatch { left: -18%; }
+  .hero-dispatch { left: -27%; }
+}
+
+/* Past 1440 the container stops growing, so the channel reaches its full
+   width and the card can sit further left still. C's gutters are 120px
+   rather than 100, so its channel is 216px where B's is 243. */
+@media (min-width: 1440px) {
+  .hero-dispatch { left: -30%; }
 }
