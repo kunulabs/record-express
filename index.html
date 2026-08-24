@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Record Express — Colour scheme variants</title>
-  <meta name="description" content="Preview index for the Record Express landing page colour-scheme variants." />
+  <title>Record Express — Landing page builds</title>
+  <meta name="description" content="Pick a colour scheme to browse the Record Express landing page builds." />
   <meta name="robots" content="noindex" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,27 +12,26 @@
   <style>
     :root {
       --bg: #fff6eb;
+      --surface: #fffdf9;
       --ink: #122114;
-      --muted: rgba(18, 33, 20, 0.65);
-      --line: rgba(18, 33, 20, 0.2);
+      --muted: rgba(18, 33, 20, 0.66);
+      --line: rgba(18, 33, 20, 0.18);
       --accent: #d55445;
+      --accent-soft: #fbe0d6;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 48px 24px;
+      padding: 56px 24px 72px;
       background: var(--bg);
       color: var(--ink);
       font-family: "Open Sans", system-ui, -apple-system, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
-    main { width: 100%; max-width: 640px; }
+    main { width: 100%; max-width: 880px; margin: 0 auto; }
     .eyebrow {
-      font-weight: 700; font-size: 12px; letter-spacing: 1px;
+      font-weight: 700; font-size: 12px; letter-spacing: 1.5px;
       text-transform: uppercase; color: var(--accent); margin: 0 0 12px;
     }
     h1 {
@@ -40,66 +39,121 @@
       font-size: clamp(30px, 5vw, 44px); line-height: 1.1; margin: 0;
       letter-spacing: -0.02em;
     }
-    .lede { font-size: 16px; line-height: 26px; color: var(--muted); margin: 16px 0 40px; }
+    .lede { font-size: 16px; line-height: 26px; color: var(--muted); margin: 16px 0 32px; max-width: 60ch; }
+
+    .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 28px; }
+    .tab {
+      font: inherit; font-weight: 700; font-size: 15px;
+      padding: 12px 26px; border-radius: 55px; cursor: pointer;
+      background: transparent; color: var(--ink);
+      border: 1px solid var(--line);
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .tab:hover { border-color: var(--accent); }
+    .tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+
     ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
-    a.variant {
-      display: flex; align-items: center; gap: 16px;
+    a.build {
+      display: flex; align-items: center; gap: 18px;
       padding: 20px 24px; border: 1px solid var(--line); border-radius: 16px;
-      background: #fffdf9; color: inherit; text-decoration: none;
+      background: var(--surface); color: inherit; text-decoration: none;
       transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
-    a.variant:hover {
+    a.build:hover {
       transform: translateY(-2px); border-color: var(--accent);
       box-shadow: 0 12px 24px -12px rgba(18, 33, 20, 0.3);
     }
-    .letter {
+    .num {
       font-family: "Outfit", system-ui, sans-serif; font-weight: 800;
-      font-size: 20px; color: var(--accent); width: 24px; flex-shrink: 0;
+      font-size: 20px; color: var(--accent); width: 28px; flex-shrink: 0;
     }
-    .label { font-family: "Outfit", system-ui, sans-serif; font-weight: 700; font-size: 18px; flex: 1; }
-    .go { color: var(--muted); font-size: 20px; line-height: 1; }
-    footer { margin-top: 40px; font-size: 13px; line-height: 22px; color: var(--muted); }
-    @media (prefers-reduced-motion: reduce) { a.variant { transition: none; } }
+    .body { flex: 1; min-width: 0; }
+    .label { font-family: "Outfit", system-ui, sans-serif; font-weight: 700; font-size: 18px; }
+    .meta { font-size: 13px; line-height: 20px; color: var(--muted); margin-top: 2px; }
+    .width {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.4px;
+      padding: 5px 11px; border-radius: 55px; background: var(--accent-soft);
+      color: var(--accent); flex-shrink: 0; white-space: nowrap;
+    }
+    .go { color: var(--muted); font-size: 20px; line-height: 1; flex-shrink: 0; }
+
+    .empty {
+      padding: 32px 24px; border: 1px dashed var(--line); border-radius: 16px;
+      color: var(--muted); font-size: 15px; line-height: 24px; text-align: center;
+    }
+    footer { margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 14px; line-height: 24px; color: var(--muted); }
+    footer a { color: var(--accent); font-weight: 700; }
+    @media (prefers-reduced-motion: reduce) { a.build, .tab { transition: none; } }
   </style>
 </head>
 <body>
   <main>
     <p class="eyebrow">Record Express</p>
-    <h1>Colour scheme variants</h1>
+    <h1>Landing page builds</h1>
     <p class="lede">
-      Four self-contained copies of the landing page. Each has its own stylesheet,
-      so a change to one never affects the others.
+      Pick a colour scheme, then open a build to browse it. Each build is a
+      self-contained copy, so changing one never affects the others.
     </p>
-    <ul>
-      <li>
-        <a class="variant" href="variant-a/">
-          <span class="letter">A</span>
-          <span class="label">Variant A</span>
-          <span class="go" aria-hidden="true">&#8594;</span>
-        </a>
-      </li>
-      <li>
-        <a class="variant" href="variant-b/">
-          <span class="letter">B</span>
-          <span class="label">Variant B</span>
-          <span class="go" aria-hidden="true">&#8594;</span>
-        </a>
-      </li>
-      <li>
-        <a class="variant" href="variant-c/">
-          <span class="letter">C</span>
-          <span class="label">Variant C</span>
-          <span class="go" aria-hidden="true">&#8594;</span>
-        </a>
-      </li>
-      <li>
-        <a class="variant" href="variant-d/">
-          <span class="letter">D</span>
-          <span class="label">Variant D</span>
-          <span class="go" aria-hidden="true">&#8594;</span>
-        </a>
-      </li>
-    </ul>
+
+    <div class="tabs" role="tablist" aria-label="Colour scheme">
+      <button class="tab" type="button" role="tab" id="tab-light" aria-controls="panel" aria-selected="true" data-scheme="light">Light</button>
+      <button class="tab" type="button" role="tab" id="tab-dark" aria-controls="panel" aria-selected="false" data-scheme="dark">Dark</button>
+      <button class="tab" type="button" role="tab" id="tab-mixed" aria-controls="panel" aria-selected="false" data-scheme="mixed">Mixed</button>
+    </div>
+
+    <div id="panel" role="tabpanel" aria-labelledby="tab-light"></div>
+
+    <footer>
+      The earlier A–D explorations are kept at <a href="old-design/">old design</a>.
+    </footer>
   </main>
+
+  <script>
+    // One entry per build. Adding a build is a matter of adding a row here and
+    // dropping its folder alongside; nothing else needs touching.
+    var BUILDS = [
+      // { id: 'build-1', name: 'Build 1', scheme: 'light', width: 1280, note: '' },
+    ];
+
+    var panel = document.getElementById('panel');
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+
+    function render(scheme) {
+      var list = BUILDS.filter(function (b) { return b.scheme === scheme; });
+      if (!list.length) {
+        panel.innerHTML = '<p class="empty">No ' + scheme + ' builds yet.</p>';
+        return;
+      }
+      var ul = document.createElement('ul');
+      list.forEach(function (b, i) {
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.className = 'build';
+        a.href = b.id + '/';
+        a.innerHTML =
+          '<span class="num">' + (i + 1) + '</span>' +
+          '<span class="body"><span class="label"></span>' +
+          (b.note ? '<span class="meta"></span>' : '') + '</span>' +
+          '<span class="width">' + b.width + 'px</span>' +
+          '<span class="go" aria-hidden="true">&#8594;</span>';
+        a.querySelector('.label').textContent = b.name;
+        if (b.note) a.querySelector('.meta').textContent = b.note;
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+      panel.innerHTML = '';
+      panel.appendChild(ul);
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) { t.setAttribute('aria-selected', String(t === tab)); });
+        panel.setAttribute('aria-labelledby', tab.id);
+        render(tab.getAttribute('data-scheme'));
+      });
+    });
+
+    render('light');
+  </script>
 </body>
 </html>

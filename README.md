@@ -8,16 +8,21 @@ any static host.
 
 ## Structure
 
+The current builds live at the repository root, one folder each. The earlier
+A-D explorations are kept under old-design/. The root index is a chooser that
+groups builds by colour scheme (light / dark / mixed) for review.
+
 The site lives in four self-contained variants; the repository root holds only
 a small preview index that links to them.
 
 ```
-index.html         Preview index (links to the four variants)
+index.html         Chooser: light / dark / mixed, links to each build
+old-design/        The earlier A-D explorations
 
-variant-a/         Current design (cream), quote bar in the page
-variant-b/         Dark scheme, sticky booking widget
-variant-c/         Light scheme (white/cream), sticky booking widget
-variant-d/         Figma 33329:1919 - wider copy, smaller photo and card,
+old-design/variant-a/         Current design (cream), quote bar in the page
+old-design/variant-b/         Dark scheme, sticky booking widget
+old-design/variant-c/         Light scheme (white/cream), sticky booking widget
+old-design/variant-d/         Figma 33329:1919 - wider copy, smaller photo and card,
                    driver utility bar kept, no sticky widget
 
   index.html       Page markup
@@ -40,10 +45,10 @@ Live previews:
 | | URL |
 |---|---|
 | Index | https://kunulabs.github.io/record-express/ |
-| Variant A | https://kunulabs.github.io/record-express/variant-a/ |
-| Variant B | https://kunulabs.github.io/record-express/variant-b/ |
-| Variant C | https://kunulabs.github.io/record-express/variant-c/ |
-| Variant D | https://kunulabs.github.io/record-express/variant-d/ |
+| Variant A | https://kunulabs.github.io/record-express/old-design/variant-a/ |
+| Variant B | https://kunulabs.github.io/record-express/old-design/variant-b/ |
+| Variant C | https://kunulabs.github.io/record-express/old-design/variant-c/ |
+| Variant D | https://kunulabs.github.io/record-express/old-design/variant-d/ |
 
 To reskin a variant, edit the design tokens at the top of its `css/style.css` —
 the whole palette flows from that one block:
