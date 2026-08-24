@@ -3097,3 +3097,8 @@ h1, h2, h3, h4, .font-display {
 .eyebrow-pill { align-self: center; }
 .hero-actions { justify-content: center; }
 .hero-desc { margin-left: auto; margin-right: auto; }
+
+/* "Only Quote": these frames carry no actions row - the copy block is the
+   pill and the title/description frame, with the phone frame that A and B
+   have simply absent. */
+.hero-actions { display: none; }

@@ -3131,3 +3131,23 @@ h1, h2, h3, h4, .font-display {
    basis on both the row and its container. */
 .hero-inner .quote-bar > .quote-bar-options { flex: none; width: 100%; }
 .hero-inner .quote-bar-options > .quote-option { flex: none; width: 100%; }
+
+/* The quote card lives in the hero row here, so the 72px the frame leaves
+   under the content has to come from the hero itself - the bar section's own
+   padding was zeroed when it moved in. */
+.hero-inner { padding-bottom: 72px; }
+
+/* Let the card fill the column: as a flex item it was sizing to content
+   (318 of the 499 column), which squeezed the address fields to 180px and
+   clipped them. */
+.hero-inner .quote-bar-section { display: block; }
+.hero-inner .quote-bar { width: 100%; }
+
+/* The quote bar ships inside a .container, which was still applying the 50px
+   page gutters once the section moved into the hero - 100px off the card, and
+   the cause of the clipped addresses. */
+.hero-inner .quote-bar-section .container {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
