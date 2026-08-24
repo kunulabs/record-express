@@ -3187,20 +3187,28 @@ h1, h2, h3, h4, .font-display {
    fallback also means the card still appears if the script never runs - it is
    hidden from first paint, so it must not depend on JS to come back. */
 .hero-inner .quote-bar-section {
-  animation: quote-card-fallback 0.55s ease 2.4s both;
+  animation: quote-card-fallback 1.15s cubic-bezier(0.4, 0, 0.2, 1) 2.4s both;
 }
 
 .hero-inner .quote-bar-section.is-typed {
-  animation: quote-card-fade 0.55s ease both;
+  animation: quote-card-fade 1.15s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
+/* 20px of travel rather than 12 with the longer duration: a slow fade over a
+   short distance reads as the card being sluggish, where the same time over a
+   longer distance reads as deliberate.
+
+   An expo-out curve was tried first and was wrong for this: it put 70% of the
+   opacity in the first 0.2s and left a long tail, so the card still felt fast
+   and then seemed to hang. An eased-in-out curve spreads the change across
+   the duration, which is what actually reads as slow. */
 @keyframes quote-card-fade {
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: none; }
 }
 
 @keyframes quote-card-fallback {
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: none; }
 }
 
@@ -3208,3 +3216,9 @@ h1, h2, h3, h4, .font-display {
   .hero-inner .quote-bar-section,
   .hero-inner .quote-bar-section.is-typed { animation: none; }
 }
+
+
+/* B drops the CTA and phone row under the description. The frame does carry
+   one (33365:5987 at y=532), so this is a deliberate departure from it: the
+   copy column comes to 484 rather than the frame's 588. */
+.hero-actions { display: none; }
