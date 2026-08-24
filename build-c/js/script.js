@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initTopbar();
   initLangDropdown();
   initHeroTypewriter();
+  initHeroQuoteCard();
   initContactTypewriter();
   initQuoteBar();
   initStatsCountUp();
@@ -122,6 +123,9 @@ function typeElement(el) {
       el.classList.remove('is-typing');
       el.style.height = '';
       el.style.overflow = '';
+      // lets anything sequenced behind the headline start on the real end of
+      // the typing rather than on a delay guessed from the copy length
+      el.dispatchEvent(new CustomEvent('typed', { bubbles: true }));
       return;
     }
     var seg = segments[segIndex];
@@ -152,6 +156,28 @@ function initHeroTypewriter() {
   if (!el) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   typeElement(el);
+}
+
+// C stacks the hero, so the quote bar sits directly under the headline as its
+// own section rather than beside it. It holds back until the headline has
+// finished typing, keyed off the typewriter's own finish rather than a delay
+// that would drift the moment the headline copy changed length.
+function initHeroQuoteCard() {
+  var card = document.querySelector('.quote-bar-section');
+  var title = document.querySelector('.hero-title');
+  if (!card || !title) return;
+
+  function show() { card.classList.add('is-typed'); }
+
+  // under reduced motion the headline never types, so there is nothing to
+  // wait for; same if typing has already finished or never started
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      !title.classList.contains('is-typing')) {
+    show();
+    return;
+  }
+
+  title.addEventListener('typed', show, { once: true });
 }
 
 function initContactTypewriter() {
