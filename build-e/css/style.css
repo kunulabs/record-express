@@ -3151,3 +3151,10 @@ h1, h2, h3, h4, .font-display {
   padding-left: 0;
   padding-right: 0;
 }
+
+/* The design system's H1 is 64/68 (Type/Heading/H1), and every frame's
+   headline box is a multiple of that line-height - 152 for the two-line
+   stacked heroes, 304 for B's four, 380 for F's six. Ours was resolving to
+   43.5px at the 1280 frame, which is why the headline sat on one line where
+   the frame wraps it. 5vw hits 64 at 1280 and is capped there for the 1440. */
+.hero-title { font-size: clamp(34px, 5vw, 64px); line-height: 1.0625; }
