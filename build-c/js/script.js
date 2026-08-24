@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initTopbar();
   initLangDropdown();
   initHeroTypewriter();
+  initHeroDescTypewriter();
   initHeroQuoteCard();
   initContactTypewriter();
   initQuoteBar();
@@ -97,13 +98,13 @@ function initLangDropdown() {
   });
 }
 
-function typeElement(el) {
+function typeElement(el, speed) {
   var segments = [];
   Array.prototype.forEach.call(el.childNodes, function (node) {
     if (node.nodeType === Node.TEXT_NODE) {
       segments.push({ text: node.textContent, className: null });
     } else if (node.nodeType === Node.ELEMENT_NODE) {
-      segments.push({ text: node.textContent, className: node.className });
+      segments.push({ text: node.textContent, tag: node.tagName, className: node.className });
     }
   });
   if (!segments.length) return;
@@ -130,9 +131,13 @@ function typeElement(el) {
     }
     var seg = segments[segIndex];
     if (charIndex === 0) {
-      if (seg.className) {
-        currentNode = document.createElement('span');
-        currentNode.className = seg.className;
+      if (seg.tag) {
+        // the tag itself has to be rebuilt, not just its class: the headline's
+        // highlight is a classed <span>, but the description's emphasis is a
+        // bare <strong>, and keying off className alone dropped it to a plain
+        // text node and lost the bold
+        currentNode = document.createElement(seg.tag);
+        if (seg.className) currentNode.className = seg.className;
         el.appendChild(currentNode);
       } else {
         currentNode = document.createTextNode('');
@@ -145,7 +150,7 @@ function typeElement(el) {
       segIndex++;
       charIndex = 0;
     }
-    setTimeout(typeNext, 28);
+    setTimeout(typeNext, speed || 28);
   }
 
   typeNext();
@@ -178,6 +183,25 @@ function initHeroQuoteCard() {
   }
 
   title.addEventListener('typed', show, { once: true });
+}
+
+// The description types after the headline rather than alongside it, and at
+// 34ms against the headline's 28 so it reads as a slower second beat. It is
+// 139 characters, so this runs about 4.7s on its own - the quote bar is left
+// keyed to the headline so the page is not waiting on the whole crawl.
+function initHeroDescTypewriter() {
+  var desc = document.querySelector('.hero-desc');
+  var title = document.querySelector('.hero-title');
+  if (!desc || !title) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // nothing to chain off if the headline never typed
+  if (!title.classList.contains('is-typing')) {
+    typeElement(desc, 34);
+    return;
+  }
+
+  title.addEventListener('typed', function () { typeElement(desc, 34); }, { once: true });
 }
 
 function initContactTypewriter() {
