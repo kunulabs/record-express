@@ -361,8 +361,12 @@ h1, h2, h3, h4, .font-display {
   /* Copy runs ~56 chars; uppercase at 18px needs 581px against a 541px column,
      so the pill keeps the sentence casing it's written in and scales slightly
      to stay on one line down to ~1000px. */
-  font-size: clamp(15px, 1.25vw, 18px);
-  line-height: 1.34;
+  /* capped at 16 rather than 18: C's 1440 frame keeps the same 40px pill
+     as the 1280 frames, and at 18 the line box grew to 43 */
+  font-size: clamp(15px, 1.25vw, 16px);
+  /* the frames give the pill a 40px box - 8 padding, a 24px line, 8 padding
+     (252x40 holding a 220x24 label); 1.34 was landing it on 37 */
+  line-height: 1.5;
   max-width: 100%;
   opacity: 0.8;
 }
@@ -434,8 +438,11 @@ h1, h2, h3, h4, .font-display {
 .hero-desc {
   font-family: "Outfit", var(--font-family);
   font-weight: 400;
-  font-size: clamp(18px, 1.53vw, 22px);
-  line-height: 1.27;
+  /* 22/28 at the 1280 core frame: the frames' hero description boxes are
+     whole numbers of 28px lines (84 for three in A and B, 112 for four in the
+     narrow columns of F and G). 1.53vw was resolving to 19.6 and 25. */
+  font-size: clamp(16px, 1.72vw, 22px);
+  line-height: 1.2727;
   opacity: 0.8;
   margin-top: 32px;
   /* the UA paragraph margin (1em = 22px) was never zeroed and was landing
@@ -3098,9 +3105,14 @@ h1, h2, h3, h4, .font-display {
 .hero-actions { justify-content: center; }
 .hero-desc { margin-left: auto; margin-right: auto; }
 
-/* The design system's H1 is 64/68 (Type/Heading/H1), and every frame's
-   headline box is a multiple of that line-height - 152 for the two-line
-   stacked heroes, 304 for B's four, 380 for F's six. Ours was resolving to
-   43.5px at the 1280 frame, which is why the headline sat on one line where
-   the frame wraps it. 5vw hits 64 at 1280 and is capped there for the 1440. */
-.hero-title { font-size: clamp(34px, 5vw, 64px); line-height: 1.0625; }
+/* The hero headline is Type/Display/Hero, not Heading/H1: Outfit ExtraBold
+   72/76 with -2px tracking. Every frame's headline box is a whole number of
+   76px line boxes - 152 for the two-line stacked heroes in A, C and D, 304
+   for B's four, 380 for F's and G's five - which is what identifies 76 as the
+   line box rather than H1's 68. 5.625vw lands on 72 at the 1280 core frame
+   and is capped there so the 1440 build does not overshoot it. */
+.hero-title {
+  font-size: clamp(34px, 5.625vw, 72px);
+  line-height: 1.0556;
+  letter-spacing: -0.0278em;
+}

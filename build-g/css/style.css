@@ -361,8 +361,12 @@ h1, h2, h3, h4, .font-display {
   /* Copy runs ~56 chars; uppercase at 18px needs 581px against a 541px column,
      so the pill keeps the sentence casing it's written in and scales slightly
      to stay on one line down to ~1000px. */
-  font-size: clamp(15px, 1.25vw, 18px);
-  line-height: 1.34;
+  /* capped at 16 rather than 18: C's 1440 frame keeps the same 40px pill
+     as the 1280 frames, and at 18 the line box grew to 43 */
+  font-size: clamp(15px, 1.25vw, 16px);
+  /* the frames give the pill a 40px box - 8 padding, a 24px line, 8 padding
+     (252x40 holding a 220x24 label); 1.34 was landing it on 37 */
+  line-height: 1.5;
   max-width: 100%;
   opacity: 0.8;
 }
@@ -434,8 +438,11 @@ h1, h2, h3, h4, .font-display {
 .hero-desc {
   font-family: "Outfit", var(--font-family);
   font-weight: 400;
-  font-size: clamp(18px, 1.53vw, 22px);
-  line-height: 1.27;
+  /* 22/28 at the 1280 core frame: the frames' hero description boxes are
+     whole numbers of 28px lines (84 for three in A and B, 112 for four in the
+     narrow columns of F and G). 1.53vw was resolving to 19.6 and 25. */
+  font-size: clamp(16px, 1.72vw, 22px);
+  line-height: 1.2727;
   opacity: 0.8;
   margin-top: 32px;
   /* the UA paragraph margin (1em = 22px) was never zeroed and was landing
@@ -3063,7 +3070,59 @@ h1, h2, h3, h4, .font-display {
 
 
 /* ===== Dark & light scheme =====
-   Cream page with the designed dark bands left in place. */
+   G is literally "Dark & Light" (33388:9831): the hero band and the quote bar
+   that sits inside it are dark, and every section below stays on the cream
+   palette. Re-declaring the tokens on those two sections re-themes their whole
+   subtree through the cascade, so nothing inside needs a per-element rule.
+   The dark ground is the project's existing --color-bg-dark (#122114), which
+   is the same green the frame paints the band in. */
+.topbar,
+.site-header,
+.hero,
+.quote-bar-section {
+  --color-bg-default: #122114;
+  --color-bg-accent: #122114;
+  --color-surface: #1b2a1d;
+  --color-surface-alt: #223026;
+  --color-pill: #1b2a1d;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.7);
+  --color-border: rgba(255, 255, 255, 0.18);
+  background: var(--color-bg-default);
+  color: var(--color-text-primary);
+}
+
+/* The hero and the bar are one continuous band in the frame, so the bar's
+   own top padding is what joins them; without this the two sections meet on
+   a seam because .hero-inner carries its own bottom padding. */
+.quote-bar-section { padding-top: 48px; }
+
+/* The eyebrow pill is an outline on the dark ground, not a filled chip. */
+.hero .eyebrow-pill {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  /* the border sits outside an auto-height inline-flex box, so trim the
+     padding by its width to keep the pill on the frames' 40 */
+  padding: 7px 15px;
+}
+
+/* Borders in the bar are hard-coded to the light #b9afa2 and disappear
+   against the dark. */
+.quote-bar-section .quote-bar { border-color: transparent; box-shadow: none; }
+.quote-bar-section .quote-bar-divider { background: var(--color-border); }
+.quote-bar-section .quote-option {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+}
+.quote-bar-section .quote-option.is-active {
+  border-color: var(--color-primitive-green, #2ecc71);
+  background: var(--color-surface-alt);
+}
+.quote-bar-section .quote-option input { color: var(--color-text-primary); }
+
+/* Photos carry their own light; knock the van back slightly on the dark band. */
+.hero-media-bg { filter: brightness(0.96); }
 
 
 /* ===== Hero: copy beside the graphic =====
@@ -3077,12 +3136,67 @@ h1, h2, h3, h4, .font-display {
    rather than at the top of the row (33388:9831). Without these two G is
    simply F on a cream page. */
 .hero-inner { min-height: 764px; align-items: flex-start; }
-.hero-copy { padding-top: 8px; }
 .hero-media { margin-top: 80px; }
 
-/* The design system's H1 is 64/68 (Type/Heading/H1), and every frame's
-   headline box is a multiple of that line-height - 152 for the two-line
-   stacked heroes, 304 for B's four, 380 for F's six. Ours was resolving to
-   43.5px at the 1280 frame, which is why the headline sat on one line where
-   the frame wraps it. 5vw hits 64 at 1280 and is capped there for the 1440. */
-.hero-title { font-size: clamp(34px, 5vw, 64px); line-height: 1.0625; }
+/* G's Hero-Graphic (33388:9894) holds one child, the Truck-Bg vector - there
+   is no dispatch panel over the van in this frame the way there is in F and H. */
+.hero-dispatch { display: none; }
+
+/* G's bar is not a card: its children sit straight on the 1180 container
+   (33412:5636), which is how it comes to 72 rather than the 90 a padded card
+   with a 56px icon block lands on. 288 title + 16 + divider + 15 + 694
+   options + 16 + 150 button = 1180. */
+.quote-bar {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.quote-bar-title { flex: 0 0 288px; align-items: flex-start; gap: 6px; }
+.quote-bar-title-text { gap: 4px; max-width: none; }
+.quote-bar-eyebrow { font-size: 14px; line-height: 22px; }
+.quote-bar-heading { font-size: 18px; line-height: 24px; }
+
+/* the 56px rounded icon block becomes a 16px inline glyph on the eyebrow */
+.quote-bar-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 0;
+  background: none;
+  margin-top: 3px;
+}
+.quote-bar-icon svg { width: 16px; height: 16px; }
+
+.quote-bar-divider { height: 72px; }
+.quote-bar-options { flex: 1 1 auto; gap: 12px; min-width: 0; flex-wrap: nowrap; }
+.quote-option { flex: 1 1 0; min-width: 0; padding: 12px; border-radius: 16px; }
+.quote-option svg { width: 16px; height: 16px; flex-shrink: 0; align-self: flex-start; margin-top: 2px; }
+.quote-option-text { min-width: 0; }
+.quote-bar-submit { flex: 0 0 150px; }
+
+/* The hero headline is Type/Display/Hero, not Heading/H1: Outfit ExtraBold
+   72/76 with -2px tracking. Every frame's headline box is a whole number of
+   76px line boxes - 152 for the two-line stacked heroes in A, C and D, 304
+   for B's four, 380 for F's and G's five - which is what identifies 76 as the
+   line box rather than H1's 68. 5.625vw lands on 72 at the 1280 core frame
+   and is capped there so the 1440 build does not overshoot it. */
+.hero-title {
+  font-size: clamp(34px, 5.625vw, 72px);
+  line-height: 1.0556;
+  letter-spacing: -0.0278em;
+}
+
+/* Below the core frame the row cannot hold 288 + 694 + 150 side by side
+   without squeezing the addresses - measured 160px of input against the 226
+   the pick-up value needs at 1024 - so the compact bar goes back to wrapping
+   and the options take their own full-width line. */
+@media (max-width: 1200px) {
+  .quote-bar { flex-wrap: wrap; row-gap: 12px; }
+  .quote-bar-title { flex: 1 1 240px; }
+  .quote-bar-divider { display: none; }
+  .quote-bar-options { flex: 1 1 100%; flex-wrap: wrap; }
+  .quote-option { flex: 1 1 260px; }
+}
