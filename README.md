@@ -82,3 +82,24 @@ Google Drive and direct upload. They cannot be pulled from Figma in this
 environment: the egress policy blocks `figma.com`, so `download_assets` URLs
 fail even though the design itself can be read through the Figma MCP server.
 New or updated artwork therefore has to be uploaded rather than fetched.
+
+## V5 builds
+
+Eight builds from the "Landing Page V5 - 21 Aug" board, one folder each at the
+repository root, listed by the chooser at the root index.
+
+| Build | Figma node  | Core frame | Scheme |
+|-------|-------------|-----------|--------|
+| 1     | 33365:2801  | 1280      | mixed  |
+| 2     | 33385:3090  | 1280      | mixed  |
+| 3     | 33385:3803  | 1440      | mixed  |
+| 4     | 33385:5229  | 1280      | light  |
+| 5     | 33387:7560  | 1280      | light  |
+| 6     | 33387:8334  | 1280      | dark   |
+| 7     | 33388:9831  | 1280      | mixed  |
+| 8     | 33404:3750  | 1280      | dark   |
+
+They share one asset folder at assets/ rather than carrying a copy each - the
+set is 8.4MB, so eight copies would have added ~67MB to the repository. Each
+build is otherwise self-contained: its own index.html, stylesheet and script.
+
