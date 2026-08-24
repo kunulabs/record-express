@@ -3089,3 +3089,11 @@ h1, h2, h3, h4, .font-display {
 .hero-copy { flex: 1 1 auto; }
 .hero-media { display: none; }
 .quote-bar { padding: 32px; }
+
+/* The stacked heroes are centred, not left-aligned: in the frames the eyebrow
+   pill sits at x=464 of the 1180 column (494 of 1240 in C), i.e. exactly
+   (column - 252) / 2. */
+.hero-copy { align-items: center; text-align: center; }
+.eyebrow-pill { align-self: center; }
+.hero-actions { justify-content: center; }
+.hero-desc { margin-left: auto; margin-right: auto; }
