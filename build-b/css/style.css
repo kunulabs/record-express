@@ -3174,3 +3174,37 @@ h1, h2, h3, h4, .font-display {
   line-height: 1.0556;
   letter-spacing: -0.0278em;
 }
+
+
+/* ===== B only: the quote card waits for the headline =====
+   B is the one build with the quote form inside the hero, so it is on screen
+   the whole time the headline is typing. It holds back and fades in as the
+   last characters land.
+
+   Two animation names rather than one with a changed delay: swapping only the
+   delay on an animation still inside its delay period leaves it counted as
+   already elapsed, so it would jump to the end state instead of fading. The
+   fallback also means the card still appears if the script never runs - it is
+   hidden from first paint, so it must not depend on JS to come back. */
+.hero-inner .quote-bar-section {
+  animation: quote-card-fallback 0.55s ease 2.4s both;
+}
+
+.hero-inner .quote-bar-section.is-typed {
+  animation: quote-card-fade 0.55s ease both;
+}
+
+@keyframes quote-card-fade {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes quote-card-fallback {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-inner .quote-bar-section,
+  .hero-inner .quote-bar-section.is-typed { animation: none; }
+}
