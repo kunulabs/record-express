@@ -361,12 +361,16 @@ h1, h2, h3, h4, .font-display {
   /* Copy runs ~56 chars; uppercase at 18px needs 581px against a 541px column,
      so the pill keeps the sentence casing it's written in and scales slightly
      to stay on one line down to ~1000px. */
-  /* capped at 16 rather than 18: C's 1440 frame keeps the same 40px pill
-     as the 1280 frames, and at 18 the line box grew to 43 */
-  font-size: clamp(15px, 1.25vw, 16px);
-  /* the frames give the pill a 40px box - 8 padding, a 24px line, 8 padding
-     (252x40 holding a 220x24 label); 1.34 was landing it on 37 */
-  line-height: 1.5;
+  /* Every frame draws this chip at exactly 252x40: 16px of padding either
+     side of a 220x24 uppercase label. Fixed rather than scaled with the
+     viewport - C's 1440 frame uses the same 252 as the 1280 frames. */
+  font-size: 16px;
+  line-height: 24px;
+  text-transform: uppercase;
+  /* solved against the frames' 220px label: Outfit regular sets the string at
+     195.3 flat, so 1.07px of tracking per character brings it to 220 */
+  letter-spacing: 0.067em;
+  white-space: nowrap;
   max-width: 100%;
   opacity: 0.8;
 }
