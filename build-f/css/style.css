@@ -3104,3 +3104,11 @@ body { background: var(--color-bg-default); color: var(--color-text-primary); }
 .blog-card-img img,
 .benefits-media img,
 .benefits2-media img { filter: brightness(0.94); }
+
+
+/* ===== Hero: copy beside the graphic =====
+   F, Figma 33387:8334: copy 456, graphic 676, 72px bar. */
+.hero-copy { flex: 0 0 38.64%; }
+.hero-media { flex: 0 0 57.29%; max-width: none; }
+.quote-bar { padding: 8px; }
+.quote-option { padding: 8px 12px; }

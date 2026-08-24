@@ -3104,3 +3104,16 @@ body { background: var(--color-bg-default); color: var(--color-text-primary); }
 .blog-card-img img,
 .benefits-media img,
 .benefits2-media img { filter: brightness(0.94); }
+
+
+/* ===== Hero: copy beside the graphic =====
+   H, Figma 33404:3750: copy 648, dispatch column 484x592 - the large-dispatch frame. */
+.hero-copy { flex: 0 0 54.92%; }
+.hero-media { flex: 0 0 41.02%; max-width: none; }
+.quote-bar { padding: 8px; }
+.quote-option { padding: 8px 12px; }
+
+/* H gives the dispatch its own tall column, so the card fills it. */
+.hero-media { aspect-ratio: 484 / 592; }
+.hero-dispatch { width: min(96%, 460px); left: 2%; }
+.hero-media-bg-frame { display: none; }

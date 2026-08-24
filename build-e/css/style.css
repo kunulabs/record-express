@@ -3075,3 +3075,59 @@ h1, h2, h3, h4, .font-display {
 .services-featured .service-panel-desc,
 .services-featured .service-panel-meta { color: var(--color-text-primary); }
 .services-featured .service-panel-desc { opacity: 0.75; }
+
+
+/* ===== Hero: vertical quote card beside the copy =====
+   E, Figma 33387:7560: copy 664, card 444x473.
+   The quote bar is lifted into the hero row as a column rather than sitting
+   under it, so the form stacks instead of running across. */
+/* centred, not stretched: the card is content-height in the design (368 in B,
+   473 in E), and stretching it ran it to the full height of the copy column */
+.hero-inner { align-items: center; }
+.hero-copy { flex: 0 0 56.27%; }
+.hero-media { display: none; }
+
+.hero-inner .quote-bar-section {
+  flex: 0 0 37.63%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+.hero-inner .quote-bar {
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  gap: 20px;
+  padding: 28px;
+}
+.hero-inner .quote-bar-divider { display: none; }
+.hero-inner .quote-bar-options { flex-direction: column; align-items: stretch; gap: 14px; }
+.hero-inner .quote-option { width: 100%; }
+.hero-inner .quote-bar-submit { width: 100%; justify-content: center; }
+
+/* The options row is a flexible child in the horizontal bar; turned vertical
+   it kept growing to fill, which ran each option to ~267px and the card to
+   744. Size them to content instead. */
+.hero-inner .quote-bar-options { flex: 0 0 auto; }
+.hero-inner .quote-option { flex: 0 0 auto; }
+.hero-inner .quote-bar-title { flex: 0 0 auto; }
+
+/* The address inputs are sized for the wide horizontal bar; in the narrow
+   card they were clipping ("Rue Joseph Bens 33, 118..."). */
+.hero-inner .quote-option { min-width: 0; }
+.hero-inner .quote-option-text { min-width: 0; width: 100%; }
+.hero-inner .quote-option input { width: 100%; min-width: 0; }
+
+.hero-inner .quote-bar-options { width: 100%; }
+.hero-inner .quote-option { display: flex; width: 100%; box-sizing: border-box; }
+
+/* Turned vertical, the bar's inherited align-items: center was sizing every
+   child to its content width - the option rows came out 260 of the card's 443
+   and clipped the addresses. Stretch them across instead. */
+.hero-inner .quote-bar { align-items: stretch; }
+
+/* .quote-option carries flex: 1 1 260px from the horizontal bar; flex-basis
+   beats width, so the rows stayed 260 wide inside the 443 card. Reset the
+   basis on both the row and its container. */
+.hero-inner .quote-bar > .quote-bar-options { flex: none; width: 100%; }
+.hero-inner .quote-bar-options > .quote-option { flex: none; width: 100%; }

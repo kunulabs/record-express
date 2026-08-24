@@ -3075,3 +3075,17 @@ h1, h2, h3, h4, .font-display {
 .services-featured .service-panel-desc,
 .services-featured .service-panel-meta { color: var(--color-text-primary); }
 .services-featured .service-panel-desc { opacity: 0.75; }
+
+
+/* ===== Hero: stacked =====
+   A, Figma 33365:2801: copy 1180x408 over a 1180x144 bar.
+   Copy runs the full content width with the quote bar beneath it; this frame
+   carries no hero image. */
+.hero-inner {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+.hero-copy { flex: 1 1 auto; }
+.hero-media { display: none; }
+.quote-bar { padding: 32px; }

@@ -3064,3 +3064,11 @@ h1, h2, h3, h4, .font-display {
 
 /* ===== Dark & light scheme =====
    Cream page with the designed dark bands left in place. */
+
+
+/* ===== Hero: copy beside the graphic =====
+   G, Figma 33388:9831: copy 456, graphic 676, 72px bar. */
+.hero-copy { flex: 0 0 38.64%; }
+.hero-media { flex: 0 0 57.29%; max-width: none; }
+.quote-bar { padding: 8px; }
+.quote-option { padding: 8px 12px; }
