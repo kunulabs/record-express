@@ -86,20 +86,23 @@ New or updated artwork therefore has to be uploaded rather than fetched.
 ## V5 builds
 
 Eight builds from the "Landing Page V5 - 21 Aug" board, one folder each at the
-repository root, listed by the chooser at the root index.
+repository root, listed by the chooser at the root index. Names and schemes are
+the designer's own, read off the frames.
 
-| Build | Figma node  | Core frame | Scheme |
-|-------|-------------|-----------|--------|
-| 1     | 33365:2801  | 1280      | mixed  |
-| 2     | 33385:3090  | 1280      | mixed  |
-| 3     | 33385:3803  | 1440      | mixed  |
-| 4     | 33385:5229  | 1280      | light  |
-| 5     | 33387:7560  | 1280      | light  |
-| 6     | 33387:8334  | 1280      | dark   |
-| 7     | 33388:9831  | 1280      | mixed  |
-| 8     | 33404:3750  | 1280      | dark   |
+| Folder  | Figma node  | Frame | Gutter | Scheme      | Frame name                              |
+|---------|-------------|-------|--------|-------------|-----------------------------------------|
+| build-a | 33365:2801  | 1280  | 50     | light       | A Light - Quote & Contact               |
+| build-b | 33385:3090  | 1280  | 50     | light       | B Light - Veritcal Quote & Contact      |
+| build-c | 33385:3803  | 1440  | 100    | light       | C Light - Only Quote (1440px - normal)  |
+| build-d | 33385:5229  | 1280  | 50     | light       | D - Light - Only Quote (1280 px - small)|
+| build-e | 33387:7560  | 1280  | 50     | light       | E - Light - Vertical Quote & Image      |
+| build-f | 33387:8334  | 1280  | 50     | dark        | F - Dark (Green) - Quote &              |
+| build-g | 33388:9831  | 1280  | 50     | dark & light| G - Dark & Light- Quote & Image         |
+| build-h | 33404:3750  | 1280  | 50     | dark        | H - Dark - Quote & Large Dispatch       |
+
+The seven 1280 frames use 50px gutters (1180 of content); the 1440 frame uses
+100px (1240). Each build is responsive below its own frame.
 
 They share one asset folder at assets/ rather than carrying a copy each - the
 set is 8.4MB, so eight copies would have added ~67MB to the repository. Each
 build is otherwise self-contained: its own index.html, stylesheet and script.
-

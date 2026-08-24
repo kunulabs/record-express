@@ -68,8 +68,8 @@
       font-size: 20px; color: var(--accent); width: 28px; flex-shrink: 0;
     }
     .body { flex: 1; min-width: 0; }
-    .label { font-family: "Outfit", system-ui, sans-serif; font-weight: 700; font-size: 18px; }
-    .meta { font-size: 13px; line-height: 20px; color: var(--muted); margin-top: 2px; }
+    .label { display: block; font-family: "Outfit", system-ui, sans-serif; font-weight: 700; font-size: 18px; }
+    .meta { display: block; font-size: 13px; line-height: 20px; color: var(--muted); margin-top: 2px; }
     .width {
       font-size: 12px; font-weight: 700; letter-spacing: 0.4px;
       padding: 5px 11px; border-radius: 55px; background: var(--accent-soft);
@@ -112,14 +112,14 @@
     // One entry per build. Adding a build is a matter of adding a row here and
     // dropping its folder alongside; nothing else needs touching.
     var BUILDS = [
-      { id: 'build-1', name: 'Build 1', scheme: 'mixed', width: 1280, note: 'Cream page, dark service and CTA bands' },
-      { id: 'build-2', name: 'Build 2', scheme: 'mixed', width: 1280, note: 'Cream page, dark service and CTA bands' },
-      { id: 'build-3', name: 'Build 3', scheme: 'mixed', width: 1440, note: 'The one drawn on a 1440 frame' },
-      { id: 'build-4', name: 'Build 4', scheme: 'light', width: 1280, note: 'Cream throughout, dark footer only' },
-      { id: 'build-5', name: 'Build 5', scheme: 'light', width: 1280, note: 'Cream throughout, dark footer only' },
-      { id: 'build-6', name: 'Build 6', scheme: 'dark',  width: 1280, note: 'Dark page, light services band' },
-      { id: 'build-7', name: 'Build 7', scheme: 'mixed', width: 1280, note: 'Light top and bottom, dark middle' },
-      { id: 'build-8', name: 'Build 8', scheme: 'dark',  width: 1280, note: 'Dark page, light services band' }
+      { id: 'build-a', name: 'A Light \u2014 Quote & Contact',            scheme: 'light', width: 1280 },
+      { id: 'build-b', name: 'B Light \u2014 Vertical Quote & Contact',   scheme: 'light', width: 1280 },
+      { id: 'build-c', name: 'C Light \u2014 Only Quote (normal)',        scheme: 'light', width: 1440 },
+      { id: 'build-d', name: 'D Light \u2014 Only Quote (small)',         scheme: 'light', width: 1280 },
+      { id: 'build-e', name: 'E Light \u2014 Vertical Quote & Image',     scheme: 'light', width: 1280 },
+      { id: 'build-f', name: 'F Dark (Green) \u2014 Quote',               scheme: 'dark',  width: 1280 },
+      { id: 'build-g', name: 'G Dark & Light \u2014 Quote & Image',       scheme: 'mixed', width: 1280 },
+      { id: 'build-h', name: 'H Dark \u2014 Quote & Large Dispatch',      scheme: 'dark',  width: 1280 }
     ];
 
     var panel = document.getElementById('panel');
@@ -138,7 +138,7 @@
         a.className = 'build';
         a.href = b.id + '/';
         a.innerHTML =
-          '<span class="num">' + (i + 1) + '</span>' +
+          '<span class="num">' + b.id.slice(-1).toUpperCase() + '</span>' +
           '<span class="body"><span class="label"></span>' +
           (b.note ? '<span class="meta"></span>' : '') + '</span>' +
           '<span class="width">' + b.width + 'px</span>' +
