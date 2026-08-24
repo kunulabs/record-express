@@ -169,26 +169,34 @@ function initHeroTypewriter() {
 // that would drift the moment the headline copy changed length.
 function initHeroQuoteCard() {
   var card = document.querySelector('.quote-bar-section');
-  var title = document.querySelector('.hero-title');
-  if (!card || !title) return;
+  var desc = document.querySelector('.hero-desc');
+  if (!card) return;
 
   function show() { card.classList.add('is-typed'); }
 
-  // under reduced motion the headline never types, so there is nothing to
-  // wait for; same if typing has already finished or never started
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-      !title.classList.contains('is-typing')) {
+  // Claiming the sequence cancels the CSS fallback outright, rather than the
+  // two racing on timing. The fallback exists for the script never running at
+  // all; once it has, a fixed delay can only be wrong - a throttled tab can
+  // stretch the typing past any delay picked here, and the fallback firing
+  // first would show the bar and then re-fade it when the typing finished.
+  card.classList.add('js-sequenced');
+
+  // the description is the last thing to type, so the bar waits on it rather
+  // than on the headline. Under reduced motion nothing types at all, so there
+  // is nothing to wait for.
+  if (!desc || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     show();
     return;
   }
 
-  title.addEventListener('typed', show, { once: true });
+  // attached before the description starts, which it does when the headline
+  // ends; the event fires whenever that run completes
+  desc.addEventListener('typed', show, { once: true });
 }
 
-// The description types after the headline rather than alongside it, and at
-// 34ms against the headline's 28 so it reads as a slower second beat. It is
-// 139 characters, so this runs about 4.7s on its own - the quote bar is left
-// keyed to the headline so the page is not waiting on the whole crawl.
+// The description types after the headline rather than alongside it, at 24ms
+// a character. It is 139 characters, so this runs about 3.3s, and the quote
+// bar waits on it finishing rather than on the headline.
 function initHeroDescTypewriter() {
   var desc = document.querySelector('.hero-desc');
   var title = document.querySelector('.hero-title');
@@ -197,11 +205,11 @@ function initHeroDescTypewriter() {
 
   // nothing to chain off if the headline never typed
   if (!title.classList.contains('is-typing')) {
-    typeElement(desc, 34);
+    typeElement(desc, 24);
     return;
   }
 
-  title.addEventListener('typed', function () { typeElement(desc, 34); }, { once: true });
+  title.addEventListener('typed', function () { typeElement(desc, 24); }, { once: true });
 }
 
 function initContactTypewriter() {

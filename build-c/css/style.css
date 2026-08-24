@@ -3137,11 +3137,22 @@ h1, h2, h3, h4, .font-display {
    already elapsed, so it would jump to the end state instead of fading. The
    fallback also means the bar still appears if the script never runs, since it
    is hidden from first paint. */
+/* The fallback covers the script never running: the bar is hidden from first
+   paint, so it must not depend on JS to come back. It is not a race with the
+   script - the script cancels it by adding .js-sequenced on load, long before
+   this delay - because no fixed delay can be right once the bar waits on
+   typing that a throttled tab can stretch indefinitely. */
 .quote-bar-section {
-  animation: quote-card-fallback 1.15s cubic-bezier(0.4, 0, 0.2, 1) 2.4s both;
+  animation: quote-card-fallback 1.15s cubic-bezier(0.4, 0, 0.2, 1) 2s both;
 }
 
-.quote-bar-section.is-typed {
+.quote-bar-section.js-sequenced {
+  animation: none;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.quote-bar-section.js-sequenced.is-typed {
   animation: quote-card-fade 1.15s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
@@ -3159,5 +3170,10 @@ h1, h2, h3, h4, .font-display {
 
 @media (prefers-reduced-motion: reduce) {
   .quote-bar-section,
-  .quote-bar-section.is-typed { animation: none; }
+  .quote-bar-section.js-sequenced,
+  .quote-bar-section.js-sequenced.is-typed {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
