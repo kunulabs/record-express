@@ -3120,3 +3120,49 @@ h1, h2, h3, h4, .font-display {
   line-height: 1.0556;
   letter-spacing: -0.0278em;
 }
+
+
+/* ===== A only: the quote bar's entrance =====
+   At 1280 this bar lands across the fold - on a typical laptop viewport
+   about half of it shows. That peek is doing useful work: a partly revealed
+   element is what tells you there is more below, and hiding it would cost
+   the conversion prompt while showing it whole would mean shrinking the hero
+   away from the frame. So the animation leans on the peek instead of
+   fighting it. The bar is the last thing on the page to move and it moves
+   upward, into the strip that is already on screen.
+
+   Pure CSS on load rather than an observer: the bar is partly in view at
+   landing, so an intersection trigger would fire immediately anyway, and
+   `both` fill holds the hidden state through the delay so there is no flash
+   of the settled bar before the animation starts. */
+/* Timed against the headline, which types from 170ms to 1738ms: the bar
+   starts rising as the last characters land, so the two beats hand off
+   instead of competing. Everything has settled by ~2.3s. */
+.quote-bar {
+  animation: quote-bar-rise 0.65s cubic-bezier(0.2, 0.7, 0.25, 1) 1.35s both;
+}
+
+/* the controls arrive after the card, so the eye reads container then
+   contents rather than everything at once */
+.quote-bar-title { animation: quote-bar-item 0.45s ease 1.60s both; }
+.quote-option:nth-of-type(1) { animation: quote-bar-item 0.45s ease 1.68s both; }
+.quote-option:nth-of-type(2) { animation: quote-bar-item 0.45s ease 1.76s both; }
+.quote-bar-submit { animation: quote-bar-item 0.45s ease 1.84s both; }
+
+@keyframes quote-bar-rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes quote-bar-item {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quote-bar,
+  .quote-bar-title,
+  .quote-option:nth-of-type(1),
+  .quote-option:nth-of-type(2),
+  .quote-bar-submit { animation: none; }
+}
