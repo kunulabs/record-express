@@ -3117,3 +3117,8 @@ body { background: var(--color-bg-default); color: var(--color-text-primary); }
 .hero-media { aspect-ratio: 484 / 592; }
 .hero-dispatch { width: min(96%, 460px); left: 2%; }
 .hero-media-bg-frame { display: none; }
+
+/* H's copy starts 54 into the row while the dispatch column runs its full
+   height (33404:3750). */
+.hero-inner { align-items: flex-start; }
+.hero-copy { margin-top: 54px; }

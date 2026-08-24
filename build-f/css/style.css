@@ -3112,3 +3112,8 @@ body { background: var(--color-bg-default); color: var(--color-text-primary); }
 .hero-media { flex: 0 0 57.29%; max-width: none; }
 .quote-bar { padding: 8px; }
 .quote-option { padding: 8px 12px; }
+
+/* F's hero row is 588 with the graphic 28 down (33387:8334); the copy alone
+   only came to 549. */
+.hero-inner { min-height: 660px; align-items: flex-start; }
+.hero-media { margin-top: 28px; }

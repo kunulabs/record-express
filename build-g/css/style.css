@@ -3072,3 +3072,10 @@ h1, h2, h3, h4, .font-display {
 .hero-media { flex: 0 0 57.29%; max-width: none; }
 .quote-bar { padding: 8px; }
 .quote-option { padding: 8px 12px; }
+
+/* G's hero row is 692 tall against F's 588, and its graphic sits 80 down
+   rather than at the top of the row (33388:9831). Without these two G is
+   simply F on a cream page. */
+.hero-inner { min-height: 764px; align-items: flex-start; }
+.hero-copy { padding-top: 8px; }
+.hero-media { margin-top: 80px; }
