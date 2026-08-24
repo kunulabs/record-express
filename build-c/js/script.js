@@ -98,7 +98,7 @@ function initLangDropdown() {
   });
 }
 
-function typeElement(el, speed) {
+function typeElement(el, speed, onChar) {
   var segments = [];
   Array.prototype.forEach.call(el.childNodes, function (node) {
     if (node.nodeType === Node.TEXT_NODE) {
@@ -117,6 +117,7 @@ function typeElement(el, speed) {
 
   var segIndex = 0;
   var charIndex = 0;
+  var typed = 0;
   var currentNode = null;
 
   function typeNext() {
@@ -146,6 +147,10 @@ function typeElement(el, speed) {
     }
     currentNode.textContent += seg.text[charIndex];
     charIndex++;
+    typed++;
+    // counted across segments, so a cue can be expressed as a point in the
+    // whole string rather than an offset into one of its spans
+    if (onChar) onChar(typed);
     if (charIndex >= seg.text.length) {
       segIndex++;
       charIndex = 0;
@@ -181,35 +186,49 @@ function initHeroQuoteCard() {
   // first would show the bar and then re-fade it when the typing finished.
   card.classList.add('js-sequenced');
 
-  // the description is the last thing to type, so the bar waits on it rather
-  // than on the headline. Under reduced motion nothing types at all, so there
-  // is nothing to wait for.
+  // Under reduced motion nothing types at all, so there is nothing to wait for.
   if (!desc || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     show();
     return;
   }
 
-  // attached before the description starts, which it does when the headline
-  // ends; the event fires whenever that run completes
+  // "cue" fires partway through the description; "typed" is the backstop for
+  // a run that ends before the cue is reached, which is what happens if the
+  // copy is ever shortened past it
+  desc.addEventListener('cue', show, { once: true });
   desc.addEventListener('typed', show, { once: true });
 }
 
+// The quote bar may be on screen from the point the description has typed its
+// first line, and not before it. Held as the literal text rather than a
+// character count so it stays readable, and so it moves with the copy instead
+// of silently pointing at the wrong place if the sentence is reworded.
+var DESC_BAR_CUE = 'Record Express delivers your urgent parcels, documents and goods anywhere in Belgium';
+
 // The description types after the headline rather than alongside it, at 24ms
-// a character. It is 139 characters, so this runs about 3.3s, and the quote
-// bar waits on it finishing rather than on the headline.
+// a character, and fires "cue" partway through for the bar to start on.
 function initHeroDescTypewriter() {
   var desc = document.querySelector('.hero-desc');
   var title = document.querySelector('.hero-title');
   if (!desc || !title) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+  var cued = false;
+  function onChar(typed) {
+    if (cued || typed < DESC_BAR_CUE.length) return;
+    cued = true;
+    desc.dispatchEvent(new CustomEvent('cue'));
+  }
+
+  function run() { typeElement(desc, 24, onChar); }
+
   // nothing to chain off if the headline never typed
   if (!title.classList.contains('is-typing')) {
-    typeElement(desc, 24);
+    run();
     return;
   }
 
-  title.addEventListener('typed', function () { typeElement(desc, 24); }, { once: true });
+  title.addEventListener('typed', run, { once: true });
 }
 
 function initContactTypewriter() {
