@@ -849,11 +849,24 @@ h1, h2, h3, h4, .font-display {
   flex-wrap: wrap;
 }
 
+/* Section and rail type, to the design system. Measured against the services
+   frame (33451:18879 / 33451:18889): the title is 732 x 108, so H2 48/54 over
+   two lines, and each service row's Left-Info box is 34 tall, so H4 28/34.
+   Both were well under - the title 29/35 on one line in 573px, the rows 20/29.
+   The title is the H2 token, so this lifts every section heading on the page,
+   which is also the "text is too small" raised on the call.
+
+   Capped rather than fixed so the headings still come down on narrow screens:
+   3.75vw hits 48 at the 1280 core frame, 2.19vw hits 28. Declared here, with
+   the base rules, so the narrow (<=1000, <=560) and short-viewport (<=740h)
+   blocks further down the file still override them - at the end of the file
+   they won everywhere, leaving a 36px panel title in a 272px column at 320
+   and section headings larger than the compact hero on a 1280x700 laptop. */
 .section-title {
   font-weight: 800;
-  font-size: 29px;
-  line-height: 35px;
-  max-width: 640px;
+  font-size: clamp(28px, 3.75vw, 48px);
+  line-height: 1.125;
+  max-width: 732px;
 }
 
 .section-desc {
@@ -1025,8 +1038,8 @@ h1, h2, h3, h4, .font-display {
 .service-panel-title {
   font-family: "Outfit", var(--font-family);
   font-weight: 800;
-  font-size: 32px;
-  line-height: 43px;
+  font-size: 36px;
+  line-height: 42px;
   margin: 16px 0 0;
 }
 
@@ -1128,8 +1141,8 @@ h1, h2, h3, h4, .font-display {
 .service-row-number {
   font-family: "Outfit", var(--font-family);
   font-weight: 700;
-  font-size: 18px;
-  line-height: 26px;
+  font-size: clamp(20px, 2.19vw, 28px);
+  line-height: 1.214;
   color: var(--color-text-action);
   transition: color 0.3s ease;
 }
@@ -1138,8 +1151,8 @@ h1, h2, h3, h4, .font-display {
   flex: 1 1 auto;
   font-family: "Outfit", var(--font-family);
   font-weight: 700;
-  font-size: 20px;
-  line-height: 29px;
+  font-size: clamp(20px, 2.19vw, 28px);
+  line-height: 1.214;
 }
 
 .service-row-icon {
@@ -3199,39 +3212,10 @@ h1, h2, h3, h4, .font-display {
 /* 636 x 220 inside the panel's 32px padding */
 .service-panel-media { aspect-ratio: 636 / 220; }
 
-/* Type/Heading/H3 */
-.service-panel-title { font-size: 36px; line-height: 42px; }
 
 /* Below the core frame the fixed columns have to give way again, in the same
    proportion the frame sets - 440 : 700 is 38.6% : 61.4% of the 1180 row. */
 @media (min-width: 1001px) and (max-width: 1200px) {
   .services-rail { flex: 38.6 1 0; }
   .services-featured { flex: 61.4 1 0; }
-}
-
-
-/* ===== Section and rail type, to the design system =====
-   Measured against the services frame (33451:18879 / 33451:18889):
-
-     Title            732 x 108  -> H2 48/54, wrapping to two lines
-     Service row      440 x 82, its Left-Info box 34 tall -> H4 28/34
-
-   Both were well under. The section title was 29/35 and fitted on one line
-   in 573px where the frame gives it 732 and two lines, and the rail rows were
-   20/29 against the frame's 28/34. The title is the H2 token, so this lifts
-   every section heading on the page, not only services - which is also the
-   "text is too small" raised on the call.
-
-   Capped rather than fixed so the headings still come down on narrow screens:
-   3.75vw hits 48 at the 1280 core frame, 2.19vw hits 28. */
-.section-title {
-  font-size: clamp(28px, 3.75vw, 48px);
-  line-height: 1.125;
-  max-width: 732px;
-}
-
-.service-row-number,
-.service-row-title {
-  font-size: clamp(20px, 2.19vw, 28px);
-  line-height: 1.214;
 }
