@@ -3161,3 +3161,50 @@ h1, h2, h3, h4, .font-display {
    made on the previous round's B. The copy column comes to 408 rather than the
    frame's 512, and the hero band to 552 rather than 656. */
 .hero-actions { display: none; }
+
+
+/* ===== Services showcase, brought to the frame (33451:18884) =====
+   Addresses the call feedback that "the picture is way too big and the text is
+   the thing that matters", by matching the frame rather than picking sizes:
+
+     Navigation-Rail      x0    440 x 598   (left)
+     Featured-Service-Zone x480 700 x 598   (right, 40 gap)
+     Image-Container      32,32 636 x 220
+     Service-Title              box 42 tall -> H3 36/42
+
+   Three things were off. The two columns were mirrored - the panel sat left at
+   758 and the rail right at 382, where the frame puts the rail left at 440 and
+   the panel right at 700. That mirror is also the swap asked for on the call,
+   "services on the left and the square on the right". The image was 694x321
+   against the designed 636x220, half as tall again as it should be, which is
+   what made it dominate the section. And the panel title was 32/43 where the
+   frame's 42px box is the design system's H3 at 36/42. */
+
+/* Scoped above 1000px, where the two columns actually sit side by side. The
+   base sheet stacks them below that (@media max-width: 1000px), and an
+   unscoped row-reverse here came later in the file, so it overrode that and
+   left the two columns crushed into a row on mobile - the image fell to
+   118x41 at 320. Stacked, column-reverse keeps the rail first, which is the
+   frame's reading order. */
+@media (min-width: 1001px) {
+  .services-showcase { flex-direction: row-reverse; }
+  .services-rail { flex: 0 0 440px; }
+  .services-featured { flex: 0 0 700px; }
+}
+
+@media (max-width: 1000px) {
+  .services-showcase { flex-direction: column-reverse; }
+}
+
+/* 636 x 220 inside the panel's 32px padding */
+.service-panel-media { aspect-ratio: 636 / 220; }
+
+/* Type/Heading/H3 */
+.service-panel-title { font-size: 36px; line-height: 42px; }
+
+/* Below the core frame the fixed columns have to give way again, in the same
+   proportion the frame sets - 440 : 700 is 38.6% : 61.4% of the 1180 row. */
+@media (min-width: 1001px) and (max-width: 1200px) {
+  .services-rail { flex: 38.6 1 0; }
+  .services-featured { flex: 61.4 1 0; }
+}
