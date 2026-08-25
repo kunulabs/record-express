@@ -3141,7 +3141,14 @@ h1, h2, h3, h4, .font-display {
 /* G's hero row is 588 against F's 484 - it is the one of the three that keeps
    a CTA and phone row under the description - and its graphic sits 94.875 down
    rather than at the top of the row (33388:9875). */
-.hero-inner { min-height: 660px; align-items: flex-start; }
+/* No min-height on the row. It was there to make the row reach the frame's
+   height when the content fell short, but the content already fills it at the
+   core frame - and below 1280 the column narrows, the headline and description
+   get shorter and the graphic scales down, while a fixed min-height does not.
+   That slack opened up under the content and pushed the quote bar away: 72px
+   of gap at 1200, 103 at 1100, 126 at 1024, against the frames' 48. Letting
+   the row be content-driven holds the 48 at every width. */
+.hero-inner { align-items: flex-start; }
 .hero-media { margin-top: 95px; }
 
 /* G's Hero-Graphic (33388:9894) holds one child, the Truck-Bg vector - there

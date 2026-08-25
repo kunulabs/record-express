@@ -3131,7 +3131,14 @@ body { background: var(--color-bg-default); color: var(--color-text-primary); }
 
 /* H's copy starts 32 into the row (was 54) while the dispatch column runs its
    full height (33404:3794). Row 444 plus the 72 of top padding. */
-.hero-inner { align-items: flex-start; min-height: 516px; }
+/* No min-height on the row. It was there to make the row reach the frame's
+   height when the content fell short, but the content already fills it at the
+   core frame - and below 1280 the column narrows, the headline and description
+   get shorter and the graphic scales down, while a fixed min-height does not.
+   That slack opened up under the content and pushed the quote bar away: 72px
+   of gap at 1200, 103 at 1100, 126 at 1024, against the frames' 48. Letting
+   the row be content-driven holds the 48 at every width. */
+.hero-inner { align-items: flex-start; }
 .hero-copy { margin-top: 32px; }
 
 /* Like F, H's copy column (33404:3797) ends at the description: 64 + 420 =
