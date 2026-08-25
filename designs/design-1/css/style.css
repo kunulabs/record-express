@@ -3153,11 +3153,11 @@ h1, h2, h3, h4, .font-display {
    (../../css/hero-sequence.css). The old per-build version that lived here
    was removed rather than left alongside it - two mechanisms animating the
    same element would each hold their own hidden state. */
-}
 
 
-/* The V6 frame restores the CTA and phone row under the description
-   (33451:18803 at y456, 337 wide: a 168 button and a 153 phone block). It had
-   been dropped from the previous round's B on request; this is a new frame
-   and it carries one, so it is back. */
-.hero-actions { display: flex; }
+/* No CTA and phone row under the description. The frame does carry one
+   (33451:18803 at y456, 337 wide: a 168 button beside a 153 phone block), so
+   this is a deliberate departure from it on request, the same call that was
+   made on the previous round's B. The copy column comes to 408 rather than the
+   frame's 512, and the hero band to 552 rather than 656. */
+.hero-actions { display: none; }

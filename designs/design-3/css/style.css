@@ -3140,11 +3140,27 @@ h1, h2, h3, h4, .font-display {
 .quote-bar-icon svg { width: 16px; height: 16px; }
 
 .quote-bar-divider { height: 72px; }
-.quote-bar-options { flex: 1 1 auto; gap: 12px; min-width: 0; flex-wrap: nowrap; }
-.quote-option { flex: 1 1 0; min-width: 0; padding: 12px; border-radius: 16px; }
+/* The option boxes are 64 tall in the frame, sitting 4 down inside the 72px
+   bar. They were coming to 70, which left a single pixel of air top and bottom
+   and read as jammed against the bar's edges - that was the roughness. Pinned
+   to 64 and centred, so the 4 either side falls out of the geometry. */
+.quote-bar-options { flex: 1 1 auto; gap: 12px; min-width: 0; flex-wrap: nowrap; align-items: center; }
+.quote-option {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 64px;
+  padding: 0 12px;
+  border-radius: 16px;
+  align-items: center;
+}
 .quote-option svg { width: 16px; height: 16px; flex-shrink: 0; align-self: flex-start; margin-top: 2px; }
 .quote-option-text { min-width: 0; }
-.quote-bar-submit { flex: 0 0 150px; }
+
+/* flex: 0 0 150px alone left this at 157: a flex item's default min-width is
+   auto, so it will not shrink below its own content, and "Calculate" plus the
+   icon and the base 20px side padding come to about 154. The options row then
+   only gets what the button leaves, which is why it was 8px narrow too. */
+.quote-bar-submit { flex: 0 0 150px; min-width: 0; padding-left: 16px; padding-right: 16px; }
 
 /* Type/Display/Hero, which the V6 frames moved to Outfit ExtraBold 62/76 with
    -2px tracking - it was 72/76 last round. The headline box here is 769x228,
