@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Record Express &#8212; D - Light - Only Quote (1280 px - small)</title>
+  <title>Record Express &#8212; E - Light - Vertical Quote &amp; Image</title>
   <meta name="description" content="Smart logistics for businesses that move fast. Express deliveries, smart routes, and real-time control, across Belgium and beyond." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <!-- ?v= busts the 10-minute GitHub Pages asset cache; bump on every deploy -->
-  <link rel="stylesheet" href="css/style.css?v=v5-d" />
+  <link rel="stylesheet" href="css/style.css?v=v5-e" />
 </head>
 <body>
 
@@ -34,7 +34,7 @@
     <div class="container header-inner">
       <div class="header-left">
         <a href="#" class="logo" aria-label="Record Express home">
-          <img src="../assets/images/logo.png" alt="Record Express" width="48" height="48" />
+          <img src="../../assets/images/logo.png" alt="Record Express" width="48" height="48" />
         </a>
         <nav class="main-nav" aria-label="Primary">
           <ul>
@@ -108,7 +108,7 @@
         </div>
         <div class="hero-media">
           <div class="hero-media-bg-frame">
-            <img class="hero-media-bg" src="../assets/images/hero-van.png" alt="Record Express delivery van" />
+            <img class="hero-media-bg" src="../../assets/images/hero-van.png" alt="Record Express delivery van" />
           </div>
           <div class="hero-dispatch" tabindex="0" role="img" aria-label="Live dispatch panel showing active Record Express shipments">
             <div class="d-head">
@@ -137,46 +137,46 @@
             </div>
           </div>
         </div>
+            <!-- Pickup / Delivery quote bar -->
+        <section class="quote-bar-section">
+          <div class="container">
+            <form class="quote-bar" id="quote-bar">
+              <div class="quote-bar-title">
+                <span class="quote-bar-icon">
+                  <svg viewBox="0 0 24 24" fill="none" class="icon-32"><path d="M7 4h8l4 4v12H7z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M10 12h6M10 16h6M10 8h2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </span>
+                <span class="quote-bar-title-text">
+                  <span class="quote-bar-eyebrow">Get a Quick</span>
+                  <span class="quote-bar-heading">Delivery Price</span>
+                </span>
+              </div>
+              <div class="quote-bar-divider" aria-hidden="true"></div>
+              <div class="quote-bar-options">
+                <label class="quote-option is-active" data-role="pickup">
+                  <svg viewBox="0 0 24 24" fill="none" class="icon-32"><path d="M12 21s7-6.1 7-11.5A7 7 0 105 9.5C5 14.9 12 21 12 21z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.3" stroke="currentColor" stroke-width="1.4"/></svg>
+                  <span class="quote-option-text">
+                    <span class="quote-option-label">Pick-up</span>
+                    <input type="text" value="Rue Joseph Bens 33, 1180 Uccle" aria-label="Pick-up address" />
+                  </span>
+                </label>
+                <label class="quote-option" data-role="delivery">
+                  <svg viewBox="0 0 24 24" fill="none" class="icon-32"><path d="M12 21s7-6.1 7-11.5A7 7 0 105 9.5C5 14.9 12 21 12 21z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.3" stroke="currentColor" stroke-width="1.4"/></svg>
+                  <span class="quote-option-text">
+                    <span class="quote-option-label">Delivery</span>
+                    <input type="text" value="Rue Neuve 25, 6238 Point-o-Celles" aria-label="Delivery address" />
+                  </span>
+                </label>
+              </div>
+              <button type="submit" class="btn btn-primary quote-bar-submit">
+                Calculate
+                <span class="btn-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+            </form>
+          </div>
+        </section>
       </div>
     </section>
 
-    <!-- Pickup / Delivery quote bar -->
-    <section class="quote-bar-section">
-      <div class="container">
-        <form class="quote-bar" id="quote-bar">
-          <div class="quote-bar-title">
-            <span class="quote-bar-icon">
-              <svg viewBox="0 0 24 24" fill="none" class="icon-32"><path d="M7 4h8l4 4v12H7z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M10 12h6M10 16h6M10 8h2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            </span>
-            <span class="quote-bar-title-text">
-              <span class="quote-bar-eyebrow">Get a Quick</span>
-              <span class="quote-bar-heading">Delivery Price</span>
-            </span>
-          </div>
-          <div class="quote-bar-divider" aria-hidden="true"></div>
-          <div class="quote-bar-options">
-            <label class="quote-option is-active" data-role="pickup">
-              <svg viewBox="0 0 24 24" fill="none" class="icon-32"><path d="M12 21s7-6.1 7-11.5A7 7 0 105 9.5C5 14.9 12 21 12 21z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.3" stroke="currentColor" stroke-width="1.4"/></svg>
-              <span class="quote-option-text">
-                <span class="quote-option-label">Pick-up</span>
-                <input type="text" value="Rue Joseph Bens 33, 1180 Uccle" aria-label="Pick-up address" />
-              </span>
-            </label>
-            <label class="quote-option" data-role="delivery">
-              <svg viewBox="0 0 24 24" fill="none" class="icon-32"><path d="M12 21s7-6.1 7-11.5A7 7 0 105 9.5C5 14.9 12 21 12 21z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.3" stroke="currentColor" stroke-width="1.4"/></svg>
-              <span class="quote-option-text">
-                <span class="quote-option-label">Delivery</span>
-                <input type="text" value="Rue Neuve 25, 6238 Point-o-Celles" aria-label="Delivery address" />
-              </span>
-            </label>
-          </div>
-          <button type="submit" class="btn btn-primary quote-bar-submit">
-            Calculate
-            <span class="btn-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </button>
-        </form>
-      </div>
-    </section>
 
     <!-- Stats -->
     <section class="stats-section">
@@ -215,7 +215,7 @@
         <div class="services-showcase">
           <div class="services-featured">
             <article class="service-panel is-active" id="service-panel-01" role="tabpanel" aria-labelledby="service-tab-01">
-              <div class="service-panel-media"><img src="../assets/images/service-express.jpg" alt="Express and same-day courier loading a van" /></div>
+              <div class="service-panel-media"><img src="../../assets/images/service-express.jpg" alt="Express and same-day courier loading a van" /></div>
               <div class="service-panel-body">
                 <div class="service-panel-top">
                   <p class="service-panel-number">01</p>
@@ -230,7 +230,7 @@
               </div>
             </article>
             <article class="service-panel" id="service-panel-02" role="tabpanel" aria-labelledby="service-tab-02" hidden>
-              <div class="service-panel-media"><img src="../assets/images/service-tours.jpg" alt="Courier handing a parcel to a customer" /></div>
+              <div class="service-panel-media"><img src="../../assets/images/service-tours.jpg" alt="Courier handing a parcel to a customer" /></div>
               <div class="service-panel-body">
                 <div class="service-panel-top">
                   <p class="service-panel-number">02</p>
@@ -245,7 +245,7 @@
               </div>
             </article>
             <article class="service-panel" id="service-panel-03" role="tabpanel" aria-labelledby="service-tab-03" hidden>
-              <div class="service-panel-media"><img src="../assets/images/service-nextday.jpg" alt="Team planning delivery routes on a map" /></div>
+              <div class="service-panel-media"><img src="../../assets/images/service-nextday.jpg" alt="Team planning delivery routes on a map" /></div>
               <div class="service-panel-body">
                 <div class="service-panel-top">
                   <p class="service-panel-number">03</p>
@@ -260,7 +260,7 @@
               </div>
             </article>
             <article class="service-panel" id="service-panel-04" role="tabpanel" aria-labelledby="service-tab-04" hidden>
-              <div class="service-panel-media"><img src="../assets/images/service-logistics.jpg" alt="Dispatcher coordinating logistics on the phone" /></div>
+              <div class="service-panel-media"><img src="../../assets/images/service-logistics.jpg" alt="Dispatcher coordinating logistics on the phone" /></div>
               <div class="service-panel-body">
                 <div class="service-panel-top">
                   <p class="service-panel-number">04</p>
@@ -321,10 +321,10 @@
           <p class="section-desc">Medical, industrial, legal, service providers: Over 30 years of expertise across Belgium and internationally.</p>
         </div>
         <div class="industries-photo">
-          <img class="industry-photo is-active" src="../assets/images/industry-legal.jpg" alt="Record Express team reviewing a delivery route beside a branded van" />
-          <img class="industry-photo" src="../assets/images/industry-industry.jpg" alt="Warehouse team walking between racking aisles" aria-hidden="true" />
-          <img class="industry-photo" src="../assets/images/industry-medical.jpg" alt="Record Express staff member in a warehouse" aria-hidden="true" />
-          <img class="industry-photo" src="../assets/images/industry-service.jpg" alt="Two Record Express drivers in a van cab" aria-hidden="true" />
+          <img class="industry-photo is-active" src="../../assets/images/industry-legal.jpg" alt="Record Express team reviewing a delivery route beside a branded van" />
+          <img class="industry-photo" src="../../assets/images/industry-industry.jpg" alt="Warehouse team walking between racking aisles" aria-hidden="true" />
+          <img class="industry-photo" src="../../assets/images/industry-medical.jpg" alt="Record Express staff member in a warehouse" aria-hidden="true" />
+          <img class="industry-photo" src="../../assets/images/industry-service.jpg" alt="Two Record Express drivers in a van cab" aria-hidden="true" />
         </div>
         <div class="industries-list">
           <div class="industry-row is-active" data-industry="01">
@@ -444,9 +444,9 @@
       <div class="container benefits-inner">
         <div class="benefits-media">
           <div class="benefits-media-frame">
-            <img class="benefits-media-bg" src="../assets/images/benefits-van.jpg" alt="Record Express drivers in their delivery van" />
+            <img class="benefits-media-bg" src="../../assets/images/benefits-van.jpg" alt="Record Express drivers in their delivery van" />
           </div>
-          <img class="benefits-media-badge" src="../assets/images/benefits-badge.png" alt="EcoVadis committed sustainability rating, May 2025" />
+          <img class="benefits-media-badge" src="../../assets/images/benefits-badge.png" alt="EcoVadis committed sustainability rating, May 2025" />
         </div>
         <div class="benefits-copy">
           <span class="section-eyebrow">Why Record Express</span>
@@ -476,7 +476,7 @@
             </ul>
           </div>
           <div class="benefits2-media">
-            <img src="../assets/images/benefits2-driver.jpg" alt="Record Express driver holding a parcel" />
+            <img src="../../assets/images/benefits2-driver.jpg" alt="Record Express driver holding a parcel" />
           </div>
         </div>
       </div>
@@ -511,31 +511,31 @@
         <div class="testimonial-cards" id="testimonial-cards">
           <blockquote class="testimonial-card testimonial-card-dark" data-featured
             data-quote="Record Express is an extension of our team. They handle time-critical shipments with precision and total transparency. We always know what is happening."
-            data-name="Thomas Liu" data-role="Supply Chain Manager" data-avatar="../assets/images/avatar-thomas.jpg">
+            data-name="Thomas Liu" data-role="Supply Chain Manager" data-avatar="../../assets/images/avatar-thomas.jpg">
             <span class="quote-mark">&ldquo;</span>
             <p data-quote-text>Record Express is an extension of our team. They handle time-critical shipments with precision and total transparency. We always know what is happening.</p>
             <footer>
-              <img data-quote-avatar src="../assets/images/avatar-thomas.jpg" alt="" />
+              <img data-quote-avatar src="../../assets/images/avatar-thomas.jpg" alt="" />
               <div><cite data-quote-name>Thomas Liu</cite><span data-quote-role>Supply Chain Manager</span></div>
             </footer>
           </blockquote>
           <blockquote class="testimonial-card" tabindex="0" role="button" aria-label="Feature this testimonial"
             data-quote="Their Same Day service has been a game changer for our spare parts logistics. Fast, reliable, and easy to work with."
-            data-name="Sophie Laurent" data-role="Logistics Director" data-avatar="../assets/images/avatar-sophie.jpg">
+            data-name="Sophie Laurent" data-role="Logistics Director" data-avatar="../../assets/images/avatar-sophie.jpg">
             <span class="quote-mark quote-mark-small">&ldquo;</span>
             <p>Their Same Day service has been a game changer for our spare parts logistics. Fast, reliable, and easy to work with.</p>
             <footer>
-              <img src="../assets/images/avatar-sophie.jpg" alt="" />
+              <img src="../../assets/images/avatar-sophie.jpg" alt="" />
               <div><cite>Sophie Laurent</cite><span>Logistics Director</span></div>
             </footer>
           </blockquote>
           <blockquote class="testimonial-card" tabindex="0" role="button" aria-label="Feature this testimonial"
             data-quote="Cross-border delivery with zero surprises. Excellent communication and real time visibility we can count on."
-            data-name="Luca Bianchi" data-role="Operations Manager" data-avatar="../assets/images/avatar-luca.jpg">
+            data-name="Luca Bianchi" data-role="Operations Manager" data-avatar="../../assets/images/avatar-luca.jpg">
             <span class="quote-mark quote-mark-small">&ldquo;</span>
             <p>Cross-border delivery with zero surprises. Excellent communication and real time visibility we can count on.</p>
             <footer>
-              <img src="../assets/images/avatar-luca.jpg" alt="" />
+              <img src="../../assets/images/avatar-luca.jpg" alt="" />
               <div><cite>Luca Bianchi</cite><span>Operations Manager</span></div>
             </footer>
           </blockquote>
@@ -576,8 +576,8 @@
           </a>
         </div>
         <div class="about-media">
-          <img class="about-media-photo" src="../assets/images/about-brussels.jpg" alt="Historic Brussels Grand Place architecture" />
-          <img class="about-media-avatar" src="../assets/images/about-ceo.jpg" alt="Daniel Renous, CEO of Record Express" />
+          <img class="about-media-photo" src="../../assets/images/about-brussels.jpg" alt="Historic Brussels Grand Place architecture" />
+          <img class="about-media-avatar" src="../../assets/images/about-ceo.jpg" alt="Daniel Renous, CEO of Record Express" />
           <div class="about-media-caption">
             <p class="about-media-name">Daniel Renous</p>
             <p class="about-media-role">CEO - Record Express</p>
@@ -599,7 +599,7 @@
         <div class="blog-cards-wrap">
           <div class="blog-cards">
             <article class="blog-card" data-tag="operations">
-              <div class="blog-card-img"><img src="../assets/images/blog-operations.jpg" alt="Container port with cargo ship" /></div>
+              <div class="blog-card-img"><img src="../../assets/images/blog-operations.jpg" alt="Container port with cargo ship" /></div>
               <h3>How data-driven dispatch improves delivery performance</h3>
               <p>Real-time visibility and intelligent planning help reduce delays, optimise routes and keep customers informed.</p>
               <div class="blog-card-footer">
@@ -608,7 +608,7 @@
               </div>
             </article>
             <article class="blog-card" data-tag="technology">
-              <div class="blog-card-img"><img src="../assets/images/blog-technology.jpg" alt="Warehouse worker checking inventory" /></div>
+              <div class="blog-card-img"><img src="../../assets/images/blog-technology.jpg" alt="Warehouse worker checking inventory" /></div>
               <h3>Greener logistics: small steps, big impact</h3>
               <p>From alternative fuels to smarter planning, see how we're reducing emissions across our network.</p>
               <div class="blog-card-footer">
@@ -617,7 +617,7 @@
               </div>
             </article>
             <article class="blog-card" data-tag="sustainability">
-              <div class="blog-card-img"><img src="../assets/images/blog-sustainability.jpg" alt="Truck driving through a tunnel at night" /></div>
+              <div class="blog-card-img"><img src="../../assets/images/blog-sustainability.jpg" alt="Truck driving through a tunnel at night" /></div>
               <h3>Building resilient last-mile operations in a changing world</h3>
               <p>From capacity constraints to rising customer expectations, last-mile logistics faces constant pressure.</p>
               <div class="blog-card-footer">
@@ -641,22 +641,22 @@
         <p class="section-eyebrow" style="text-align:center;">Our Partners</p>
         <div class="partners-marquee">
           <ul class="partners-strip">
-            <li><img src="../assets/images/partner-laredoute.png" alt="La Redoute" /></li>
-            <li><img src="../assets/images/partner-aisin.png" alt="AISIN" /></li>
-            <li><img src="../assets/images/partner-igneos.png" alt="IGNEOS" /></li>
-            <li><img src="../assets/images/partner-colruyt.png" alt="Colruyt Group" /></li>
-            <li><img src="../assets/images/partner-lolaliza.png" alt="LolaLiza" /></li>
-            <li><img src="../assets/images/partner-daddykate.png" alt="Daddy Kate" /></li>
-            <li><img src="../assets/images/partner-sncb.png" alt="SNCB" /></li>
+            <li><img src="../../assets/images/partner-laredoute.png" alt="La Redoute" /></li>
+            <li><img src="../../assets/images/partner-aisin.png" alt="AISIN" /></li>
+            <li><img src="../../assets/images/partner-igneos.png" alt="IGNEOS" /></li>
+            <li><img src="../../assets/images/partner-colruyt.png" alt="Colruyt Group" /></li>
+            <li><img src="../../assets/images/partner-lolaliza.png" alt="LolaLiza" /></li>
+            <li><img src="../../assets/images/partner-daddykate.png" alt="Daddy Kate" /></li>
+            <li><img src="../../assets/images/partner-sncb.png" alt="SNCB" /></li>
           </ul>
           <ul class="partners-strip" aria-hidden="true">
-            <li><img src="../assets/images/partner-laredoute.png" alt="" /></li>
-            <li><img src="../assets/images/partner-aisin.png" alt="" /></li>
-            <li><img src="../assets/images/partner-igneos.png" alt="" /></li>
-            <li><img src="../assets/images/partner-colruyt.png" alt="" /></li>
-            <li><img src="../assets/images/partner-lolaliza.png" alt="" /></li>
-            <li><img src="../assets/images/partner-daddykate.png" alt="" /></li>
-            <li><img src="../assets/images/partner-sncb.png" alt="" /></li>
+            <li><img src="../../assets/images/partner-laredoute.png" alt="" /></li>
+            <li><img src="../../assets/images/partner-aisin.png" alt="" /></li>
+            <li><img src="../../assets/images/partner-igneos.png" alt="" /></li>
+            <li><img src="../../assets/images/partner-colruyt.png" alt="" /></li>
+            <li><img src="../../assets/images/partner-lolaliza.png" alt="" /></li>
+            <li><img src="../../assets/images/partner-daddykate.png" alt="" /></li>
+            <li><img src="../../assets/images/partner-sncb.png" alt="" /></li>
           </ul>
         </div>
       </div>
@@ -748,7 +748,7 @@
         <div class="footer-columns">
           <div class="footer-col footer-col-brand">
             <div class="footer-brand">
-              <img src="../assets/images/logo.png" alt="Record Express" width="48" height="48" />
+              <img src="../../assets/images/logo.png" alt="Record Express" width="48" height="48" />
               <p>B2B courier &amp; logistics for businesses that move fast.</p>
               <p class="footer-contact">
                 <button type="button" class="copy-trigger" data-copy="+3223310505" data-copy-label="+32 2 331 05 05">+32 2 331 05 05</button>
@@ -811,6 +811,6 @@
 
   <div class="copy-toast" id="copy-toast" role="status" aria-live="polite"></div>
 
-  <script src="js/script.js?v=v5-d"></script>
+  <script src="js/script.js?v=v5-e"></script>
 </body>
 </html>
