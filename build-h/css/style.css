@@ -3126,7 +3126,18 @@ body { background: var(--color-bg-default); color: var(--color-text-primary); }
 
 /* H gives the dispatch its own column, so the card fills it. */
 .hero-media { aspect-ratio: 363 / 444; }
-.hero-dispatch { width: 100%; left: 0; }
+
+/* Offset down the column rather than sitting at its top. The column height
+   comes from the frame's aspect ratio while the card's own height comes from
+   its rows, and the two do not agree - at top 0 the card came to 420 in a 444
+   column and left 24px of dead space under it. The frame offsets it instead:
+   the card surface (33404:4511) starts 25.5 down, which is the 5.74% used
+   here, and its bottom then lands on the column bottom.
+
+   Kept as a top offset rather than bottom: 0, which also closes the gap but
+   makes the card grow upward on hover - it expands from 420 to 643, and
+   anchored at the bottom that ran it 127px above the hero and over the nav. */
+.hero-dispatch { width: 100%; left: 0; top: 5.74%; }
 .hero-media-bg-frame { display: none; }
 
 /* H's copy starts 32 into the row (was 54) while the dispatch column runs its
