@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Record Express &#8212; Landing page designs</title>
+  <meta name="description" content="Pick a colour scheme, then open a design to browse it." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Outfit:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fff6eb; --surface: #fffdf9; --ink: #122114;
+      --muted: rgba(18, 33, 20, 0.66); --line: rgba(18, 33, 20, 0.18);
+      --accent: #d55445; --accent-soft: #fbe0d6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; padding: 56px 24px 72px;
+      background: var(--bg); color: var(--ink);
+      font-family: "Open Sans", system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    main { width: 100%; max-width: 880px; margin: 0 auto; }
+    .eyebrow {
+      font-weight: 700; font-size: 12px; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--accent); margin: 0 0 12px;
+    }
+    h1 {
+      font-family: "Outfit", system-ui, sans-serif; font-weight: 800;
+      font-size: clamp(30px, 5vw, 44px); line-height: 1.1; margin: 0;
+      letter-spacing: -0.02em;
+    }
+    .lede { font-size: 16px; line-height: 26px; color: var(--muted); margin: 16px 0 32px; max-width: 62ch; }
+
+    .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 28px; }
+    .tab {
+      font: inherit; font-weight: 700; font-size: 15px;
+      padding: 12px 26px; border-radius: 55px; cursor: pointer;
+      background: transparent; color: var(--ink); border: 1px solid var(--line);
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .tab:hover { border-color: var(--accent); }
+    .tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+    a.build {
+      display: flex; align-items: center; gap: 18px;
+      padding: 20px 24px; border: 1px solid var(--line); border-radius: 16px;
+      background: var(--surface); color: inherit; text-decoration: none;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    a.build:hover {
+      transform: translateY(-2px); border-color: var(--accent);
+      box-shadow: 0 12px 24px -12px rgba(18, 33, 20, 0.3);
+    }
+    .num {
+      font-family: "Outfit", system-ui, sans-serif; font-weight: 800;
+      font-size: 20px; color: var(--accent); width: 28px; flex-shrink: 0;
+    }
+    .body { flex: 1; min-width: 0; }
+    .label { display: block; font-family: "Outfit", system-ui, sans-serif; font-weight: 700; font-size: 18px; }
+    .meta { display: block; font-size: 13px; line-height: 20px; color: var(--muted); margin-top: 2px; }
+    .width {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.4px;
+      padding: 5px 11px; border-radius: 55px; background: var(--accent-soft);
+      color: var(--accent); flex-shrink: 0; white-space: nowrap;
+    }
+    .go { color: var(--muted); font-size: 20px; line-height: 1; flex-shrink: 0; }
+
+    footer { margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 14px; line-height: 24px; color: var(--muted); }
+    footer a { color: var(--accent); font-weight: 700; }
+    @media (prefers-reduced-motion: reduce) { a.build, .tab { transition: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Record Express</p>
+    <h1>Landing page designs</h1>
+    <p class="lede">
+      Three designs, each in three colour schemes. Pick a scheme, then open a
+      design to browse it. The scheme is a switch over the same page, so the
+      three versions of a design differ only in colour.
+    </p>
+
+    <div class="tabs" role="tablist" aria-label="Colour scheme">
+      <button class="tab" type="button" role="tab" id="tab-light" aria-controls="panel" aria-selected="true" data-scheme="light">Light</button>
+      <button class="tab" type="button" role="tab" id="tab-mixed" aria-controls="panel" aria-selected="false" data-scheme="mixed">Mixed</button>
+      <button class="tab" type="button" role="tab" id="tab-dark" aria-controls="panel" aria-selected="false" data-scheme="dark">Dark</button>
+    </div>
+
+    <div id="panel" role="tabpanel" aria-labelledby="tab-light"></div>
+
+    <footer>
+      The earlier rounds are kept at <a href="old/">old</a>.
+    </footer>
+  </main>
+
+  <script>
+    // One entry per design. A scheme is a query parameter on the same page
+    // rather than a separate folder, so there are three sources here, not nine.
+    var DESIGNS = [
+      { id: 'design-1', name: 'Quote card in the hero',
+        note: 'Copy on the left, the pick-up and delivery form as a card beside it.' },
+      { id: 'design-2', name: 'Centred, quote bar below',
+        note: 'Headline centred across the full width, with the form as a bar under it.' },
+      { id: 'design-3', name: 'Live dispatch board',
+        note: 'Copy on the left, the live shipment board on the right, form bar below.' }
+    ];
+
+    var panel = document.getElementById('panel');
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+
+    function render(scheme) {
+      var ul = document.createElement('ul');
+      DESIGNS.forEach(function (d, i) {
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.className = 'build';
+        a.href = 'designs/' + d.id + '/?scheme=' + scheme;
+        a.innerHTML =
+          '<span class="num">' + (i + 1) + '</span>' +
+          '<span class="body"><span class="label"></span><span class="meta"></span></span>' +
+          '<span class="width">1280px</span>' +
+          '<span class="go" aria-hidden="true">&#8594;</span>';
+        a.querySelector('.label').textContent = d.name;
+        a.querySelector('.meta').textContent = d.note;
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+      panel.innerHTML = '';
+      panel.appendChild(ul);
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) { t.setAttribute('aria-selected', String(t === tab)); });
+        panel.setAttribute('aria-labelledby', tab.id);
+        render(tab.getAttribute('data-scheme'));
+      });
+    });
+
+    render('light');
+  </script>
+</body>
+</html>
