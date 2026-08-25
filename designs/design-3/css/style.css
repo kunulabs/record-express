@@ -3244,3 +3244,30 @@ h1, h2, h3, h4, .font-display {
   .quote-bar-section.is-targeted .quote-bar,
   .quote-bar-section.is-targeted .quote-option.is-active { animation: none; }
 }
+
+
+/* ===== Section and rail type, to the design system =====
+   Measured against the services frame (33451:18879 / 33451:18889):
+
+     Title            732 x 108  -> H2 48/54, wrapping to two lines
+     Service row      440 x 82, its Left-Info box 34 tall -> H4 28/34
+
+   Both were well under. The section title was 29/35 and fitted on one line
+   in 573px where the frame gives it 732 and two lines, and the rail rows were
+   20/29 against the frame's 28/34. The title is the H2 token, so this lifts
+   every section heading on the page, not only services - which is also the
+   "text is too small" raised on the call.
+
+   Capped rather than fixed so the headings still come down on narrow screens:
+   3.75vw hits 48 at the 1280 core frame, 2.19vw hits 28. */
+.section-title {
+  font-size: clamp(28px, 3.75vw, 48px);
+  line-height: 1.125;
+  max-width: 732px;
+}
+
+.service-row-number,
+.service-row-title {
+  font-size: clamp(20px, 2.19vw, 28px);
+  line-height: 1.214;
+}
