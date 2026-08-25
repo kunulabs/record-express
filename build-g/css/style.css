@@ -3130,17 +3130,19 @@ h1, h2, h3, h4, .font-display {
 
 
 /* ===== Hero: copy beside the graphic =====
-   G, Figma 33388:9831: copy 456, graphic 676, 72px bar. */
-.hero-copy { flex: 0 0 38.64%; }
-.hero-media { flex: 0 0 57.29%; max-width: none; }
+   G, Figma 33388:9875: copy 625, graphic 507, 48 between them, 72px bar.
+   The frame was reworked shorter and the split reversed - the copy used to be
+   the narrow column at 456 against a 676 graphic. */
+.hero-copy { flex: 0 0 52.97%; }
+.hero-media { flex: 0 0 42.97%; max-width: none; }
 .quote-bar { padding: 8px; }
 .quote-option { padding: 8px 12px; }
 
-/* G's hero row is 692 tall against F's 588, and its graphic sits 80 down
-   rather than at the top of the row (33388:9831). Without these two G is
-   simply F on a cream page. */
-.hero-inner { min-height: 764px; align-items: flex-start; }
-.hero-media { margin-top: 80px; }
+/* G's hero row is 588 against F's 484 - it is the one of the three that keeps
+   a CTA and phone row under the description - and its graphic sits 94.875 down
+   rather than at the top of the row (33388:9875). */
+.hero-inner { min-height: 660px; align-items: flex-start; }
+.hero-media { margin-top: 95px; }
 
 /* G's Hero-Graphic (33388:9894) holds one child, the Truck-Bg vector - there
    is no dispatch panel over the van in this frame the way there is in F and H. */

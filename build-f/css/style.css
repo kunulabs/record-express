@@ -3118,14 +3118,16 @@ body { background: var(--color-bg-default); color: var(--color-text-primary); }
 
 
 /* ===== Hero: copy beside the graphic =====
-   F, Figma 33387:8334: copy 456, graphic 676, 72px bar. */
-.hero-copy { flex: 0 0 38.64%; }
-.hero-media { flex: 0 0 57.29%; max-width: none; }
+   F, Figma 33387:8378: copy 625, graphic 507, 48 between them, 72px bar.
+   The frame was reworked shorter and the split reversed - the copy used to be
+   the narrow column at 456 against a 676 graphic. */
+.hero-copy { flex: 0 0 52.97%; }
+.hero-media { flex: 0 0 42.97%; max-width: none; }
 
-/* F's hero row is 588 with the graphic 28 down (33387:8334); the copy alone
-   only came to 549. */
-.hero-inner { min-height: 660px; align-items: flex-start; }
-.hero-media { margin-top: 28px; }
+/* Row 484 (was 588) plus the 72 of top padding, with the graphic sitting
+   42.875 down inside it. */
+.hero-inner { min-height: 556px; align-items: flex-start; }
+.hero-media { margin-top: 43px; }
 
 /* F's copy column (33387:8381) is pill + headline + description and stops
    there - 64 + 524 = the 588 the frame gives it. There is no CTA and phone

@@ -3118,19 +3118,21 @@ body { background: var(--color-bg-default); color: var(--color-text-primary); }
 
 
 /* ===== Hero: copy beside the graphic =====
-   H, Figma 33404:3750: copy 648, dispatch column 484x592 - the large-dispatch frame. */
-.hero-copy { flex: 0 0 54.92%; }
-.hero-media { flex: 0 0 41.02%; max-width: none; }
+   H, Figma 33404:3794: copy 769, dispatch column 363x444, 48 between them.
+   The frame was reworked wider and much shorter - the copy was 648 against a
+   484x592 dispatch column. */
+.hero-copy { flex: 0 0 65.17%; }
+.hero-media { flex: 0 0 30.76%; max-width: none; }
 
-/* H gives the dispatch its own tall column, so the card fills it. */
-.hero-media { aspect-ratio: 484 / 592; }
-.hero-dispatch { width: min(96%, 460px); left: 2%; }
+/* H gives the dispatch its own column, so the card fills it. */
+.hero-media { aspect-ratio: 363 / 444; }
+.hero-dispatch { width: 100%; left: 0; }
 .hero-media-bg-frame { display: none; }
 
-/* H's copy starts 54 into the row while the dispatch column runs its full
-   height (33404:3750). */
-.hero-inner { align-items: flex-start; min-height: 664px; }
-.hero-copy { margin-top: 54px; }
+/* H's copy starts 32 into the row (was 54) while the dispatch column runs its
+   full height (33404:3794). Row 444 plus the 72 of top padding. */
+.hero-inner { align-items: flex-start; min-height: 516px; }
+.hero-copy { margin-top: 32px; }
 
 /* Like F, H's copy column (33404:3797) ends at the description: 64 + 420 =
    484, with no CTA and phone row beneath it. */
