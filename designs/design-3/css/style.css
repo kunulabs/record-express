@@ -3179,10 +3179,16 @@ h1, h2, h3, h4, .font-display {
 /* clears the sticky header (54 topbar + 104 nav) plus a little air */
 .quote-bar-section { scroll-margin-top: 176px; }
 
-/* A slow pulse, not a loop that never settles: it runs three times on load and
-   stops, so the button reads as the next step without nagging afterwards. */
-.hero-quote-cta {
-  animation: hero-cta-pulse 2.2s ease-in-out 1.2s 3;
+/* A slow pulse, not a loop that never settles: it runs three times and stops,
+   so the button reads as the next step without nagging afterwards.
+
+   Held until the hero entrance has finished rather than started on a delay of
+   its own: at 1.2s it was pulsing while the description and the quote bar were
+   still arriving, which put three things in motion at once. is-seq-done is set
+   by the shared sequence when its last step lands, so this follows the hero
+   however its timing changes. */
+.is-seq-done .hero-quote-cta {
+  animation: hero-cta-pulse 2.2s ease-in-out 0.4s 3;
 }
 
 @keyframes hero-cta-pulse {
@@ -3193,8 +3199,8 @@ h1, h2, h3, h4, .font-display {
 
 /* hovering or focusing stops the pulse - once the button has been found, the
    attention cue has done its job */
-.hero-quote-cta:hover,
-.hero-quote-cta:focus-visible { animation: none; }
+.is-seq-done .hero-quote-cta:hover,
+.is-seq-done .hero-quote-cta:focus-visible { animation: none; }
 
 /* The arrival flash on the bar. Applied by script and removed when it ends, so
    it can be replayed on a second click. */
@@ -3218,7 +3224,7 @@ h1, h2, h3, h4, .font-display {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-quote-cta,
+  .is-seq-done .hero-quote-cta,
   .quote-bar-section.is-targeted .quote-bar,
   .quote-bar-section.is-targeted .quote-option.is-active { animation: none; }
 }

@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
   initTopbar();
   initLangDropdown();
   initHeroTypewriter();
-  initHeroQuoteCard();
   initContactTypewriter();
   initQuoteBar();
   initStatsCountUp();
@@ -156,29 +155,6 @@ function initHeroTypewriter() {
   if (!el) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   typeElement(el);
-}
-
-// B lifts the quote form into the hero, beside the copy, so unlike the other
-// builds it is on screen the whole time the headline is typing. Holding it
-// back until the headline lands stops the two competing, and it keys off the
-// typewriter's own finish rather than a delay that would drift the moment the
-// headline copy changed length.
-function initHeroQuoteCard() {
-  var card = document.querySelector('.hero-inner .quote-bar-section');
-  var title = document.querySelector('.hero-title');
-  if (!card || !title) return;
-
-  function show() { card.classList.add('is-typed'); }
-
-  // under reduced motion the headline never types, so there is nothing to
-  // wait for; same if typing has already finished or never started
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-      !title.classList.contains('is-typing')) {
-    show();
-    return;
-  }
-
-  title.addEventListener('typed', show, { once: true });
 }
 
 function initContactTypewriter() {

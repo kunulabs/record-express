@@ -1,0 +1,56 @@
+/* ===== Hero entrance sequence =====
+   Shared by all three designs. Which elements take part, and in what order, is
+   declared per design in its HTML with data-seq="N" - elements sharing a number
+   arrive together. Nothing here knows about a particular design.
+
+   Steps are hidden from first paint, not hidden by script: a script that runs
+   on DOMContentLoaded would let them paint first and then blink out, which is
+   the exact "visible at first" problem this is fixing.
+
+   Two animation names for one set of keyframes is deliberate. Changing only
+   animation-delay on an animation still inside its delay period leaves the
+   elapsed time counted against it, so it jumps to its end state instead of
+   animating. A distinct name restarts it cleanly. */
+
+[data-seq] {
+  animation: hero-seq-fallback 1.15s cubic-bezier(0.4, 0, 0.2, 1) 2.6s both;
+}
+
+/* The script claims the sequence on load, which cancels the fallback outright.
+   This is not a race it could lose: no fixed delay can be right when the cue is
+   typing that a throttled tab stretches to a second a character, and a fallback
+   firing first would show a step and then re-fade it. The fallback exists only
+   for the script never running at all. */
+.js-sequenced [data-seq] {
+  animation: none;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.js-sequenced [data-seq].is-seq-in {
+  animation: hero-seq-in 1.15s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* 20px of travel: a slow fade over a short distance reads as sluggish, where
+   the same duration over a longer one reads as deliberate. An expo-out curve
+   was tried and is wrong here - it front-loads 70% of the opacity into the
+   first 0.2s, so it still feels fast and then seems to hang. */
+@keyframes hero-seq-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes hero-seq-fallback {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-seq],
+  .js-sequenced [data-seq],
+  .js-sequenced [data-seq].is-seq-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

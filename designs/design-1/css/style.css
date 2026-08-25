@@ -3149,45 +3149,10 @@ h1, h2, h3, h4, .font-display {
 }
 
 
-/* ===== B only: the quote card waits for the headline =====
-   B is the one build with the quote form inside the hero, so it is on screen
-   the whole time the headline is typing. It holds back and fades in as the
-   last characters land.
-
-   Two animation names rather than one with a changed delay: swapping only the
-   delay on an animation still inside its delay period leaves it counted as
-   already elapsed, so it would jump to the end state instead of fading. The
-   fallback also means the card still appears if the script never runs - it is
-   hidden from first paint, so it must not depend on JS to come back. */
-.hero-inner .quote-bar-section {
-  animation: quote-card-fallback 1.15s cubic-bezier(0.4, 0, 0.2, 1) 2.4s both;
-}
-
-.hero-inner .quote-bar-section.is-typed {
-  animation: quote-card-fade 1.15s cubic-bezier(0.4, 0, 0.2, 1) both;
-}
-
-/* 20px of travel rather than 12 with the longer duration: a slow fade over a
-   short distance reads as the card being sluggish, where the same time over a
-   longer distance reads as deliberate.
-
-   An expo-out curve was tried first and was wrong for this: it put 70% of the
-   opacity in the first 0.2s and left a long tail, so the card still felt fast
-   and then seemed to hang. An eased-in-out curve spreads the change across
-   the duration, which is what actually reads as slow. */
-@keyframes quote-card-fade {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: none; }
-}
-
-@keyframes quote-card-fallback {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-inner .quote-bar-section,
-  .hero-inner .quote-bar-section.is-typed { animation: none; }
+/* The quote card's entrance is handled by the shared hero sequence
+   (../../css/hero-sequence.css). The old per-build version that lived here
+   was removed rather than left alongside it - two mechanisms animating the
+   same element would each hold their own hidden state. */
 }
 
 

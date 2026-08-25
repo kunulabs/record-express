@@ -19,8 +19,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <!-- ?v= busts the 10-minute GitHub Pages asset cache; bump on every deploy -->
-  <link rel="stylesheet" href="../../css/schemes.css?v=v6-1" />
-  <link rel="stylesheet" href="css/style.css?v=v6-1" />
+  <link rel="stylesheet" href="../../css/schemes.css?v=v6-2" />
+  <link rel="stylesheet" href="../../css/hero-sequence.css?v=v6-2" />
+  <link rel="stylesheet" href="css/style.css?v=v6-2" />
 </head>
 <body>
 
@@ -102,7 +103,7 @@
         <div class="hero-copy">
           <span class="eyebrow-pill">B2B Courier &amp; Logistics</span>
           <h1 class="hero-title">B2B express transport &amp; logistics in <span class="text-accent-green">Belgium and Europe.</span></h1>
-          <p class="hero-desc">Record Express delivers your urgent parcels, documents and goods anywhere in Belgium and Europe — <strong>no intermediary, with real-time tracking.</strong></p>
+          <p class="hero-desc" data-seq="1">Record Express delivers your urgent parcels, documents and goods anywhere in Belgium and Europe — <strong>no intermediary, with real-time tracking.</strong></p>
           <div class="hero-actions">
             <a href="#contact" class="btn btn-primary">
               Get a Quote
@@ -149,7 +150,7 @@
           </div>
         </div>
             <!-- Pickup / Delivery quote bar -->
-        <section class="quote-bar-section">
+        <section class="quote-bar-section" data-seq="1">
           <div class="container">
             <form class="quote-bar" id="quote-bar">
               <div class="quote-bar-title">
@@ -822,6 +823,7 @@
 
   <div class="copy-toast" id="copy-toast" role="status" aria-live="polite"></div>
 
-  <script src="js/script.js?v=v6-1"></script>
+  <script src="js/script.js?v=v6-2"></script>
+  <script src="../../js/hero-sequence.js?v=v6-2"></script>
 </body>
 </html>
