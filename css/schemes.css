@@ -1,0 +1,143 @@
+/* ===== Colour schemes =====
+   One palette layer shared by all three designs. The design stylesheets carry
+   layout only and never name a colour, so a scheme is a token swap and a fix
+   to a palette lands on all three designs at once.
+
+   Applied as data-scheme on <html>, set from the ?scheme= query parameter by
+   an inline script in <head> before first paint. Absent or unrecognised falls
+   back to light.
+
+   Colours come from the V6 frames' own variables rather than sampled pixels:
+   green/500 #2ecc71, green/700 #355239, green/850 #223526, coral/500 #ed7554,
+   coral/700 #b84437, background/default #fff6eb, background/accent #ffe3c2,
+   background/surface #ffffff, text/primary #122114, text/action #d55445,
+   border/strong #b9afa2. #122114 is also the colour inside the frames'
+   Effect/Shadow/LG, which is what identifies it as the dark ground rather
+   than a near-black. */
+
+
+/* ----- Light (default) ----- */
+:root,
+:root[data-scheme="light"] {
+  --color-bg-default: #fff6eb;
+  --color-bg-accent: #ffe3c2;
+  --color-bg-dark: #122114;
+  --color-text-primary: #122114;
+  --color-text-secondary: rgba(18, 33, 20, 0.65);
+  --color-text-action: #d55445;
+  --color-text-on-dark: #ffffff;
+  --color-coral-500: #ec6655;
+  --color-coral-700: #b84437;
+  --color-border: rgba(18, 33, 20, 0.2);
+  --color-white: #ffffff;
+  /* --color-white doubles as text-on-dark, so raised panels use their own
+     token; that lets a scheme darken surfaces without inverting the text. */
+  --color-surface: #ffffff;
+  --color-surface-alt: #fffdf9;
+  --color-pill: #e3e2c9;
+  /* border/strong from the frames; --color-muted-line is the grey used by the
+     contact form and footer rules. Both were hard-coded in the layout sheet
+     and stayed light on a dark ground. */
+  --color-border-strong: #b9afa2;
+  --color-muted-line: #d4d4d4;
+}
+
+
+/* ----- Dark ----- */
+:root[data-scheme="dark"] {
+  --color-bg-default: #122114;
+  --color-border-strong: rgba(255, 255, 255, 0.22);
+  --color-muted-line: rgba(255, 255, 255, 0.28);
+  --color-bg-accent: #223526;
+  --color-bg-dark: #0d180f;
+  --color-surface: #223526;
+  --color-surface-alt: #2a4030;
+  --color-pill: #223526;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.68);
+  --color-border: rgba(255, 255, 255, 0.16);
+}
+
+
+/* ----- Mixed -----
+   Mixed is not "dark hero, light body": it is a per-section pattern, so it
+   starts from the dark palette and re-lightens named bands below. Which bands
+   are light differs per design and is read off each mixed frame - see
+   .is-light-band, applied per design in that design's stylesheet. */
+:root[data-scheme="mixed"] {
+  --color-bg-default: #122114;
+  --color-border-strong: rgba(255, 255, 255, 0.22);
+  --color-muted-line: rgba(255, 255, 255, 0.28);
+  --color-bg-accent: #223526;
+  --color-bg-dark: #0d180f;
+  --color-surface: #223526;
+  --color-surface-alt: #2a4030;
+  --color-pill: #223526;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.68);
+  --color-border: rgba(255, 255, 255, 0.16);
+}
+
+/* Re-declaring the tokens on a section re-lightens everything inside it
+   through the cascade, so a band needs no per-element rules. */
+:root[data-scheme="mixed"] .is-light-band {
+  --color-bg-default: #fff6eb;
+  --color-bg-accent: #ffe3c2;
+  --color-bg-dark: #122114;
+  --color-surface: #ffffff;
+  --color-surface-alt: #fffdf9;
+  --color-pill: #e3e2c9;
+  --color-text-primary: #122114;
+  --color-text-secondary: rgba(18, 33, 20, 0.65);
+  --color-border: rgba(18, 33, 20, 0.2);
+  --color-border-strong: #b9afa2;
+  --color-muted-line: #d4d4d4;
+  background: var(--color-bg-default);
+  color: var(--color-text-primary);
+}
+
+
+/* ----- Shared consequences of a dark ground ----- */
+:root[data-scheme="dark"] body,
+:root[data-scheme="mixed"] body {
+  background: var(--color-bg-default);
+  color: var(--color-text-primary);
+}
+
+:root[data-scheme="dark"] .site-header,
+:root[data-scheme="dark"] .topbar,
+:root[data-scheme="mixed"] .site-header,
+:root[data-scheme="mixed"] .topbar {
+  background: var(--color-bg-default);
+}
+
+:root[data-scheme="dark"] .topbar,
+:root[data-scheme="mixed"] .topbar {
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Photos carry their own light, so knock them back slightly on a dark ground.
+   Scoped away from light bands, which keep the photos at full strength. */
+:root[data-scheme="dark"] .industries-photo img,
+:root[data-scheme="dark"] .blog-card-img img,
+:root[data-scheme="dark"] .benefits-media img,
+:root[data-scheme="dark"] .benefits2-media img,
+:root[data-scheme="mixed"] :not(.is-light-band) > * .industries-photo img,
+:root[data-scheme="mixed"] :not(.is-light-band) > * .blog-card-img img { filter: brightness(0.94); }
+
+/* The partner logos are dark artwork on cream; on a dark ground they need
+   inverting rather than multiplying, which was rendering them near-black. */
+:root[data-scheme="dark"] .partners-track img,
+:root[data-scheme="mixed"] .partners-track img {
+  mix-blend-mode: normal;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
+
+/* On a dark ground the frames outline the selected address box in green
+   (border/interactive #3f6647, green/700 #355239) rather than the coral used
+   on cream, which reads as an error state against the dark. */
+:root[data-scheme="dark"] .quote-option.is-active,
+:root[data-scheme="mixed"] .quote-option.is-active {
+  border-color: #3f6647;
+}
