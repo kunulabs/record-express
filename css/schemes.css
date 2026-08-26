@@ -131,6 +131,12 @@
    wordmark. There is no white variant to use - Figma's own dark frame
    (33465:5975) and its footer mark (33451:19335) are the same badge - so this
    is a lift, not a recolour. Interim until the client supplies a knockout. */
+/* The footer sits on --color-bg-dark in every scheme, light included, so its
+   mark needs the same lift unconditionally rather than scoped to dark. */
+.footer-brand img {
+  filter: brightness(1.2) saturate(1.12);
+}
+
 :root[data-scheme="dark"] .logo img,
 :root[data-scheme="mixed"] .logo img {
   /* 1.2 measured: mean luminance 138 -> 159 against the #122114 ground, with
