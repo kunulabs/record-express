@@ -1244,16 +1244,26 @@ h1, h2, h3, h4, .font-display {
 
 /* ===== Industries (header / photo / accordion) =====
    Figma node 33240:2882: 360 / 56 / 480 / 56 / 288 across the 1240 box. */
-/* Industries sits on background/surface #ffffff in the frame (33451:18940),
-   where services above it has no background token and so takes the cream page
-   ground. That alternation is what separates the two, and it is the same token
-   .stats-section already uses - so light reads hero cream, stats white,
-   services cream, industries white.
+/* The frame puts industries on background/surface #ffffff against the cream
+   page ground that services takes. That is only a 7.9 step in luminance
+   (247.1 -> 255), and with 228px of empty padding at the seam the two tones
+   are never in view together, so the boundary does not read at all.
 
-   Design 1 only for now, so the change can be reviewed on its own before it
-   goes to 2 and 3. */
+   Measured the alternatives across the palette: a warm sand #fbeedd is a 7.5
+   step and a cooler stone #f4eee4 an 8.5 - neither better than the white it
+   would replace. background/accent is the only tone in this palette with real
+   separation from the cream, at 18.2. So the tint wins over frame fidelity
+   here, by decision.
+
+   Consequence to know about: .urgent-cta-section immediately below is also
+   accent per its own frame, so those two bands now run together as one tan
+   block. The dark CTA card inside it still carries that boundary. If the run
+   reads long, the fix is to drop the urgent band to the cream ground, not to
+   weaken this one back to white.
+
+   Design 1 only, so it can be judged against 2 and 3. */
 .industries-section {
-  background: var(--color-surface);
+  background: var(--color-bg-accent);
   padding: 72px 0;
 }
 
@@ -1305,6 +1315,24 @@ h1, h2, h3, h4, .font-display {
 }
 
 .industry-row.is-active { background: var(--color-bg-accent); }
+
+/* The selected row was accent on a light band. Now that the band itself is
+   accent on light and dark, it needs the other side of the pair there or the
+   card disappears into its own section - the highlight is the contrast, not
+   the colour.
+
+   Dark takes surface-alt rather than surface: on dark --color-surface is
+   #223526, which is exactly what --color-bg-accent resolves to, so the card
+   would land on the band's own colour. Mixed keeps the base rule, because its
+   industries band is a light band on cream and accent reads against it. */
+:root:not([data-scheme]) .industry-row.is-active,
+:root[data-scheme="light"] .industry-row.is-active {
+  background: var(--color-surface);
+}
+
+:root[data-scheme="dark"] .industry-row.is-active {
+  background: var(--color-surface-alt);
+}
 
 .industry-row-header {
   display: flex;
