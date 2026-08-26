@@ -1244,8 +1244,15 @@ h1, h2, h3, h4, .font-display {
 
 /* ===== Industries (header / photo / accordion) =====
    Figma node 33240:2882: 360 / 56 / 480 / 56 / 288 across the 1240 box. */
+/* Services and industries must never share a ground. The frame's answer -
+   industries on background/surface #ffffff against the cream services above -
+   is only a 7.9 step in luminance, and with 228px of empty padding at the seam
+   the two tones are never in view together, so it did not read at all. The
+   middle of the palette is no help: a warm sand #fbeedd measures 7.5 and a
+   cooler stone #f4eee4 8.5, neither better than the white they would replace.
+   background/accent is the only tone here with real separation, at 18.2. */
 .industries-section {
-  background: var(--color-bg-default);
+  background: var(--color-bg-accent);
   padding: 72px 0;
 }
 
@@ -1297,6 +1304,24 @@ h1, h2, h3, h4, .font-display {
 }
 
 .industry-row.is-active { background: var(--color-bg-accent); }
+
+/* The selected row was accent on a light band. Now that the band itself is
+   accent on light and dark, it needs the other side of the pair there or the
+   card disappears into its own section - the highlight is the contrast, not
+   the colour.
+
+   Dark takes surface-alt rather than surface: on dark --color-surface is
+   #223526, which is exactly what --color-bg-accent resolves to, so the card
+   would land on the band's own colour. Mixed keeps the base rule, because its
+   industries band is a light band on cream and accent reads against it. */
+:root:not([data-scheme]) .industry-row.is-active,
+:root[data-scheme="light"] .industry-row.is-active {
+  background: var(--color-surface);
+}
+
+:root[data-scheme="dark"] .industry-row.is-active {
+  background: var(--color-surface-alt);
+}
 
 .industry-row-header {
   display: flex;
