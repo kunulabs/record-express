@@ -125,6 +125,20 @@
 :root[data-scheme="mixed"] :not(.is-light-band) > * .industries-photo img,
 :root[data-scheme="mixed"] :not(.is-light-band) > * .blog-card-img img { filter: brightness(0.94); }
 
+/* The header mark reads muddy on the dark ground: it is an opaque coral badge
+   with a green wedge, so the brightness(0) invert(1) knockout the partner
+   logos get would flatten it to a featureless white square and lose the
+   wordmark. There is no white variant to use - Figma's own dark frame
+   (33465:5975) and its footer mark (33451:19335) are the same badge - so this
+   is a lift, not a recolour. Interim until the client supplies a knockout. */
+:root[data-scheme="dark"] .logo img,
+:root[data-scheme="mixed"] .logo img {
+  /* 1.2 measured: mean luminance 138 -> 159 against the #122114 ground, with
+     the wordmark still crisp. 1.3 was tried and washes the coral out, bleeding
+     the white type into the badge. */
+  filter: brightness(1.2) saturate(1.12);
+}
+
 /* The partner logos are dark artwork on cream; on a dark ground they need
    inverting rather than multiplying, which was rendering them near-black. */
 :root[data-scheme="dark"] .partners-track img,

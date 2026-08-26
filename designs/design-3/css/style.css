@@ -864,7 +864,7 @@ h1, h2, h3, h4, .font-display {
    and section headings larger than the compact hero on a 1280x700 laptop. */
 .section-title {
   font-weight: 800;
-  font-size: clamp(28px, 3.75vw, 48px);
+  font-size: clamp(28px, 4.8vw, 48px);
   line-height: 1.125;
   max-width: 732px;
 }
@@ -2998,43 +2998,13 @@ h1, h2, h3, h4, .font-display {
   .hero-media { max-width: 360px; }
 }
 
-/* The hero takes a further x0.75 on short screens (56 -> 42px). The rest of
-   the page has to come down with it, or the hero ends up smaller than the
-   headings below it and the scale reads broken. */
-@media (min-width: 1001px) and (max-height: 740px) {
-  .section-title,
-  .urgent-cta-copy h3,
-  .rating-score { font-size: 23px; line-height: 29px; }
-
-  .contact-title,
-  .benefits2-copy h2 { font-size: 29px; line-height: 35px; }
-
-  .service-panel-title,
-  .service-panel-number { font-size: 25px; line-height: 34px; }
-
-  .stat-text strong { font-size: 19px; line-height: 25px; }
-
-  .service-row-title { font-size: 17px; line-height: 25px; }
-  .quote-bar-heading { font-size: 17px; line-height: 23px; }
-
-  .service-row-number,
-  .industry-row-title,
-  .blog-card h3,
-  .footer-newsletter h3 { font-size: 16px; line-height: 22px; }
-
-  .quote-mark { font-size: 40px; }
-  .quote-mark-small { font-size: 26px; }
-
-  /* lead paragraphs and list copy follow the hero description down */
-  .contact-desc,
-  .contact-list li,
-  .checklist li,
-  .step h3,
-  .timeline h3,
-  .services-rail-cta h3 { font-size: 16px; }
-
-  .section-desc { font-size: 15px; line-height: 24px; }
-}
+/* No type trim on short screens. There used to be one here, stepping every
+   heading down so the page matched a hero that compacted to 42px on a laptop
+   window - but that hero rule (in the block above) has been dead since the V6
+   type pass put Type/Display/Hero later in the file, so the hero stays 62 and
+   the trim was shrinking the sections under a full-size headline. The section
+   headings hold their H2 48/54 token at every desktop size, which is what the
+   frame specifies. The spacing compaction above still applies. */
 
 /* A few headings carry words longer than their column at the narrow end
    ("intermediaries." in a 208px box at 320px), which spills past the edge.
@@ -3051,14 +3021,13 @@ h1, h2, h3, h4, .font-display {
   overflow-wrap: break-word;
 }
 
-/* Hover opens the board to all 12 rows - the list grows, not the card, so the
-   footer stays pinned and the last row is never half-cut. A and its siblings
-   stop at 8 or 10 because their open card would land on the section below;
-   D's card is only 253 of the photo's 472, so the full state fits inside the
-   photo with room to spare. */
+/* Hover adds two rows to the seven at rest - the list grows, not the card, so
+   the footer stays pinned and the last row is never half-cut. It used to open
+   to all 12, which grew the card from 420 to 643px and swallowed the hero.
+   Nine rows of 12.08cqw plus a 1px border each. */
 .hero-dispatch:hover .d-rows,
 .hero-dispatch:focus-visible .d-rows {
-  height: calc(144.96cqw + 12px);
+  height: calc(108.72cqw + 9px);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3298,3 +3267,12 @@ h1, h2, h3, h4, .font-display {
 
 /* 636 x 220 inside the panel's 32px padding */
 .service-panel-media { aspect-ratio: 636 / 220; }
+
+
+/* The entrance runs desc -> quote bar -> Get a Quote, each group starting on
+   the previous one's animationend, so the shared 1.15s step put the CTA 3.45s
+   behind the typewriter - too long a wait for the thing being pointed at. The
+   order is deliberate and stays; only the pace changes, and only here, so
+   designs 1 and 2 keep the timing they were signed off at. CTA now lands at
+   1.8s. */
+.js-sequenced [data-seq].is-seq-in { animation-duration: 0.6s; }
