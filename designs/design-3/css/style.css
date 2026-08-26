@@ -1262,17 +1262,22 @@ h1, h2, h3, h4, .font-display {
   gap: 56px;
 }
 
+/* The frame's industries row is 296 : 367 : 405 on the 1180 container with 56px
+   gaps (33451:18940). We had 360 : 480 : 288, which left the row list 273px
+   wide against the designed 405 - narrow enough that the row titles wrap the
+   moment they carry the services rail's type size. */
 .industries-header {
-  flex: 360 1 0;
+  flex: 296 1 0;
   min-width: 0;
   margin: 0;
 }
 
 .industries-photo {
-  flex: 480 1 0;
+  flex: 367 1 0;
   min-width: 0;
   position: relative;
-  aspect-ratio: 480 / 416;
+  /* moves with the column width or the photo distorts */
+  aspect-ratio: 367 / 416;
   border-radius: 24px;
   overflow: hidden;
   background: var(--color-bg-accent);
@@ -1291,7 +1296,7 @@ h1, h2, h3, h4, .font-display {
 .industry-photo.is-active { opacity: 1; }
 
 .industries-list {
-  flex: 288 1 0;
+  flex: 405 1 0;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -1340,20 +1345,27 @@ h1, h2, h3, h4, .font-display {
 .industry-row-number {
   font-family: "Outfit", var(--font-family);
   font-weight: 700;
-  font-size: 16px;
-  line-height: 22px;
   color: var(--color-text-secondary);
   transition: color 0.35s ease;
 }
 
 .industry-row.is-active .industry-row-number { color: var(--color-text-action); }
 
+/* The rows take the services rail's scale, using its exact clamp so the two
+   sections track together at every width. A departure: the frame gives these
+   rows H5 22/28 with a 16/22 number, not H4 28/34 - but matching services is
+   the point, and it is the same departure already made there. Only fits
+   because the list is now the frame's 405 rather than 273. */
+.industry-row-title,
+.industry-row-number {
+  font-size: clamp(20px, 2.19vw, 28px);
+  line-height: 1.214;
+}
+
 .industry-row-title {
   flex: 1 1 auto;
   font-family: "Outfit", var(--font-family);
   font-weight: 700;
-  font-size: 18px;
-  line-height: 26px;
 }
 
 .industry-row-icon {
