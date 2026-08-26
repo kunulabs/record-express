@@ -3098,15 +3098,18 @@ h1, h2, h3, h4, .font-display {
 .hero-actions { display: flex; margin-top: 48px; }
 .hero-phone { display: none; }
 
-/* The bar is not a card in this frame: its children sit straight on the 1180
-   container (33404:3797), which is how it comes to 72 rather than the 90 a padded
-   card with a 56px icon block lands on. 288 title + 16 + divider + 15 + 694
-   options + 16 + 150 button = 1180. */
+/* A deliberate departure from this frame. The frame puts the fields straight
+   on the 1180 container with no container of their own (33451:22731), and
+   makes them the same #fff6eb as the hero behind them - so they read as
+   hairline outlines floating in space rather than as inputs. Designs 1 and 2
+   wrap the same bar in a card and have never drawn a complaint, so this takes
+   their card and keeps design 3's compact internals: the 16px inline glyph
+   rather than a 56px icon block, the 288 title, 64px fields, 150 button.
+
+   The base card comes through by not being cancelled - bg-accent ground, 1px
+   border-strong, 32 radius, 12 padding, soft shadow. Only the nowrap row and
+   its gap are design 3's. */
 .quote-bar {
-  background: none;
-  border: 0;
-  border-radius: 0;
-  padding: 0;
   gap: 16px;
   align-items: center;
   flex-wrap: nowrap;
@@ -3126,7 +3129,8 @@ h1, h2, h3, h4, .font-display {
 }
 .quote-bar-icon svg { width: 16px; height: 16px; }
 
-.quote-bar-divider { height: 72px; }
+/* the content row is 64 inside the card's 12px padding, not the frame's 72 */
+.quote-bar-divider { height: 64px; }
 /* The option boxes are 64 tall in the frame, sitting 4 down inside the 72px
    bar. They were coming to 70, which left a single pixel of air top and bottom
    and read as jammed against the bar's edges - that was the roughness. Pinned
@@ -3139,7 +3143,19 @@ h1, h2, h3, h4, .font-display {
   padding: 0 12px;
   border-radius: 16px;
   align-items: center;
+  /* surface-alt, not surface: on dark and mixed --color-surface is #223526,
+     which is exactly what --color-bg-accent resolves to, so fields on it would
+     disappear into the card and rebuild the very problem this fixes.
+     surface-alt is #fffdf9 on light and #2a4030 on dark, a step above the card
+     either way. */
+  background: var(--color-surface-alt);
 }
+
+/* coral/500 rather than the frame's coral/700 #b84437: a brick-red 2px outline
+   sitting next to the coral Calculate button read as an error state. Dark and
+   mixed still take the green from css/schemes.css, whose selector is more
+   specific than this one. */
+.quote-option.is-active { border-color: var(--color-coral-500); }
 .quote-option svg { width: 16px; height: 16px; flex-shrink: 0; align-self: flex-start; margin-top: 2px; }
 .quote-option-text { min-width: 0; }
 
@@ -3170,6 +3186,21 @@ h1, h2, h3, h4, .font-display {
   .quote-bar-divider { display: none; }
   .quote-bar-options { flex: 1 1 100%; flex-wrap: wrap; }
   .quote-option { flex: 1 1 260px; }
+}
+
+/* The card earns its keep as a composition device on a row; once everything is
+   a single stacked column it is just 26px of horizontal padding taken off the
+   address fields, and those are the tightest thing on the page - the longer
+   value already scrolls inside its input below 390. So the chrome goes and the
+   fields keep their fill, which is the part that was actually wrong. */
+@media (max-width: 560px) {
+  .quote-bar {
+    background: none;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+  }
 }
 
 
