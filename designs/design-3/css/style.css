@@ -2236,9 +2236,14 @@ h1, h2, h3, h4, .font-display {
   gap: 24px;
 }
 
+/* Type/Heading/H2, same as every other section heading - the frame's heading
+   node (33451:19260) is 520 x 108, two whole 54px line boxes. This was left on
+   38/44 when the design-system pass lifted the rest, so it was the one section
+   title on the page still under its token. Clamped like .section-title so it
+   comes down with the column on narrow screens. */
 .contact-title {
-  font-size: 38px;
-  line-height: 44px;
+  font-size: clamp(28px, 4.8vw, 48px);
+  line-height: 1.125;
 }
 
 .contact-desc {
