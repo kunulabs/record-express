@@ -26,6 +26,12 @@
   --color-text-secondary: rgba(18, 33, 20, 0.65);
   --color-text-action: #d55445;
   --color-text-on-dark: #ffffff;
+  /* The footer sits on --color-bg-dark in every scheme, so its secondary text
+     needs a light value regardless of scheme - it was on --color-muted-line, a
+     hairline token, which is rgba(255,255,255,0.28) on dark and measured 2.5:1
+     as text. This keeps the footer's hierarchy rather than flattening it all
+     to --color-text-on-dark white. 8.2:1 on #122114. */
+  --color-text-on-dark-muted: rgba(255, 255, 255, 0.72);
   --color-coral-500: #ec6655;
   --color-coral-700: #b84437;
   --color-border: rgba(18, 33, 20, 0.2);
@@ -55,6 +61,13 @@
   --color-pill: #223526;
   --color-text-primary: #ffffff;
   --color-text-secondary: rgba(255, 255, 255, 0.68);
+
+  /* The coral ramp was never flipped for dark. text/action #d55445 measures
+     4.1:1 against #122114 and coral/700 #b84437 only 2.4:1, so eyebrows,
+     "Explore industry" links and the timeline headings were below AA. The
+     light end of the same ramp, #ed7554, gives 5.8:1 - same hue, readable. */
+  --color-text-action: #ed7554;
+  --color-coral-700: #ed7554;
   --color-border: rgba(255, 255, 255, 0.16);
 }
 
@@ -75,6 +88,7 @@
   --color-pill: #223526;
   --color-text-primary: #ffffff;
   --color-text-secondary: rgba(255, 255, 255, 0.68);
+
   --color-border: rgba(255, 255, 255, 0.16);
 }
 
@@ -114,6 +128,18 @@
 :root[data-scheme="dark"] .topbar,
 :root[data-scheme="mixed"] .topbar {
   border-bottom: 1px solid var(--color-border);
+}
+
+/* Mixed runs cream light bands against dark ones, so the coral ramp cannot be
+   one value. Root keeps the dark ramp, which is correct on the cream bands;
+   the dark bands re-scope it to the light end. Re-declaring the tokens on a
+   section re-themes its whole subtree through the cascade. */
+:root[data-scheme="mixed"] .site-header,
+:root[data-scheme="mixed"] .topbar,
+:root[data-scheme="mixed"] .site-footer,
+:root[data-scheme="mixed"] section:not(.is-light-band) {
+  --color-text-action: #ed7554;
+  --color-coral-700: #ed7554;
 }
 
 /* Photos carry their own light, so knock them back slightly on a dark ground.
