@@ -1244,8 +1244,16 @@ h1, h2, h3, h4, .font-display {
 
 /* ===== Industries (header / photo / accordion) =====
    Figma node 33240:2882: 360 / 56 / 480 / 56 / 288 across the 1240 box. */
+/* Industries sits on background/surface #ffffff in the frame (33451:18940),
+   where services above it has no background token and so takes the cream page
+   ground. That alternation is what separates the two, and it is the same token
+   .stats-section already uses - so light reads hero cream, stats white,
+   services cream, industries white.
+
+   Design 1 only for now, so the change can be reviewed on its own before it
+   goes to 2 and 3. */
 .industries-section {
-  background: var(--color-bg-default);
+  background: var(--color-surface);
   padding: 72px 0;
 }
 
