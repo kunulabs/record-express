@@ -1331,7 +1331,8 @@ h1, h2, h3, h4, .font-display {
    would land on the band's own colour. Mixed keeps the base rule, because its
    industries band is a light band on cream and accent reads against it. */
 :root:not([data-scheme]) .industry-row.is-active,
-:root[data-scheme="light"] .industry-row.is-active {
+:root[data-scheme="light"] .industry-row.is-active,
+:root[data-scheme="original"] .industry-row.is-active {
   background: var(--color-surface);
 }
 
@@ -2133,7 +2134,10 @@ h1, h2, h3, h4, .font-display {
 .blog-card p {
   font-size: 14px;
   line-height: 22px;
-  color: var(--color-text-secondary);
+  /* The card is --color-bg-dark in every scheme, so its body copy needs the
+     always-light token, not the scheme's text-secondary - that one is dark on
+     light schemes and rendered this invisible, 1:1 against its own card. */
+  color: var(--color-text-on-dark-muted);
   margin: 0;
 }
 

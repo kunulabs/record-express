@@ -111,6 +111,69 @@
 }
 
 
+/* ----- Original colours -----
+   The client's live palette, read off the recordexpress.com PDF export by
+   sampling pixels across all 18 pages rather than eyeballing it.
+
+   What that showed, and why this scheme is shaped the way it is:
+
+   The site is light-led with no dark bands at all. Every page is
+   white-dominant and dark pixels never exceed 4.7% of a page, which is text.
+   The warm stone measures #f6f2ef - the given #F5F2EC - and alternates with
+   white band to band, so it is the tan band's replacement rather than
+   something derived. #1a2a1a turns up 295 times in ~1.5M sampled pixels: a
+   text colour, not a ground.
+
+   Green leads and coral supports, the opposite weighting to our other three.
+   #2dcc70 is the most-used saturated colour by roughly 3x over the coral -
+   headline highlight, nav icon, stat unit suffixes - while #ea6556 does
+   labels and secondary headings, with #974136 its darker variant for small
+   type. .text-accent-green is already #2ecc71 and already wraps the hero
+   headline tail, which is the same treatment the site gives "en Belgique et
+   en Europe.", so that wiring needs no change.
+
+   #223526 has no clear role on the live site - it barely registers in the
+   sample - so it is held for raised surfaces on the dark footer, which is
+   where the other schemes use it. */
+:root[data-scheme="original"] {
+  --color-bg-default: #ffffff;
+  --color-bg-accent: #F5F2EC;
+  --color-bg-dark: #1A2A1A;
+  --color-surface: #ffffff;
+  --color-surface-alt: #F5F2EC;
+  --color-pill: #F5F2EC;
+  --color-text-primary: #1A2A1A;
+  --color-text-secondary: rgba(26, 42, 26, 0.65);
+  /* The site sets label text in the darker brick and keeps the bright coral
+     for fills - measured 6.72:1 against white where #EC6655 is only 3.18:1,
+     so this is both truer to the source and the readable choice. */
+  --color-text-action: #974136;
+  --color-coral-500: #EC6655;
+  --color-coral-700: #974136;
+  --color-border: rgba(26, 42, 26, 0.18);
+  --color-border-strong: #cfc7ba;
+  --color-muted-line: #e2ddd3;
+}
+
+
+/* The live site alternates white and stone band to band, but our sections were
+   assigned their tokens against a palette where bg-default and surface were
+   different colours. Here both are white, so six adjacent pairs collided -
+   found by running the band audit, not guessed. These four re-band to restore
+   the alternation: white hero, stone stats, white services, stone industries,
+   white urgent, stone how-it-works, white benefits, stone benefits2, white
+   testimonials, stone about, white blog, stone partners, white contact. */
+:root[data-scheme="original"] .stats-section,
+:root[data-scheme="original"] .how-it-works-section,
+:root[data-scheme="original"] .about-section {
+  background: var(--color-bg-accent);
+}
+
+:root[data-scheme="original"] .urgent-cta-section {
+  background: var(--color-bg-default);
+}
+
+
 /* ----- Shared consequences of a dark ground ----- */
 :root[data-scheme="dark"] body,
 :root[data-scheme="mixed"] body {
