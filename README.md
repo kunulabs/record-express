@@ -67,6 +67,41 @@ the whole palette flows from that one block:
 Note the assets are duplicated per variant, so an image or markup fix must be
 applied to all four copies.
 
+## Colour schemes (current designs/)
+
+The three current designs under `designs/` carry layout only and never name a
+colour. The palette lives in one shared layer, `css/schemes.css`, applied as
+`data-scheme` on `<html>` and set from the `?scheme=` query parameter by an
+inline script in each design's `<head>` before first paint. A scheme is
+therefore a token swap over the same page: adding one is a block of custom
+properties, not a fourth copy of the markup, and a palette fix lands on all
+three designs at once. An absent or unrecognised value falls back to `light`.
+
+| Scheme | `?scheme=` | Source | Shape |
+|---|---|---|---|
+| Light | `light` | V6 frames | Cream ground, tan accent bands, white surfaces |
+| Mixed | `mixed` | V6 frames | Dark, with named bands re-lightened (`.is-light-band`) |
+| Dark | `dark` | V6 frames | Dark ground throughout, coral ramp flipped light for AA |
+| Original colours | `original` | recordexpress.com | The live palette; white-led, green leads and coral supports |
+| Only 5 colours | `five` | `33508:5101` | Five values, one flat stone ground, no banding |
+| Matching colours | `matching` | `33510:12337` | Stone replaces cream *and* white; coral used as a 500/700 pair |
+
+The last two come from the newest pair of D frames and were added together.
+`five` is a deliberate reduction — `#f5f2ec`, `#1a2a1a`, `#223526`, `#ec6655`,
+`#2ecc71` and nothing else — so the light scheme's cream/tan/white alternation
+flattens to one ground and the coral ramp collapses to a single value.
+`matching` keeps the alternation but swaps both near-whites for the one stone
+that the tan actually matches, and uses `#ec6655`/`#b84437` as a pair.
+
+Each scheme's block in `css/schemes.css` carries the reasoning and the measured
+contrast, including where a frame's own choice lands below AA and was shipped
+as drawn rather than quietly patched.
+
+Two fills are hard-coded in the design stylesheets rather than tokenised, so
+they need a per-scheme rule when a frame disagrees: `.stat-badge` is overridden
+for both new schemes (`#223526` for `five`, `#1a2a1a` for `matching`).
+`.rating-badge` is `#223526` in both frames already, so it is left alone.
+
 ## Running locally
 
 ```
