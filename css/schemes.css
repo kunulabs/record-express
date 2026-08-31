@@ -250,3 +250,122 @@
 :root[data-scheme="mixed"] .quote-option.is-active {
   border-color: #3f6647;
 }
+
+
+/* ----- Only 5 colours -----
+   "D - Light - Only 5 Colors" (33508:5101). A deliberate reduction: the whole
+   page is built from five values and nothing else -
+
+     #f5f2ec  stone, the single ground
+     #1a2a1a  ink, and the dark panels
+     #223526  deep green, badges and every outline
+     #ec6655  coral, one value with no darker partner
+     #2ecc71  green, the headline tail and footer column headings
+
+   Two consequences fall out of that list, and both are the point rather than
+   an oversight:
+
+   The banding goes away. bg-default, bg-accent, surface, surface-alt and pill
+   are all stone, so the light scheme's cream/tan/white alternation flattens to
+   one ground and the sections read as one sheet. Read off the frame, where the
+   hero (33508:5145), the stats band (33508:5184) and the urgent band
+   (33508:5322) are all #f5f2ec where light makes them cream, white and tan.
+
+   The coral ramp collapses. coral/700 is #ec6655, the same as coral/500, so
+   the CTA's inner arrow chip sits invisibly inside the button - the frame
+   draws it that way (33508:5183) where the matching scheme gives it #b84437.
+   Section eyebrows and the active quote option use the one coral.
+
+   That second one has a measured cost, left in deliberately rather than
+   quietly patched: section eyebrows are 12px bold, and #ec6655 on the stone
+   is 2.85:1, below the 3.79:1 the light scheme's #d55445 manages and well
+   below AA. The readable fix is a darker coral, but a sixth colour is exactly
+   what this frame is testing the absence of, so the scheme is shipped as
+   drawn and the number is recorded here. Deep green #223526 is the option if
+   the eyebrows need to pass without leaving the five. */
+:root[data-scheme="five"] {
+  --color-bg-default: #f5f2ec;
+  --color-bg-accent: #f5f2ec;
+  --color-bg-dark: #1a2a1a;
+  --color-surface: #f5f2ec;
+  --color-surface-alt: #f5f2ec;
+  --color-pill: #f5f2ec;
+  --color-text-primary: #1a2a1a;
+  --color-text-secondary: rgba(26, 42, 26, 0.72);
+  --color-text-action: #ec6655;
+  --color-coral-500: #ec6655;
+  --color-coral-700: #ec6655;
+  /* White is not one of the five. --color-white is only ever a foreground in
+     the layout sheets - never a fill - so pointing it at the stone gives the
+     frame's #f5f2ec on the dark panels and inside the coral buttons. */
+  --color-white: #f5f2ec;
+  --color-text-on-dark: #f5f2ec;
+  --color-text-on-dark-muted: rgba(245, 242, 236, 0.75);
+  /* border/strong is the deep green at full strength - the frame outlines the
+     quote bar and both address boxes in solid #223526 (33508:5154, 33508:5167)
+     rather than the warm grey the other light schemes use. The hairline token
+     is the same green held back, so the incidental rules stay incidental. */
+  --color-border-strong: #223526;
+  --color-border: rgba(34, 53, 38, 0.28);
+  --color-muted-line: rgba(34, 53, 38, 0.28);
+}
+
+/* .stat-badge is the one fill the layout sheets hard-code, so it cannot follow
+   a token. The frame puts the four metric badges on the deep green rather than
+   the ink (33508:5187). */
+:root[data-scheme="five"] .stat-badge {
+  background: #223526;
+}
+
+
+/* ----- Matching colours -----
+   "D - Light - Replaced with Matching Colors" (33510:12337). The same page
+   with the mismatched values swapped for ones that belong to the ramp, so the
+   difference from light is which colours are used, not how many.
+
+   Three swaps, all read off the frame:
+
+   The two near-whites go. Light runs cream #fff6eb as the ground and white
+   #ffffff as the raised surface; both become the stone #f5f2ec, which is what
+   the tan #ffe3c2 actually matches. The frame's hero (33510:12381) and stats
+   band (33510:12420) are both #f5f2ec where light makes them cream and white.
+   The tan accent bands are untouched - the urgent band is still #ffe3c2
+   (33510:12558) - so the alternation survives as stone against tan.
+
+   The coral ramp is used as a pair. The CTA is #ec6655 with its arrow chip in
+   #b84437 (33510:12419), and the active address box is outlined in the same
+   #b84437 (33510:12411), where light reaches for the off-ramp #d55445.
+
+   The dark end is #1a2a1a, footer and panels alike (33510:12964), against
+   light's #122114.
+
+   Measured: primary text 13.5:1 on the stone and 12.2:1 on the tan, the
+   eyebrow coral 4.8:1 on the stone and 4.3:1 on the tan - so everything
+   clears AA except eyebrows over the tan accent bands, which land just under
+   at 12px and would need #974136 to pass. */
+:root[data-scheme="matching"] {
+  --color-bg-default: #f5f2ec;
+  --color-bg-accent: #ffe3c2;
+  --color-bg-dark: #1a2a1a;
+  --color-surface: #f5f2ec;
+  --color-surface-alt: #f5f2ec;
+  --color-pill: #f5f2ec;
+  --color-text-primary: #1a2a1a;
+  --color-text-secondary: rgba(26, 42, 26, 0.72);
+  /* text/action was #d55445, a coral that sits outside the 500/700 ramp. The
+     darker end of the ramp replaces it: 5.9:1 on the stone against #d55445's
+     4.4:1, so this is both the matching value and the readable one. */
+  --color-text-action: #b84437;
+  --color-coral-500: #ec6655;
+  --color-coral-700: #b84437;
+  --color-white: #f5f2ec;
+  --color-text-on-dark: #f5f2ec;
+  --color-text-on-dark-muted: rgba(245, 242, 236, 0.75);
+  --color-border-strong: #b9afa2;
+  --color-border: rgba(26, 42, 26, 0.2);
+  --color-muted-line: #d9d2c6;
+}
+
+:root[data-scheme="matching"] .stat-badge {
+  background: #1a2a1a;
+}
